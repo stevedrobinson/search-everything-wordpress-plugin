@@ -2,7 +2,7 @@
 /*
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
-Description: Adds search functionality with little setup. Including options to search pages, tags, excerpts, attachments, drafts, comments and custom fields (metadata).
+Description: Adds search functionality with little setup. Including options to search pages, tags (Jerome's Keywords Plugin, UTW support coming soon), excerpts, attachments, drafts, comments and custom fields (metadata).
 Heavy props to <a href="http://kinrowan.net">Cori Schlegel</a> for making the admin options panel and the additional search capabilities. Thanks to <a href="http://alexking.org">Alex King</a> amongst <a href="http://blog.saddey.net">ot</a>h<a href="http://www.reaper-x.com">er</a><a href="http://takethu.com/blog/">s</a>
 Version: 3.5
 Author: Dan Cameron
@@ -214,7 +214,7 @@ function SE3_search_tag($where) {
 	return $where;
 }
 
-//join for searching tag
+//join for searching tag on Jerome's Keywords Plugin
 function SE3_search_tag_join($join) {
 	global $wp_query, $wpdb;
 
@@ -383,7 +383,7 @@ global $wpdb, $table_prefix;
 		</tr>
 			<tr>
 				<td class="col1"><input type="checkbox" name="search_tag" value="<?php echo get_option('SE3_use_tag_search'); ?>" <?php echo $tag_search; ?> /></td>
-				<td class="col2">Search Custom Fields (tag)</td>
+				<td class="col2">Search Tags (Jerome's Keywords Plugin, UTW support coming soon)</td>
 			</tr>
 		</table>
 							<tr>

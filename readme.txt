@@ -6,7 +6,7 @@ Requires at least: 1.5
 Tested up to: 2.2
 Stable tag: 3.2.1
 
-Adds search functionality with little setup. Including options to search pages, tags, comments, excerpts, attachments, drafts and custom fields (metadata).
+Adds search functionality with little setup. Including options to search pages, tags (Jerome's Keywords Plugin, UTW support coming soon), comments, excerpts, attachments, drafts and custom fields (metadata).
 
 == Description ==
 
