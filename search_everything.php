@@ -2,9 +2,9 @@
 /*
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
-Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments and custom fields (metadata).
-Heavy props to <a href="http://kinrowan.net">Cori Schlegel</a> for making the admin options panel and the additional search capabilities. Thanks to <a href="http://alexking.org">Alex King</a> amongst <a href="http://blog.saddey.net">ot</a>h<a href="http://www.reaper-x.com">ers</a> for the WP 2.1 compatibility
-Version: 3.2.1
+Description: Adds search functionality with little setup. Including options to search pages, tags, excerpts, attachments, drafts, comments and custom fields (metadata).
+Heavy props to <a href="http://kinrowan.net">Cori Schlegel</a> for making the admin options panel and the additional search capabilities. Thanks to <a href="http://alexking.org">Alex King</a> amongst <a href="http://blog.saddey.net">ot</a>h<a href="http://www.reaper-x.com">er</a><a href="http://takethu.com/blog/">s</a>
+Version: 3.5
 Author: Dan Cameron
 Author URI: http://dancameron.org
 */
@@ -14,9 +14,6 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 */
-
-
-
 
 //add filters based upon option settings
 
@@ -68,6 +65,13 @@ if ("true" == get_option('SE3_use_metadata_search')) {
 	add_filter('posts_where', 'SE3_search_metadata');
 	add_filter('posts_join', 'SE3_search_metadata_join');
 	SE3_log("searching metadata");
+	}
+
+//Tag Search provided by Thu Tu
+if ("true" == get_option('SE3_use_tag_search')) {
+	add_filter('posts_where', 'SE3_search_tag');
+	add_filter('posts_join', 'SE3_search_tag_join');
+	SE3_log("searching tag");
 	}
 
 //Duplicate fix provided by Tiago.Pocinho
@@ -198,6 +202,29 @@ function SE3_search_metadata_join($join) {
 	return $join;
 }
 
+//search tag
+function SE3_search_tag($where) {
+	global $wp_query, $wpdb;
+	if (!empty($wp_query->query_vars['s'])) {
+		$where .= " OR tag_name LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
+	}
+
+	SE3_log("tag where: ".$where);
+
+	return $where;
+}
+
+//join for searching tag
+function SE3_search_tag_join($join) {
+	global $wp_query, $wpdb;
+
+	if (!empty($wp_query->query_vars['s'])) {
+
+		$join .= "LEFT JOIN wp_jkeywords ON $wpdb->posts.ID = wp_jkeywords.post_id ";
+	}
+	SE3_log("tag join: ".$join);
+	return $join;
+}
 
 //build admin interface
 function SE3_option_page() {
@@ -248,6 +275,12 @@ global $wpdb, $table_prefix;
 			update_option('SE3_use_metadata_search', "true");
 		} else {
 			update_option('SE3_use_metadata_search', "false");
+		}
+		
+		if ( !empty($_POST['search_tag']) ) {
+			update_option('SE3_use_tag_search', "true");
+		} else {
+			update_option('SE3_use_tag_search', "false");
 		}
 
 		if ( empty($errs) ) {
@@ -305,6 +338,12 @@ global $wpdb, $table_prefix;
 		$metadata_search = '';
 	}
 
+	if ('true' == get_option('SE3_use_tag_search')) {
+		$tag_search = 'checked="true"';
+	} else {
+		$tag_search = '';
+	}
+	
 	?>
 
 	<div style="width:75%;" class="wrap" id="SE3_options_panel">
@@ -342,7 +381,12 @@ global $wpdb, $table_prefix;
 				</table>
 			</td>
 		</tr>
-					<tr>
+			<tr>
+				<td class="col1"><input type="checkbox" name="search_tag" value="<?php echo get_option('SE3_use_tag_search'); ?>" <?php echo $tag_search; ?> /></td>
+				<td class="col2">Search Custom Fields (tag)</td>
+			</tr>
+		</table>
+							<tr>
 						<td class="col1"><input type="checkbox" name="search_excerpt" value="<?php echo get_option('SE3_use_excerpt_search'); ?>" <?php echo $excerpt_search; ?> /></td>
 			           <td class="col2">Search Every Excerpt</td>
 			       </tr>
