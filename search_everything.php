@@ -2,7 +2,7 @@
 /*
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
-Description: Adds search functionality with little setup. Including options to search pages, tags (Jerome's Keywords Plugin, UTW support coming soon), excerpts, attachments, drafts, comments and custom fields (metadata). Additional Features: Filter Posts and Pages from search results and Localization. Thank you wordpress community!
+Description: Adds search functionality with little setup. Including options to search pages, tags (Jerome's Keywords Plugin, UTW support coming soon), excerpts, attachments, drafts, comments and custom fields (metadata). Additional Features: Localization. Thank you wordpress community!
 Version: 3.8
 Author: Dan Cameron
 Author URI: http://dancameron.org
