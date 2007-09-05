@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata).
-Version: 3.8
+Version: 3.9
 Author: Dan Cameron
 Author URI: http://dancameron.org
 */
