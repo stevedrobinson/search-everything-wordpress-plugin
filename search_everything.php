@@ -2,7 +2,7 @@
 /*
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
-Description: Adds search functionality with little setup. Including options to search pages, tags (Jerome's Keywords Plugin, UTW support coming soon), excerpts, attachments, drafts, comments and custom fields (metadata). Additional Features: Localization. Thank you wordpress community!
+Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata).
 Version: 3.8
 Author: Dan Cameron
 Author URI: http://dancameron.org
@@ -14,6 +14,9 @@ This program is free software; you can redistribute it and/or modify it under th
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 */
 
+
+
+
 //add filters based upon option settings
 
 //logging
@@ -23,8 +26,7 @@ $logging = 0;
 $locale = get_locale();
 if ( !empty($locale) )
 	load_textdomain('SearchEverything', ABSPATH . 'wp-content/plugins/' . dirname(plugin_basename(__FILE__)) .'/' . 'SE3'.$locale.'.mo');
-	
-	
+
 function SE3_log($msg) {
 	global $logging;
 	if ($logging) {
@@ -40,16 +42,6 @@ function SE3_log($msg) {
 
 
 //add filters based upon option settings
-if ("true" == get_option('SE3_exclude_posts')) {
-	add_filter('posts_where', 'SE3_exclude_posts');
-	SE3_log("searching excluding");
-	}
-	
-if ("true" == get_option('SE3_use_page_search')) {
-	add_filter('posts_where', 'SE3_search_pages');
-	SE3_log("searching pages");
-	}
-
 if ("true" == get_option('SE3_use_page_search')) {
 	add_filter('posts_where', 'SE3_search_pages');
 	SE3_log("searching pages");
@@ -82,12 +74,24 @@ if ("true" == get_option('SE3_use_metadata_search')) {
 	SE3_log("searching metadata");
 	}
 
-//Tag Search provided by Thu Tu
-if ("true" == get_option('SE3_use_tag_search')) {
-	add_filter('posts_where', 'SE3_search_tag');
-	add_filter('posts_join', 'SE3_search_tag_join');
-	SE3_log("searching tag");
+if ("true" == get_option('SE3_exclude_posts')) {
+	add_filter('posts_where', 'SE3_exclude_posts');
+	SE3_log("searching excluding posts");
 	}
+
+if ("true" == get_option('SE3_exclude_categories')) {
+	add_filter('posts_where', 'SE3_exclude_categories');
+	add_filter('posts_join', 'SE3_exclude_categories_join');
+	SE3_log("searching excluding categories");
+	}
+
+//Tag Search provided by Thu Tu 
+if ("true" == get_option('SE3_use_tag_search')) { 
+	add_filter('posts_where', 'SE3_search_tag'); 
+	add_filter('posts_join', 'SE3_search_tag_join'); 
+       SE3_log("searching tag");
+	}
+
 
 //Duplicate fix provided by Tiago.Pocinho
 	add_filter('posts_request', 'SE3_distinct');
@@ -101,19 +105,48 @@ function SE3_distinct($query){
 	  }
 	  return $query;
 	}
-	
-	//exlude some posts from search
-	function SE3_exclude_posts($where) {
-		global $wp_query;
-		if (!empty($wp_query->query_vars['s'])) {
-			$where = str_replace('"', '\'', $where);
-			$where .= ' AND ID NOT IN ( '.get_option('SE3_exclude_posts_list').' )';
-		}
 
-		SE3_log("pages where: ".$where);
-		return $where;
+//exlude some posts from search
+function SE3_exclude_posts($where) {
+	global $wp_query;
+	if (!empty($wp_query->query_vars['s'])) {
+		$excl_list = implode(',', explode(',', trim(get_option('SE3_exclude_posts_list'))));
+		$where = str_replace('"', '\'', $where);
+		$where = 'AND ('.substr($where, strpos($where, 'AND')+3).' )';
+		$where .= ' AND (ID NOT IN ( '.$excl_list.' ))';
 	}
-	
+
+	SE3_log("ex posts where: ".$where);
+	return $where;
+}
+
+//exlude some categories from search
+function SE3_exclude_categories($where) {
+	global $wp_query;
+	if (!empty($wp_query->query_vars['s'])) {
+		$excl_list = implode(',', explode(',', trim(get_option('SE3_exclude_categories_list'))));
+		$where = str_replace('"', '\'', $where);
+		$where = 'AND ('.substr($where, strpos($where, 'AND')+3).' )';
+		$where .= ' AND (c.category_id NOT IN ( '.$excl_list.' ))';
+	}
+
+	SE3_log("ex cats where: ".$where);
+	return $where;
+}
+
+//join for excluding categories
+function SE3_exclude_categories_join($join) {
+	global $wp_query, $wpdb;
+
+	if (!empty($wp_query->query_vars['s'])) {
+
+		$join .= "LEFT JOIN $wpdb->post2cat AS c ON $wpdb->posts.ID = c.post_id";
+	}
+	SE3_log("category join: ".$join);
+	return $join;
+}
+
+
 //search pages (except password protected pages provided by loops)
 function SE3_search_pages($where) {
 	global $wp_query;
@@ -252,20 +285,6 @@ function SE3_search_tag_join($join) {
 	return $join;
 }
 
-//join for searching tag UTW
-// function SE3_search_tag_join($join) {
-//	global $table_prefix, $wpdb;
-//
-//	if (!empty($wp_query->query_vars['s'])) {
-//
-//		$join .= " LEFT JOIN $tablepost2tag p2t on $wpdb->posts.ID = p2t.post_id INNER JOIN $tabletags on p2t.tag_id = $tabletags.tag_id ";
-//	}
-	
-//	SE3_log("tag join: ".$join);
-//	return $join;
-//}
-
-
 //build admin interface
 function SE3_option_page() {
 
@@ -274,19 +293,31 @@ global $wpdb, $table_prefix;
 	if ( isset($_POST['SE3_update_options']) ) {
 
 		$errs = array();
-		
+
+		if ( !empty($_POST['exclude_categories']) ) {
+			update_option('SE3_exclude_categories', "true");
+		} else {
+			update_option('SE3_exclude_categories', "false");
+		}
+
+		if ( !empty($_POST['exclude_categories_list']) ) {
+			update_option('SE3_exclude_categories_list', $_POST['exclude_categories_list']);
+		} else {
+			update_option('SE3_exclude_categories_list', "");
+		}
+
 		if ( !empty($_POST['exclude_posts']) ) {
 			update_option('SE3_exclude_posts', "true");
 		} else {
 			update_option('SE3_exclude_posts', "false");
 		}
-		
+
 		if ( !empty($_POST['exclude_posts_list']) ) {
 			update_option('SE3_exclude_posts_list', $_POST['exclude_posts_list']);
 		} else {
 			update_option('SE3_exclude_posts_list', "");
 		}
-			
+
 		if ( !empty($_POST['search_pages']) ) {
 			update_option('SE3_use_page_search', "true");
 		} else {
@@ -334,7 +365,7 @@ global $wpdb, $table_prefix;
 		} else {
 			update_option('SE3_use_tag_search', "false");
 		}
-
+		
 		if ( empty($errs) ) {
 			echo '<div id="message" class="updated fade"><p>Options updated!</p></div>';
 		} else {
@@ -347,12 +378,18 @@ global $wpdb, $table_prefix;
 	} // End if update
 
 	//set up option checkbox values
+	if ('true' == get_option('SE3_exclude_categories')) {
+		$exclude_categories = 'checked="true"';
+	} else {
+		$exclude_categories = '';
+	}
+
 	if ('true' == get_option('SE3_exclude_posts')) {
 		$exclude_posts = 'checked="true"';
 	} else {
 		$exclude_posts = '';
 	}
-	
+
 	if ('true' == get_option('SE3_use_page_search')) {
 		$page_search = 'checked="true"';
 	} else {
@@ -377,7 +414,6 @@ global $wpdb, $table_prefix;
 	    $excerpt_search = '';
 	}
 	
-
 	if ('true' == get_option('SE3_use_draft_search')) {
 		$draft_search = 'checked="true"';
 	} else {
@@ -401,81 +437,109 @@ global $wpdb, $table_prefix;
 	} else {
 		$tag_search = '';
 	}
-	
+
 	?>
 
-		<div class="wrap" id="SE3_options_panel">
-		<h2>Search Everything 3</h2>
-		<p><?php _e('The options selected below will be used in every search query on this site; in addition to the built-in post search.','SearchEverything'); ?></p>
-		<div id="searchform">
-			<form method="get" id="searchform" action="<?php bloginfo('home'); ?>">
-				<div><input type="text" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" />
-					<input type="submit" id="searchsubmit" value="Test Search" />
-				</div>
-			</form>
-		</div>
-
-
-
-		<form method="post">
-
-		<table id="search_options" cell-spacing="2" cell-padding="2">
-				<tr>
-				<td class="col1"><input type="checkbox" name="search_pages" value="<?php echo get_option('SE3_use_page_search'); ?>" <?php echo $page_search; ?> /></td>
-				<td class="col2" colspan=2 ><?php _e('Search Every Page (non-password protected)','SearchEverything'); ?></td>
-			</tr>
-			<tr>
-				<td class="col1"><input type="checkbox" name="search_comments" value="<?php echo get_option('SE3_use_comment_search'); ?>" <?php echo $comment_search; ?> /></td>
-				<td class="col2" colspan=2 ><?php _e('Search Every Comment','SearchEverything'); ?></td>
-			</tr>
-			<tr class="child_option">
-				<td>&nbsp;</td>
-				<td>
-					<table>
-						<tr>
-							<td class="col1"><input type="checkbox" name="appvd_comments" value="<?php echo get_option('SE3_approved_comments_only'); ?>" <?php echo $appvd_comment; ?> /></td>
-							<td class="col2"><?php _e('Search only Approved comments only?','SearchEverything'); ?></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<tr>
-				<td class="col1"><input type="checkbox" name="search_tag" value="<?php echo get_option('SE3_use_tag_search'); ?>" <?php echo $tag_search; ?> /></td>
-				<td class="col2"><?php _e('Search Tags (Jeromes Keywords Plugin, UTW support coming soon)','SearchEverything'); ?></td>
-			</tr>
-						<tr>
-							<td class="col1"><input type="checkbox" name="search_excerpt" value="<?php echo get_option('SE3_use_excerpt_search'); ?>" <?php echo $excerpt_search; ?> /></td>
-				           <td class="col2"><?php _e('Search Every Excerpt','SearchEverything'); ?></td>
-				       </tr>
-				    <tr>
-				<td class="col1"><input type="checkbox" name="search_drafts" value="<?php echo get_option('SE3_use_draft_search'); ?>" <?php echo $draft_search; ?> /></td>
-				<td class="col2"><?php _e('Search Every Draft','SearchEverything'); ?></td>
-			</tr>
-			<tr>
-				<td class="col1"><input type="checkbox" name="search_attachments" value="<?php echo get_option('SE3_use_attachment_search'); ?>" <?php echo $attachment_search; ?> /></td>
-				<td class="col2"><?php _e('Search Every Attachment','SearchEverything'); ?></td>
-			</tr>
-			<tr>
-				<td class="col1"><input type="checkbox" name="search_metadata" value="<?php echo get_option('SE3_use_metadata_search'); ?>" <?php echo $metadata_search; ?> /></td>
-				<td class="col2"><?php _e('Search Custom Fields (Metadata)','SearchEverything'); ?></td>
-			</tr>
-					<tr>
-						<!--<td class="col1"><input type="checkbox" name="exclude_posts" value="<?php echo get_option('SE3_exclude_posts'); ?>" <?php echo $exclude_posts; ?> /></td>
-						<td class="col2" colspan=2 ><?php _e('Exclude some post IDs','SearchEverything'); ?></td>
-					</tr>
-					<tr>-->
-
-					<!--<td class="col2" colspan=2 >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php _e('List of Post IDs to exclude','SearchEverything'); ?><br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="30" name="exclude_posts_list" value="<?php echo get_option('SE3_exclude_posts_list');?>" /></td>
-					</tr>-->
-		</table>
-
-		<p style="margin-left:70%" class="submit">
-		<input type="submit" name="SE3_update_options" value="Save"/>
-		</p>
+	<div style="width:75%;" class="wrap" id="SE3_options_panel">
+	<h2>Search Everything</h2>
+	<p><?php _e('The options selected below will be used in every search query on this site; in addition to the built-in post search.','SearchEverything'); ?></p>
+	<div id="searchform">
+		<form method="get" id="searchform" action="<?php bloginfo('home'); ?>">
+			<div><input type="text" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" />
+				<input type="submit" id="searchsubmit" value="Test Search" />
+			</div>
 		</form>
+	</div>
 
-		</div>
 
+
+	<form method="post">
+
+	<table id="search_options" cell-spacing="2" cell-padding="2">
+		<tr>
+			<td class="col1"><input type="checkbox" name="exclude_posts" value="<?php echo get_option('SE3_exclude_posts'); ?>" <?php echo $exclude_posts; ?> /></td>
+			<td class="col2" colspan=2 ><?php _e('Exclude some post IDs','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+			<td class="col1"><input type="text" size="10" name="exclude_posts_list" value="<?php echo get_option('SE3_exclude_posts_list');?>" /></td>
+			<td class="col2" colspan=2 ><?php _e('List of ID to exclude','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+			<td class="col1"><input type="checkbox" name="exclude_categories" value="<?php echo get_option('SE3_exclude_categories'); ?>" <?php echo $exclude_categories; ?> /></td>
+			<td class="col2" colspan=2 ><?php _e('Exclude some category IDs (disabled)','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+			<td class="col1"><input type="text" size="10" name="exclude_categories_list" value="<?php echo get_option('SE3_exclude_categories_list');?>" /></td>
+			<td class="col2" colspan=2 ><?php _e('List of category ID to exclude','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+			<td class="col1"><input type="checkbox" name="search_pages" value="<?php echo get_option('SE3_use_page_search'); ?>" <?php echo $page_search; ?> /></td>
+			<td class="col2" colspan=2 ><?php _e('Search Every Page (non-password protected)','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+			<td class="col1"><input type="checkbox" name="search_comments" value="<?php echo get_option('SE3_use_comment_search'); ?>" <?php echo $comment_search; ?> /></td>
+			<td class="col2" colspan=2 ><?php _e('Search Every Comment','SearchEverything'); ?></td>
+		</tr>
+		<tr class="child_option">
+			<td>&nbsp;</td>
+			<td>
+				<table>
+					<tr>
+						<td class="col1"><input type="checkbox" name="appvd_comments" value="<?php echo get_option('SE3_approved_comments_only'); ?>" <?php echo $appvd_comment; ?> /></td>
+						<td class="col2"><?php _e('Search only Approved comments only?','SearchEverything'); ?></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+					<tr>
+						<td class="col1"><input type="checkbox" name="search_excerpt" value="<?php echo get_option('SE3_use_excerpt_search'); ?>" <?php echo $excerpt_search; ?> /></td>
+			           <td class="col2"><?php _e('Search Every Excerpt','SearchEverything'); ?></td>
+			       </tr>
+			    <tr>
+			<td class="col1"><input type="checkbox" name="search_drafts" value="<?php echo get_option('SE3_use_draft_search'); ?>" <?php echo $draft_search; ?> /></td>
+			<td class="col2"><?php _e('Search Every Draft','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+			<td class="col1"><input type="checkbox" name="search_attachments" value="<?php echo get_option('SE3_use_attachment_search'); ?>" <?php echo $attachment_search; ?> /></td>
+			<td class="col2"><?php _e('Search Every Attachment','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+			<td class="col1"><input type="checkbox" name="search_metadata" value="<?php echo get_option('SE3_use_metadata_search'); ?>" <?php echo $metadata_search; ?> /></td>
+			<td class="col2"><?php _e('Search Custom Fields (Metadata)','SearchEverything'); ?></td>
+		</tr>
+		<tr>
+		<td class="col1"><input type="checkbox" name="search_tag" value="<?php echo get_option('SE3_use_tag_search'); ?>" <?php echo $tag_search; ?> /></td>
+		<td class="col2"><?php _e('Search Tags (Jeromes Keywords Plugin, UTW support needed)','SearchEverything'); ?></td>
+	</tr>
+	</table>
+
+	<p class="submit">
+	<input type="submit" name="SE3_update_options" value="Save"/>
+	</p><?php _e('You may have to update your options twice before it sticks.','SearchEverything'); ?>
+	</form>
+	<br/><br/>
+<h2>Project Info</h2>
+The development since Version One has primarily come from the WordPress community and as a SE user I'm grateful for all of their support:
+<ul>
+	<li><a href="http://kinrowan.net">Cori Schlegel</a></li>
+	<li><a href="http://alexking.org">Alex King</a></li>
+	<li><a href="http://blog.saddey.net">Saddy</a></li>
+	<li><a href="http://www.reaper-x.com">Reaper</a></li>
+	<li>Alakhnor</li>
+	<li>Uli Iserloh</li>
+</ul>
+If you'd like to contribute there's a lot to do:
+<ul>
+	<li>More Meta Fuctions</li>
+	<li>Admin Interface Design</li>
+	<li>Submit Error (needing to press 'save' twice initially)</li>
+	<li>...anything else you want to add.</li>
+</ul>
+The current project home is <a href="http://searcheverything.scatter3d.com/browser">here</a>, if you want to contribute use download the trunk and e-mail me your modifications.
+<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thank you all, <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://dancameron.org">Dan Cameron</a>
+	</div>
 
 	<?php
 }	//end SE3_option_page
@@ -501,7 +565,7 @@ function SE3_options_style() {
   	}
 
  	#search_options td.col2, #search_options th.col2 {
-		width: 450px;
+		width: 420px;
 		margin-left: -15px;
 		text-align: left;
   	}

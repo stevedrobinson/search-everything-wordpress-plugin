@@ -1,16 +1,16 @@
 === Plugin Name ===
-Contributors: dancameron, few others
+Contributors: dancameron, alexkingorg, few others
 Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web/
-Tags: search, comment search, page search, admin, seo, tags, meta
+Tags: search, comment search, page search, admin, seo
 Requires at least: 1.5
 Tested up to: 2.2
 Stable tag: 3.2.1
 
-Description: Adds search functionality with little setup. Including options to search pages, tags (Jerome's Keywords Plugin, UTW support coming soon), excerpts, attachments, drafts, comments and custom fields (metadata). Additional Features: Localization. Thank you wordpress
+Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
 == Description ==
 
-Description: Adds search functionality with little setup. Including options to search pages, tags (Jerome's Keywords Plugin, UTW support coming soon), excerpts, attachments, drafts, comments and custom fields (metadata). Additional Features: Localization. Thank you wordpress
+Adds search functionality for almost everything on your site. Including options for searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
 
 
@@ -39,8 +39,7 @@ Open up a thread in the support forums tagged 'searcheverything' and 'dancameron
 
 == Screenshots ==
 
-1. Screenshot of the options panel.
-
+Screenshot of the options panel ![options panel](/options.jpg "Options")
 
 == Help ==
 
