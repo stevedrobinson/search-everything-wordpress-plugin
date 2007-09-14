@@ -2,8 +2,8 @@
 /*
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
-Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata).
-Version: 3.9
+Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content. 
+Version: 3.9.9
 Author: Dan Cameron
 Author URI: http://dancameron.org
 */
@@ -13,9 +13,6 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 */
-
-
-
 
 //add filters based upon option settings
 
@@ -38,8 +35,6 @@ function SE3_log($msg) {
 	}
 	return true;
 	}
-
-
 
 //add filters based upon option settings
 if ("true" == get_option('SE3_use_page_search')) {
@@ -79,6 +74,8 @@ if ("true" == get_option('SE3_exclude_posts')) {
 	SE3_log("searching excluding posts");
 	}
 
+
+
 if ("true" == get_option('SE3_exclude_categories')) {
 	add_filter('posts_where', 'SE3_exclude_categories');
 	add_filter('posts_join', 'SE3_exclude_categories_join');
@@ -91,7 +88,6 @@ if ("true" == get_option('SE3_use_tag_search')) {
 	add_filter('posts_join', 'SE3_search_tag_join'); 
        SE3_log("searching tag");
 	}
-
 
 //Duplicate fix provided by Tiago.Pocinho
 	add_filter('posts_request', 'SE3_distinct');
@@ -119,6 +115,8 @@ function SE3_exclude_posts($where) {
 	SE3_log("ex posts where: ".$where);
 	return $where;
 }
+
+
 
 //exlude some categories from search
 function SE3_exclude_categories($where) {
@@ -324,6 +322,9 @@ global $wpdb, $table_prefix;
 			update_option('SE3_use_page_search', "false");
 		}
 
+
+
+
 		if ( !empty($_POST['search_comments']) ) {
 			update_option('SE3_use_comment_search', "true");
 		} else {
@@ -389,6 +390,16 @@ global $wpdb, $table_prefix;
 	} else {
 		$exclude_posts = '';
 	}
+
+
+### NEW with v.3.9.1 ##################################
+	if ('true' == get_option('SE3_exclude_pages')) {
+		$exclude_pages = 'checked="true"';
+	} else {
+		$exclude_pages = '';
+	}
+### NEW with v.3.9.1 ##################################
+
 
 	if ('true' == get_option('SE3_use_page_search')) {
 		$page_search = 'checked="true"';
@@ -458,24 +469,33 @@ global $wpdb, $table_prefix;
 	<table id="search_options" cell-spacing="2" cell-padding="2">
 		<tr>
 			<td class="col1"><input type="checkbox" name="exclude_posts" value="<?php echo get_option('SE3_exclude_posts'); ?>" <?php echo $exclude_posts; ?> /></td>
-			<td class="col2" colspan=2 ><?php _e('Exclude some post IDs','SearchEverything'); ?></td>
+			<td class="col2" colspan=2 ><?php _e('Exclude some post or page IDs','SearchEverything'); ?></td>
 		</tr>
+		
 		<tr>
-			<td class="col1"><input type="text" size="10" name="exclude_posts_list" value="<?php echo get_option('SE3_exclude_posts_list');?>" /></td>
-			<td class="col2" colspan=2 ><?php _e('List of ID to exclude','SearchEverything'); ?></td>
+				<td class="col1"></td>
+			<td class="col2" colspan=2 ><?php _e('List of IDs to exclude (example: 1, 5, 9)','SearchEverything'); ?>
+				<br/>
+				<input type="text" size="20" name="exclude_posts_list" value="<?php echo get_option('SE3_exclude_posts_list');?>" /></td>
 		</tr>
 		<tr>
 			<td class="col1"><input type="checkbox" name="exclude_categories" value="<?php echo get_option('SE3_exclude_categories'); ?>" <?php echo $exclude_categories; ?> /></td>
-			<td class="col2" colspan=2 ><?php _e('Exclude some category IDs (disabled)','SearchEverything'); ?></td>
+			<td class="col2" colspan=2 ><?php _e('Exclude some category IDs','SearchEverything'); ?></td>
 		</tr>
 		<tr>
-			<td class="col1"><input type="text" size="10" name="exclude_categories_list" value="<?php echo get_option('SE3_exclude_categories_list');?>" /></td>
-			<td class="col2" colspan=2 ><?php _e('List of category ID to exclude','SearchEverything'); ?></td>
+			<td class="col1"></td>
+			<td class="col2" colspan=2 ><?php _e('List of category IDs to exclude (example: 1, 4)','SearchEverything'); ?>
+				<br/>
+				<input type="text" size="20" name="exclude_categories_list" value="<?php echo get_option('SE3_exclude_categories_list');?>" /></td>
 		</tr>
 		<tr>
 			<td class="col1"><input type="checkbox" name="search_pages" value="<?php echo get_option('SE3_use_page_search'); ?>" <?php echo $page_search; ?> /></td>
 			<td class="col2" colspan=2 ><?php _e('Search Every Page (non-password protected)','SearchEverything'); ?></td>
 		</tr>
+
+
+
+
 		<tr>
 			<td class="col1"><input type="checkbox" name="search_comments" value="<?php echo get_option('SE3_use_comment_search'); ?>" <?php echo $comment_search; ?> /></td>
 			<td class="col2" colspan=2 ><?php _e('Search Every Comment','SearchEverything'); ?></td>
@@ -514,38 +534,39 @@ global $wpdb, $table_prefix;
 	</table>
 
 	<p class="submit">
-	<input type="submit" name="SE3_update_options" value="Save"/>
+	<input type="submit" name="SE3_update_options" class="SE3_btn" value="Save Search Options"/>
 	</p><?php _e('You may have to update your options twice before it sticks.','SearchEverything'); ?>
 	</form>
 	<br/><br/>
 <h2>Project Info</h2>
-The development since Version One has primarily come from the WordPress community and as a SE user I'm grateful for all of their support:
+The development since Version One has primarily come from the WordPress community and as a SE user I&#8217;m grateful for all of their support:
 <ul>
-	<li><a href="http://kinrowan.net">Cori Schlegel</a></li>
-	<li><a href="http://alexking.org">Alex King</a></li>
-	<li><a href="http://blog.saddey.net">Saddy</a></li>
-	<li><a href="http://www.reaper-x.com">Reaper</a></li>
+	<li><a href="http://kinrowan.net/">Cori Schlegel</a></li>
+	<li><a href="http://alexking.org/">Alex King</a></li>
+	<li><a href="http://blog.saddey.net/">Saddy</a></li>
+	<li><a href="http://www.reaper-x.com/">Reaper</a></li>
+	<li><a href="http://green-beast.com/">Mike Cherim</a></li>
 	<li>Alakhnor</li>
 	<li>Uli Iserloh</li>
 </ul>
-If you'd like to contribute there's a lot to do:
+If you&#8217;d like to contribute there&#8217;s a lot to do:
 <ul>
 	<li>More Meta Fuctions</li>
 	<li>Admin Interface Design</li>
 	<li>Submit Error (needing to press 'save' twice initially)</li>
-	<li>...anything else you want to add.</li>
+	<li>&#8230;anything else you want to add.</li>
 </ul>
-The current project home is <a href="http://searcheverything.scatter3d.com/browser">here</a>, if you want to contribute use download the trunk and e-mail me your modifications.
+The current project home is at <a href="http://scatter3d.com">scatter3d.com</a>. If you want to contribute e-mail me your modifications.
 <br/><br/>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thank you all, <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://dancameron.org">Dan Cameron</a>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://dancameron.org/">Dan Cameron</a>
 	</div>
 
 	<?php
 }	//end SE3_option_page
 
 function SE3_add_options_panel() {
-	add_options_page('Search Everything', 'Search Everything', 'edit_plugins', 'SE3_options_page', 'SE3_option_page');
+	add_options_page('Search', 'Search Everything', 'edit_plugins', 'SE3_options_page', 'SE3_option_page');
 }
 add_action('admin_menu', 'SE3_add_options_panel');
 
@@ -561,13 +582,17 @@ function SE3_options_style() {
 
  	#search_options td.col1, #search_options th.col1 {
 		width: 30px;
-		text-align: left;
+		text-align: right;
+		padding-bottom: 10px;
+		
+	
   	}
 
  	#search_options td.col2, #search_options th.col2 {
 		width: 420px;
-		margin-left: -15px;
 		text-align: left;
+		padding-bottom: 10px;
+
   	}
 
   	#search_options tr.child_option {
@@ -585,6 +610,10 @@ function SE3_options_style() {
 		margin-top: 5px;
 		margin-bottom: 5px;
  	}
+
+    input.SE3_btn { 
+        cursor: pointer; 
+    }
 
  	</style>
 

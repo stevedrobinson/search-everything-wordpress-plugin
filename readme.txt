@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: dancameron, alexkingorg, few others
+Contributors: dancameron, few others
 Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web/
 Tags: search, comment search, page search, admin, seo
 Requires at least: 1.5
 Tested up to: 2.2
-Stable tag: 3.2.1
+Stable tag: 3.9.9
 
 Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
