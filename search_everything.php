@@ -3,9 +3,9 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content. 
-Version: 3.9.9
+Version: 3.9.9.5
 Author: Dan Cameron
-Author URI: http://dancameron.org
+Author URI: http://dancameron.org/
 */
 
 /*
@@ -322,9 +322,6 @@ global $wpdb, $table_prefix;
 			update_option('SE3_use_page_search', "false");
 		}
 
-
-
-
 		if ( !empty($_POST['search_comments']) ) {
 			update_option('SE3_use_comment_search', "true");
 		} else {
@@ -368,7 +365,7 @@ global $wpdb, $table_prefix;
 		}
 		
 		if ( empty($errs) ) {
-			echo '<div id="message" class="updated fade"><p>Options updated!</p></div>';
+			echo '<div id="message" class="updated fade"><p>Search Options Saved!</p></div>';
 		} else {
 			echo '<div id="message" class="error fade"><ul>';
 			foreach ( $errs as $name => $msg ) {
@@ -451,115 +448,94 @@ global $wpdb, $table_prefix;
 
 	?>
 
-	<div style="width:75%;" class="wrap" id="SE3_options_panel">
-	<h2>Search Everything</h2>
+	<div class="wrap" id="SE3_options_panel">
+	<h2>Search Everything (SE) Version: 3.9.9</h2>
 	<p><?php _e('The options selected below will be used in every search query on this site; in addition to the built-in post search.','SearchEverything'); ?></p>
-	<div id="searchform">
-		<form method="get" id="searchform" action="<?php bloginfo('home'); ?>">
-			<div><input type="text" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" />
-				<input type="submit" id="searchsubmit" value="Test Search" />
-			</div>
-		</form>
-	</div>
+    
+    </div>
+    
+	<div class="wrap SE3">
+	<h2>SE Search Options</h2>
+     <p>Use this form to configure your search options.</p>
+	<form id="SE_form" method="post" action="">
+     <fieldset>
+      <legend>Search Options Form</legend>
+         <p><input type="checkbox" id="exclude_posts" name="exclude_posts" value="<?php echo get_option('SE3_exclude_posts'); ?>" <?php echo $exclude_posts; ?> />
+       <label for="exclude_posts"><?php _e('Exclude some post or page IDs','SearchEverything'); ?></label><br />
+       <label for="exclude_posts_list" class="SE_text_label"><?php _e('List of IDs to exclude (example: 1, 5, 9)','SearchEverything'); ?></label><br />
+         <input type="text" size="40" class="SE_text_input" id="exclude_posts_list" name="exclude_posts_list" value="<?php echo get_option('SE3_exclude_posts_list');?>" /></p>
 
+         <p><input type="checkbox" id="exclude_categories" name="exclude_categories" value="<?php echo get_option('SE3_exclude_categories'); ?>" <?php echo $exclude_categories; ?> /> 
+       <label for="exclude_categories"><?php _e('Exclude some category IDs','SearchEverything'); ?></label><br />
+       <label for="exclude_categories_list" class="SE_text_label"><?php _e('List of category IDs to exclude (example: 1, 4)','SearchEverything'); ?></label><br />
+         <input type="text" size="40" class="SE_text_input" id="exclude_categories_list" name="exclude_categories_list" value="<?php echo get_option('SE3_exclude_categories_list');?>" /></p>
 
+         <p><input type="checkbox" id="search_pages" name="search_pages" value="<?php echo get_option('SE3_use_page_search'); ?>" <?php echo $page_search; ?> />
+       <label for="search_pages"><?php _e('Search every page (non-password protected)','SearchEverything'); ?></label></p>
 
-	<form method="post">
+         <p><input type="checkbox" id="search_comments" name="search_comments" value="<?php echo get_option('SE3_use_comment_search'); ?>" <?php echo $comment_search; ?> />
+       <label for="search_comments"><?php _e('Search every comment','SearchEverything'); ?></label><br />
+         <input type="checkbox" class="SE_text_input" id="appvd_comments" name="appvd_comments" value="<?php echo get_option('SE3_approved_comments_only'); ?>" <?php echo $appvd_comment; ?> />
+       <label for="appvd_comments"><?php _e('Search approved comments only?','SearchEverything'); ?></label></p>
 
-	<table id="search_options" cell-spacing="2" cell-padding="2">
-		<tr>
-			<td class="col1"><input type="checkbox" name="exclude_posts" value="<?php echo get_option('SE3_exclude_posts'); ?>" <?php echo $exclude_posts; ?> /></td>
-			<td class="col2" colspan=2 ><?php _e('Exclude some post or page IDs','SearchEverything'); ?></td>
-		</tr>
-		
-		<tr>
-				<td class="col1"></td>
-			<td class="col2" colspan=2 ><?php _e('List of IDs to exclude (example: 1, 5, 9)','SearchEverything'); ?>
-				<br/>
-				<input type="text" size="20" name="exclude_posts_list" value="<?php echo get_option('SE3_exclude_posts_list');?>" /></td>
-		</tr>
-		<tr>
-			<td class="col1"><input type="checkbox" name="exclude_categories" value="<?php echo get_option('SE3_exclude_categories'); ?>" <?php echo $exclude_categories; ?> /></td>
-			<td class="col2" colspan=2 ><?php _e('Exclude some category IDs','SearchEverything'); ?></td>
-		</tr>
-		<tr>
-			<td class="col1"></td>
-			<td class="col2" colspan=2 ><?php _e('List of category IDs to exclude (example: 1, 4)','SearchEverything'); ?>
-				<br/>
-				<input type="text" size="20" name="exclude_categories_list" value="<?php echo get_option('SE3_exclude_categories_list');?>" /></td>
-		</tr>
-		<tr>
-			<td class="col1"><input type="checkbox" name="search_pages" value="<?php echo get_option('SE3_use_page_search'); ?>" <?php echo $page_search; ?> /></td>
-			<td class="col2" colspan=2 ><?php _e('Search Every Page (non-password protected)','SearchEverything'); ?></td>
-		</tr>
+         <p><input type="checkbox" id="search_excerpt" name="search_excerpt" value="<?php echo get_option('SE3_use_excerpt_search'); ?>" <?php echo $excerpt_search; ?> />
+       <label for="search_excerpt"><?php _e('Search every excerpt','SearchEverything'); ?></label></p>
 
+         <p><input type="checkbox" id="search_drafts" name="search_drafts" value="<?php echo get_option('SE3_use_draft_search'); ?>" <?php echo $draft_search; ?> />
+       <label for="search_drafts"><?php _e('Search every draft','SearchEverything'); ?></label></p>
 
+         <p><input type="checkbox" id="search_attachments" name="search_attachments" value="<?php echo get_option('SE3_use_attachment_search'); ?>" <?php echo $attachment_search; ?> />
+       <label for="search_attachments"><?php _e('Search every attachment','SearchEverything'); ?></label></p>
 
+         <p><input type="checkbox" id="search_metadata" name="search_metadata" value="<?php echo get_option('SE3_use_metadata_search'); ?>" <?php echo $metadata_search; ?> />
+       <label for="search_metadata"><?php _e('Search custom fields (metadata)','SearchEverything'); ?></label></p>
 
-		<tr>
-			<td class="col1"><input type="checkbox" name="search_comments" value="<?php echo get_option('SE3_use_comment_search'); ?>" <?php echo $comment_search; ?> /></td>
-			<td class="col2" colspan=2 ><?php _e('Search Every Comment','SearchEverything'); ?></td>
-		</tr>
-		<tr class="child_option">
-			<td>&nbsp;</td>
-			<td>
-				<table>
-					<tr>
-						<td class="col1"><input type="checkbox" name="appvd_comments" value="<?php echo get_option('SE3_approved_comments_only'); ?>" <?php echo $appvd_comment; ?> /></td>
-						<td class="col2"><?php _e('Search only Approved comments only?','SearchEverything'); ?></td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-					<tr>
-						<td class="col1"><input type="checkbox" name="search_excerpt" value="<?php echo get_option('SE3_use_excerpt_search'); ?>" <?php echo $excerpt_search; ?> /></td>
-			           <td class="col2"><?php _e('Search Every Excerpt','SearchEverything'); ?></td>
-			       </tr>
-			    <tr>
-			<td class="col1"><input type="checkbox" name="search_drafts" value="<?php echo get_option('SE3_use_draft_search'); ?>" <?php echo $draft_search; ?> /></td>
-			<td class="col2"><?php _e('Search Every Draft','SearchEverything'); ?></td>
-		</tr>
-		<tr>
-			<td class="col1"><input type="checkbox" name="search_attachments" value="<?php echo get_option('SE3_use_attachment_search'); ?>" <?php echo $attachment_search; ?> /></td>
-			<td class="col2"><?php _e('Search Every Attachment','SearchEverything'); ?></td>
-		</tr>
-		<tr>
-			<td class="col1"><input type="checkbox" name="search_metadata" value="<?php echo get_option('SE3_use_metadata_search'); ?>" <?php echo $metadata_search; ?> /></td>
-			<td class="col2"><?php _e('Search Custom Fields (Metadata)','SearchEverything'); ?></td>
-		</tr>
-		<tr>
-		<td class="col1"><input type="checkbox" name="search_tag" value="<?php echo get_option('SE3_use_tag_search'); ?>" <?php echo $tag_search; ?> /></td>
-		<td class="col2"><?php _e('Search Tags (Jeromes Keywords Plugin, UTW support needed)','SearchEverything'); ?></td>
-	</tr>
-	</table>
+         <p><input type="checkbox" id="search_tag" name="search_tag" value="<?php echo get_option('SE3_use_tag_search'); ?>" <?php echo $tag_search; ?> />
+       <label for="search_tag"><?php _e('Search keywords/tags - <small>Jerome\'s Keywords only</small>','SearchEverything'); ?></label></p>
 
-	<p class="submit">
-	<input type="submit" name="SE3_update_options" class="SE3_btn" value="Save Search Options"/>
-	</p><?php _e('You may have to update your options twice before it sticks.','SearchEverything'); ?>
-	</form>
-	<br/><br/>
-<h2>Project Info</h2>
-The development since Version One has primarily come from the WordPress community and as a SE user I&#8217;m grateful for all of their support:
-<ul>
-	<li><a href="http://kinrowan.net/">Cori Schlegel</a></li>
-	<li><a href="http://alexking.org/">Alex King</a></li>
-	<li><a href="http://blog.saddey.net/">Saddy</a></li>
-	<li><a href="http://www.reaper-x.com/">Reaper</a></li>
-	<li><a href="http://green-beast.com/">Mike Cherim</a></li>
-	<li>Alakhnor</li>
-	<li>Uli Iserloh</li>
-</ul>
-If you&#8217;d like to contribute there&#8217;s a lot to do:
-<ul>
-	<li>More Meta Fuctions</li>
-	<li>Admin Interface Design</li>
-	<li>Submit Error (needing to press 'save' twice initially)</li>
-	<li>&#8230;anything else you want to add.</li>
-</ul>
-The current project home is at <a href="http://scatter3d.com">scatter3d.com</a>. If you want to contribute e-mail me your modifications.
-<br/><br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Thank you all, <br/>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://dancameron.org/">Dan Cameron</a>
+    	<p class="submit"><input type="submit" name="SE3_update_options" class="SE3_btn" value="Save Search Options"/><br />
+	      <span class="SE_notice">Important:</span> <?php _e('You may have to click Save Search Options twice before it sticks.','SearchEverything'); ?></p>
+
+     </fieldset>
+    </form>
+    </div>
+	<div class="wrap SE3">
+	<h2>SE Search Form</h2>
+     <p>Use this search form to run a live search test.</p>
+	 
+      <fieldset>
+       <legend>Site Search</legend>
+        <form method="get" id="searchform" action="<?php bloginfo('home'); ?>"><p class="srch submit">
+		 <label for="s">Enter search terms<br /></label>
+          <input type="text" class="srch-txt" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" />
+		  <input type="submit" class="SE3_btn" id="searchsubmit" value="Run Test Search" /></p>
+      </form>
+	 </fieldset>
+     </div>
+	<div class="wrap">
+     <h2>SE Project Information</h2>
+       <p>The development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:</p>
+         <ul class="SE_lists">
+	       <li><a href="http://kinrowan.net/">Cori Schlegel</a></li>
+		   <li><a href="http://green-beast.com/">Mike Cherim</a></li>
+           <li><a href="http://alexking.org/">Alex King</a></li>
+           <li><a href="http://blog.saddey.net/">Saddy</a></li>
+           <li><a href="http://www.reaper-x.com/">Reaper</a></li>
+           
+           <li>Alakhnor</li>
+           <li>Uli Iserloh</li>
+         </ul>
+       <p>If you&#8217;d like to contribute there&#8217;s a lot to do:</p>
+         <ul class="SE_lists">
+	       <li><strong>2.3 Compatibility</strong></li>
+	       <li>More meta data fuctions.</li>
+           <li>Search WP 2.3 tags.</li>
+			<li>Search Bookmarks.</li>
+	       <li>&#8230;anything else you want to add.</li>
+         </ul>
+        <br/><p>The current project home is at <a href="http://scatter3d.com/">scatter3d.com</a>. If you want to contribute <a href="mailto:dancameron@gmail.com">e-mail me</a> your modifications.<br/> Donations are accepted.</p>
+       <p class="sig">Respectfully,<br />
+       <a href="http://dancameron.org/">Dan Cameron</a></p>
 	</div>
 
 	<?php
@@ -573,53 +549,23 @@ add_action('admin_menu', 'SE3_add_options_panel');
 //styling options page
 function SE3_options_style() {
 	?>
-	<style type="text/css">
-
-	table#search_options {
-		table-layout: auto;
- 	}
-
-
- 	#search_options td.col1, #search_options th.col1 {
-		width: 30px;
-		text-align: right;
-		padding-bottom: 10px;
-		
-	
-  	}
-
- 	#search_options td.col2, #search_options th.col2 {
-		width: 420px;
-		text-align: left;
-		padding-bottom: 10px;
-
-  	}
-
-  	#search_options tr.child_option {
-		margin-left: 15px;
-		margin-top: -3px;
-   }
-
-   #SE3_options_panel p.submit {
-		text-align: left;
-   }
-
-	div#searchform div {
-		margin-left: auto;
-		margin-right: auto;
-		margin-top: 5px;
-		margin-bottom: 5px;
- 	}
-
-    input.SE3_btn { 
-        cursor: pointer; 
-    }
-
- 	</style>
-
+<style type="text/css" media="screen">
+  div.SE3 p.submit, div.SE3 form p.submit, div.SE3 p.submit input { text-align:left; } 
+  #SE3_options_panel p.submit { text-align:left; }
+  form#searchform label, form#searchform input, form#SE_form label, form#SE_form input { margin-left:10px; }
+  input.SE3_btn { cursor:pointer; margin-left:5px; }
+  form legend { font-weight:bold; color:navy; }
+  p.srch { margin:0; margin-bottom:20px; } 
+  p.submit input.srch-txt { background-color:#f4f4f4; background-image:none; border:1px solid #999; padding:6px; }
+  p.submit input.srch-txt:focus, p.submit input.srch-txt:active { background-color:#fff; background-image:none; border:1px solid #111; padding:6px; }
+  p.sig { margin-left:25px; }
+  span.SE_notice { color:#cd0000; font-weight:bold; padding-left:10px; }
+  label.SE_text_label { cursor:text; } 
+  form#SE_form label.SE_text_label, form#SE_form input.SE_text_input { margin-left:38px; }
+  ul.SE_lists li { list-style-type:square; }
+</style>
 <?php
 }
-
 
 add_action('admin_head', 'SE3_options_style');
 
