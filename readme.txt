@@ -1,16 +1,30 @@
 === Plugin Name ===
-Contributors: dancameron, few others
+Contributors: dancameron
 Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web/
 Tags: search, comment search, page search, admin, seo
-Requires at least: 1.5
-Tested up to: 2.2
-Stable tag: 3.9.9
+Requires at least: 2.1
+Tested up to: 2.3
+Stable tag: 4.0
 
 Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
 == Description ==
 
-Adds search functionality for almost everything on your site. Including options for searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
+Search Everything increases the ability of the default Wordpress Search, options included:
+
+* Search Every Page
+* Search non-password protected pages only
+* Search Every Comment
+* Search only approved comments
+* Search Every Draft
+* Search Every Excerpt
+* Search Every Attachment
+* Search Every Custom Field (metadata)
+* Exclude Posts from search
+* Exclude Categories from search (WP 2.2 only)
+
+... tagging support and category exclusion for WordPress 2.3 coming soon.
+
 
 
 
@@ -39,7 +53,7 @@ Open up a thread in the support forums tagged 'searcheverything' and 'dancameron
 
 == Screenshots ==
 
-Screenshot of the options panel ![options panel](/options.jpg "Options")
+1. Screenshot of the options panel
 
 == Help ==
 
