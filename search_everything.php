@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content. 
-Version: 4.0
+Version: 4.0.1
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -399,8 +399,7 @@ echo "<div class=\"updated fade\" id=\"limitcatsupdatenotice\"><p>" . __("Search
 }	//end SE4_option_page
 
 function SE4_add_options_panel() {
-	add_management_page('Search Everything', 'Manage Search', 7, 'manage_search', 'SE4_option_page');
-	add_options_page('Search', 'Search Everything', 7, 'manage_search', 'SE4_options_page', 'SE4_option_page');
+	add_options_page('Search', 'Search Everything', 7, 'manage_search', 'SE4_option_page', 'SE4_option_page');
 }
 add_action('admin_menu', 'SE4_add_options_panel');
 
