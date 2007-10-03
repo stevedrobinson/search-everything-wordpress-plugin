@@ -4,7 +4,7 @@ Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web
 Tags: search, comment search, page search, admin, seo
 Requires at least: 2.1
 Tested up to: 2.3
-Stable tag: 4.0.1
+Stable tag: 4.0.2
 
 Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
