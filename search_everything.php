@@ -411,7 +411,6 @@ function SE4_options_style() {
   #SE4_options_panel p.submit { text-align:left; }
   form#searchform label, form#searchform input, form#SE_form label, form#SE_form input { margin-left:10px; }
   input.SE4_btn { cursor:pointer; margin-left:5px; }
-  form legend { font-weight:bold; color:navy; }
   p.srch { margin:0; margin-bottom:20px; } 
   p.submit input.srch-txt { background-color:#f4f4f4; background-image:none; border:1px solid #999; padding:6px; }
   p.submit input.srch-txt:focus, p.submit input.srch-txt:active { background-color:#fff; background-image:none; border:1px solid #111; padding:6px; }
