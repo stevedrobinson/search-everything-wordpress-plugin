@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content. 
-Version: 4.0.2
+Version: 4.0.3
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -22,8 +22,8 @@ $logging = 0;
 // Load language file
 $locale = get_locale();
 if ( !empty($locale) )
-	load_textdomain('SearchEverything', ABSPATH . 'wp-content/plugins/' . dirname(plugin_basename(__FILE__)) .'/' . 'SE4'.$locale.'.mo');
-
+	load_textdomain('SearchEverything', ABSPATH . 'wp-content/plugins/' . dirname(plugin_basename(__FILE__)) .'/' . 'SE4-'.$locale.'.mo');
+	
 function SE4_log($msg) {
 	global $logging;
 	if ($logging) {
@@ -375,9 +375,9 @@ echo "<div class=\"updated fade\" id=\"limitcatsupdatenotice\"><p>" . __("Search
          <ul class="SE_lists">
 	       <li><a href="http://kinrowan.net/">Cori Schlegel</a></li>
 		   <li><a href="http://green-beast.com/">Mike Cherim</a></li>
-           <li><a href="http://alexking.org/">Alex King</a></li>
            <li><a href="http://blog.saddey.net/">Saddy</a></li>
            <li><a href="http://www.reaper-x.com/">Reaper</a></li>
+ 		   <li><a href="http://http://beyn.org/">Barış Ünver</a> (localization support)</li>
            
            <li>Alakhnor</li>
            <li>Uli Iserloh</li>
