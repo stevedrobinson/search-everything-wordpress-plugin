@@ -1,0 +1,108 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Everything\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2007-10-04 21:49+0100\n"
+"Last-Translator: alakhnor <alakhnor@wanadoo.fr>\n"
+"Language-Team: Alakhnor\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: French\n"
+"X-Poedit-Country: FRANCE\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-Basepath: c:\\wamp\\www\\le-hibootest\\wp-content\\plugins\\\n"
+"X-Poedit-SearchPath-0: search-everything\n"
+
+#: search-everything/SE-Admin.php:30
+msgid "Search Everything Options  <strong>Updated</strong>."
+msgstr "Options de Search Everything <strong>mises à jour</strong>."
+
+#: search-everything/SE-Admin.php:59
+msgid "The options selected below will be used in every search query on this site; in addition to the built-in post search."
+msgstr "Les options sélectionnées ci-dessous seront utilisées dans les recherches effectuées sur ce site en s'ajoutant à la fonction de recherche existante."
+
+#: search-everything/SE-Admin.php:63
+msgid "SE Search Options"
+msgstr "Options de recherche de SE"
+
+#: search-everything/SE-Admin.php:64
+msgid "Use this form to configure your search options."
+msgstr "Utilisez ce formulaire pour configurer vos options de recherche."
+
+#: search-everything/SE-Admin.php:67
+msgid "Search Options Form"
+msgstr "Formulaire d'option de recherche"
+
+#: search-everything/SE-Admin.php:69
+msgid "Exclude some post or page IDs"
+msgstr "Exclure des ID d'articles ou de pages"
+
+#: search-everything/SE-Admin.php:70
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "Liste d'IDs d'articles séparées par des virgules (ex : 1,5,9)"
+
+#: search-everything/SE-Admin.php:75
+msgid "Exclude some category IDs (Wordpress 2.2 Only)"
+msgstr "Exclure des ID de catégories (WordPress 2.2 seulement)"
+
+#: search-everything/SE-Admin.php:76
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "Liste d'IDs de catégories séparées par des virgules (ex : 1,4)"
+
+#: search-everything/SE-Admin.php:81
+msgid "Search every page (non-password protected)"
+msgstr "Chercher dans toutes les pages (non-protégées par mot de passe)"
+
+#: search-everything/SE-Admin.php:83
+msgid "Search approved pages only?"
+msgstr "Chercher dans les pages validées seulement"
+
+#: search-everything/SE-Admin.php:87
+msgid "Search every comment"
+msgstr "Chercher dans tous les commentaires"
+
+#: search-everything/SE-Admin.php:90
+msgid "Search approved comments only?"
+msgstr "Chercher dans les commentaires validés seulement"
+
+#: search-everything/SE-Admin.php:93
+msgid "Search every excerpt"
+msgstr "Chercher dans tous les excerpt"
+
+#: search-everything/SE-Admin.php:96
+msgid "Search every draft"
+msgstr "Chercher dans tous les brouillons"
+
+#: search-everything/SE-Admin.php:99
+msgid "Search every attachment"
+msgstr "Chercher dans tous les documents joints"
+
+#: search-everything/SE-Admin.php:102
+msgid "Search every custom field (metadata)"
+msgstr "Chercher dans tous les champs personnalisés (Meta-data)"
+
+#: search-everything/SE-Admin.php:108
+msgid "Update Options"
+msgstr "Mise à jour"
+
+#: search-everything/SE-Admin.php:114
+msgid "SE Search Form"
+msgstr "Formulaire de recherche de SE"
+
+#: search-everything/SE-Admin.php:115
+msgid "Use this search form to run a live search test."
+msgstr "Utilisez ce champ pour effectuer une recherche réelle."
+
+#: search-everything/SE-Admin.php:118
+msgid "Site Search"
+msgstr "Recherche sur le site"
+
+#: search-everything/SE-Admin.php:120
+msgid "Enter search terms"
+msgstr "Entrez les termes de recherche"
+
+#: search-everything/SE-Admin.php:122
+msgid "Run Test Search"
+msgstr "Lancer la recherche"
+
