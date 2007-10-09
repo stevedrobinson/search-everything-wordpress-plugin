@@ -69,7 +69,7 @@ Class SearchEverythingAdmin {
 	
 		        		<p><input type="checkbox" id="exclude_categories" name="exclude_categories" 
 					value="true"  <?php if($options['SE4_exclude_categories'] == 'true') { echo 'checked="true"'; } ?> /> 
-		       			<label for="exclude_categories"><?php _e('Exclude some category IDs (Wordpress 2.2 Only)','SearchEverything'); ?></label><br />
+		       			<label for="exclude_categories"><?php _e('Exclude Categories <strong><small>(Wordpress 2.2 Only)</strong></small>','SearchEverything'); ?></label><br />
 		       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="exclude_categories_list" class="SE_text_label"><?php _e('Comma separated category IDs (example: 1, 4)','SearchEverything'); ?></label><br />
 		         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" class="SE_text_input" id="exclude_categories_list" name="exclude_categories_list" value="<?php echo $options['SE4_exclude_categories_list'];?>" /></p>
 		

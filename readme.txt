@@ -4,7 +4,7 @@ Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web
 Tags: search, comment search, page search, admin, seo
 Requires at least: 2.1
 Tested up to: 2.3
-Stable tag: 4.0.3
+Stable tag: 4.1
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -29,6 +29,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 
 == Update Log ==
 
+* 4.1 - Major Plugin Architecture change, better localization support
 * 4.0.3 - Localization pot and Turkish translation (props Baris Unver)
 * 4.0.2 - CSS Bug fix - minor
 * 4.0.1 - Bug fix~Extraneous 's' in options panel

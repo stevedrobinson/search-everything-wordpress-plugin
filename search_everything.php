@@ -77,13 +77,6 @@ Class SearchEverything {
 			$this->SE4_log("searching excluding categories");
 		}
 
-		// - Depracated
-		if ("true" == $this->options['SE4_use_tag_search']) { 
-			add_filter('posts_where', array(&$this, 'SE4_search_tag')); 
-			add_filter('posts_join', array(&$this, 'SE4_search_tag_join')); 
-			$this->SE4_log("searching tag");
-		}
-
 		//Duplicate fix provided by Tiago.Pocinho
 		add_filter('posts_request', array(&$this, 'SE4_distinct'));
 	}
