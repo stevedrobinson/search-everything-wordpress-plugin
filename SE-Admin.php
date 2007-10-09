@@ -122,7 +122,7 @@ Class SearchEverythingAdmin {
 		</div>
 		<div class="wrap">
 			<h2>SE Project Information</h2>
-		       	<p>The development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:</p>
+		       	<p>As of 2.3 I'm taking a hiatus from SE development; however I'm still accepting and committing feature updates and fixes from the community. <br/> You should not fret, the development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:</p>
 		        <ul class="SE_lists">
 					<li>Alakhnor</li>
 					<li><a href="http://kinrowan.net/">Cori Schlegel</a></li>
@@ -140,7 +140,7 @@ Class SearchEverythingAdmin {
 				<li>Search Bookmarks.</li>
 				<li>&#8230;anything else you want to add.</li>
 		        </ul>
-		        <br/><p>The current project home is at <a href="http://scatter3d.com/">scatter3d.com</a>. If you want to contribute <a href="mailto:dancameron@gmail.com">e-mail me</a> your modifications.<br/> Donations are accepted.</p>
+		        <br/><p>The current project home is at <a href="http://scatter3d.com/">scatter3d.com</a>. If you want to contribute <a href="mailto:dancameron@gmail.com">e-mail me</a> your modifications.</p>
 			<p class="sig">Respectfully,<br />
 			<a href="http://dancameron.org/">Dan Cameron</a></p>
 		</div>
