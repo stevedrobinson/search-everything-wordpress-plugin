@@ -44,9 +44,9 @@ Search Everything increases the ability of the default Wordpress Search, options
 Installation Instructions:
 
 1. Download the plugin and unzip it (didn't you already do this?).
-2. Put the 'searcheverything.php' file into your wp-content/plugins/ directory.
+2. Put the 'searchev-erything' directory into your wp-content/plugins/ directory.
 3. Go to the Plugins page in your WordPress Administration area and click 'Activate' next to Search Everything.
-4. Go to the Options >  Search Everything and configure your site. (There is a bug were you might need to save your options twice)
+4. Go to the Options >  Search Everything and configure your site.
 5. That's it. Have fun and if you can contribute (see notes), at the very least post your likes and dislikes about the plugin linking to http://dancameron.org/wordpress/ so your readers to find the plugin and I can see your feedback.
 	
 	
