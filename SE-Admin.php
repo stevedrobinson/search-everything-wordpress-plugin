@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.1';
+	var $version = '4.2';
 
 	function SearchEverythingAdmin() {
 	
@@ -23,31 +23,34 @@ Class SearchEverythingAdmin {
 
 	//build admin interface
 	function SE4_option_page() {
-		global $wpdb, $table_prefix;
+		global $wpdb, $table_prefix, $wp_version;
 
 		if($_POST['action'] == "save") {
 			echo "<div class=\"updated fade\" id=\"limitcatsupdatenotice\"><p>" . __("Search Everything Options  <strong>Updated</strong>.") . "</p></div>";
 
 			$new_options = array(
-				'SE4_exclude_categories'	=> $_POST["exclude_categories"],
+				'SE4_exclude_categories'		=> $_POST["exclude_categories"],
 				'SE4_exclude_categories_list'	=> $_POST["exclude_categories_list"],
-				'SE4_exclude_posts'		=> $_POST["exclude_posts"],
-				'SE4_exclude_posts_list'	=> $_POST["exclude_posts_list"],
-				'SE4_use_page_search'		=> $_POST["search_pages"],
-				'SE4_use_comment_search'	=> $_POST["search_comments"],
+				'SE4_exclude_posts'				=> $_POST["exclude_posts"],
+				'SE4_exclude_posts_list'		=> $_POST["exclude_posts_list"],
+				'SE4_use_page_search'			=> $_POST["search_pages"],
+				'SE4_use_comment_search'		=> $_POST["search_comments"],
+				'SE4_use_tag_search'			=> $_POST["search_tags"],
 				'SE4_approved_comments_only'	=> $_POST["appvd_comments"],
-				'SE4_approved_pages_only'	=> $_POST["appvd_pages"],
-				'SE4_use_excerpt_search'	=> $_POST["search_excerpt"],
-				'SE4_use_draft_search'		=> $_POST["search_drafts"],
-				'SE4_use_attachment_search'	=> $_POST["search_attachments"],
-				'SE4_use_metadata_search'	=> $_POST["search_metadata"]
+				'SE4_approved_pages_only'		=> $_POST["appvd_pages"],
+				'SE4_use_excerpt_search'		=> $_POST["search_excerpt"],
+				'SE4_use_draft_search'			=> $_POST["search_drafts"],
+				'SE4_use_attachment_search'		=> $_POST["search_attachments"],
+				'SE4_use_metadata_search'		=> $_POST["search_metadata"]
 			);
 
+			update_option("search_tag", $_POST["SE4_use_tag_search"]);
 			update_option("SE4_options", $new_options);
 
 		}
 
 		$options = get_option('SE4_options');
+		$search_tag = get_option('search_tag');
 
 		?>
 	
@@ -69,7 +72,7 @@ Class SearchEverythingAdmin {
 	
 		        		<p><input type="checkbox" id="exclude_categories" name="exclude_categories" 
 					value="true"  <?php if($options['SE4_exclude_categories'] == 'true') { echo 'checked="true"'; } ?> /> 
-		       			<label for="exclude_categories"><?php _e('Exclude Categories <strong><small>(Wordpress 2.2 Only)</strong></small>','SearchEverything'); ?></label><br />
+		       			<label for="exclude_categories"><?php _e('Exclude Categories','SearchEverything'); ?></label><br />
 		       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="exclude_categories_list" class="SE_text_label"><?php _e('Comma separated category IDs (example: 1, 4)','SearchEverything'); ?></label><br />
 		         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" class="SE_text_input" id="exclude_categories_list" name="exclude_categories_list" value="<?php echo $options['SE4_exclude_categories_list'];?>" /></p>
 		
@@ -78,7 +81,14 @@ Class SearchEverythingAdmin {
 		       			<label for="search_pages"><?php _e('Search every page (non-password protected)','SearchEverything'); ?></label></p>
 					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="SE_text_input" id="appvd_pages" name="appvd_pages" value="true"  <?php if($options['SE4_approved_pages_only'] == 'true') { echo 'checked="true"'; } ?>
 		      			<label for="appvd_pages"><?php _e('Search approved pages only?','SearchEverything'); ?></label></p>
-		
+
+<?php 
+// Show tags only for WP 2.3+
+If ($wp_version >= '2.3') { ?>
+					<p><input type="checkbox" id="search_tags" name="search_tags" value="true"  <?php if($options['SE4_use_tag_search'] == 'true') { echo 'checked="true"'; } ?> />
+						<label for="search_tags"><?php _e('Search every tag','SearchEverything'); ?></label></p>
+<?php } ?>
+
 		         		<p><input type="checkbox" id="search_comments" name="search_comments" 
 					value="true"  <?php if($options['SE4_use_comment_search'] == 'true') { echo 'checked="true"'; } ?> />
 		       			<label for="search_comments"><?php _e('Search every comment','SearchEverything'); ?></label></p>
@@ -134,13 +144,11 @@ Class SearchEverythingAdmin {
 		        </ul>
 			<p>If you&#8217;d like to contribute there&#8217;s a lot to do:</p>
 		        <ul class="SE_lists">
-				<li><strong>Category Exclusion for new 2.3 Taxonomy Schema</strong></li>
 				<li>More meta data functions.</li>
-		        	<li>Searching tags (WP 2.3).</li>
 				<li>Search Bookmarks.</li>
 				<li>&#8230;anything else you want to add.</li>
 		        </ul>
-		        <br/><p>The current project home is at <a href="http://scatter3d.com/">scatter3d.com</a>. If you want to contribute <a href="mailto:dancameron@gmail.com">e-mail me</a> your modifications.</p>
+		        <br/><p>The current project home is at <a href="http://scatter3d.com/">scatter3d.com</a>. If you want to contribute <a href="mailto:dancameron+se@gmail.com">e-mail me</a> your modifications.</p>
 			<p class="sig">Respectfully,<br />
 			<a href="http://dancameron.org/">Dan Cameron</a></p>
 		</div>

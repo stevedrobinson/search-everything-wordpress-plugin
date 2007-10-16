@@ -13,6 +13,7 @@ Increases Wordpress' default search functionality through an options panel. Opti
 Search Everything increases the ability of the default Wordpress Search, options included:
 
 * Search Every Page
+* Search Every Tag
 * Search non-password protected pages only
 * Search Every Comment
 * Search only approved comments
@@ -22,13 +23,14 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Search Every Custom Field (metadata)
 * Search Every Category Name
 * Exclude Posts from search
-* Exclude Categories from search (WP 2.2 only)
+* Exclude Categories from search
 
-... tagging support and category exclusion for WordPress 2.3 coming soon.
+... tagging support and category exclusion for WordPress 2.3 is now supported.
 
 
 == Update Log ==
 
+* 4.2 - Full 2.3 Support with Tag Searching and Category Exclusion
 * 4.1 - Major Plugin Architecture change, better localization support
 * 4.0.3 - Localization pot and Turkish translation (props Baris Unver)
 * 4.0.2 - CSS Bug fix - minor

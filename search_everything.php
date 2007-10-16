@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content. 
-Version: 4.1
+Version: 4.2
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -22,9 +22,11 @@ Class SearchEverything {
 
 	var $login = false;
 	var $options;
+	var $wp_ver23;
 	
 	function SearchEverything(){
-
+		global $wp_version;
+		$this->wp_ver23 = ($wp_version >= '2.3');
 		$this->options = get_option('SE4_options');
 
 		if (is_admin()) {
@@ -33,6 +35,12 @@ Class SearchEverything {
 		}
 		
 		//add filters based upon option settings
+		if ("true" == $this->options['SE4_use_tag_search']) {
+			add_filter('posts_where', array(&$this, 'SE4_search_tags'));
+			add_filter('posts_join', array(&$this, 'SE4_terms_join'));
+			$this->SE4_log("searching tags");
+		}
+		
 		if ("true" == $this->options['SE4_use_page_search']) {
 			add_filter('posts_where', array(&$this, 'SE4_search_pages'));
 			$this->SE4_log("searching pages");
@@ -70,23 +78,28 @@ Class SearchEverything {
 			$this->SE4_log("searching excluding posts");
 		}
 
-		// - Depracated in 2.3
 		if ("true" == $this->options['SE4_exclude_categories']) {
 			add_filter('posts_where', array(&$this, 'SE4_exclude_categories'));
-			add_filter('posts_join', array(&$this, 'SE4_exclude_categories_join'));
+			if ($this->wp_ver23) {
+				if ("true" != $this->options['SE4_use_tag_search'])
+					add_filter('posts_join', array(&$this, 'SE4_terms_join'));
+			}
+				else
+					add_filter('posts_join', array(&$this, 'SE4_exclude_categories_join'));
 			$this->SE4_log("searching excluding categories");
 		}
-
+		
 		//Duplicate fix provided by Tiago.Pocinho
 		add_filter('posts_request', array(&$this, 'SE4_distinct'));
 	}
 
+	// Logs search into a file
 	function SE4_log($msg) {
 
 		if ($this->logging) {
 			$fp = fopen("logfile.log","a+");
 			$date = date("Y-m-d H:i:s ");
-			$source = "search_everything_2 plugin: ";
+			$source = "search_everythin plugin: ";
 			fwrite($fp, "\n\n".$date."\n".$source."\n".$msg);
 			fclose($fp);
 		}
@@ -116,32 +129,6 @@ Class SearchEverything {
 	
 		$this->SE4_log("ex posts where: ".$where);
 		return $where;
-	}
-	
-	//exlude some categories from search - Depracated in 2.3
-	function SE4_exclude_categories($where) {
-		global $wp_query;
-		if (!empty($wp_query->query_vars['s'])) {
-			$excl_list = implode(',', explode(',', trim($this->options['SE4_exclude_categories_list'])));
-			$where = str_replace('"', '\'', $where);
-			$where = 'AND ('.substr($where, strpos($where, 'AND')+3).' )';
-			$where .= ' AND (c.category_id NOT IN ( '.$excl_list.' ))';
-		}
-	
-		$this->SE4_log("ex cats where: ".$where);
-		return $where;
-	}
-	
-	//join for excluding categories - Depracated in 2.3
-	function SE4_exclude_categories_join($join) {
-		global $wp_query, $wpdb;
-	
-		if (!empty($wp_query->query_vars['s'])) {
-	
-			$join .= "LEFT JOIN $wpdb->post2cat AS c ON $wpdb->posts.ID = c.post_id";
-		}
-		$this->SE4_log("category join: ".$join);
-		return $join;
 	}
 	
 	//search pages (except password protected pages provided by loops)
@@ -206,12 +193,78 @@ Class SearchEverything {
 	function SE4_search_comments($where) {
 	global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
-			$where .= " OR (comment_content LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+			if ('true' == $this->options['SE4_approved_comments_only']) {
+				$comment_approved = " AND c.comment_approved =  '1'";
+	  		} else {
+				$comment_approved = '';
+	  		}
+
+			if ($this->wp_ver23) {
+				$where .= " OR ( c.comment_post_ID = ".$wpdb->posts . ".ID " . $comment_approved . " AND c.comment_content LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+	  		}
 		}
 	
 		$this->SE4_log("comments where: ".$where);
 	
 		return $where;
+	}
+	
+	//search metadata
+	function SE4_search_metadata($where) {
+		global $wp_query, $wpdb;
+		if (!empty($wp_query->query_vars['s'])) {
+			if ($this->wp_ver23)
+				$where .= " OR ($wpdb->posts.ID = m.post_id AND m.meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+			else
+				$where .= " OR meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
+		}
+	
+		$this->SE4_log("metadata where: ".$where);
+	
+		return $where;
+	}
+
+	//search tags
+	function SE4_search_tags($where) {
+	global $wp_query, $wpdb;
+		if (!empty($wp_query->query_vars['s'])) {
+			$where .= " OR ( $wpdb->posts.ID = rel.object_id AND rel.term_taxonomy_id = tax.term_taxonomy_id AND tax.term_id = ter.term_id AND tax.taxonomy = 'post_tag' AND ter.slug LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+		}
+	
+		$this->SE4_log("tags where: ".$where);
+	
+		return $where;
+	}
+
+	//exlude some categories from search
+	function SE4_exclude_categories($where) {
+		global $wp_query, $wpdb;
+		if (!empty($wp_query->query_vars['s'])) {
+			if (trim($this->options['SE4_exclude_categories_list']) != '') {
+				$excl_list = implode(',', explode(',', trim($this->options['SE4_exclude_categories_list'])));
+				$where = str_replace('"', '\'', $where);
+				$where = 'AND ('.substr($where, strpos($where, 'AND')+3).' )';
+				if ($this->wp_ver23)
+					$where .= " AND ( $wpdb->posts.ID = rel.object_id AND rel.term_taxonomy_id = tax.term_taxonomy_id AND tax.taxonomy = 'category' AND (tax.term_id NOT IN ( ".$excl_list." )) OR ($wpdb->posts.ID = rel.object_id AND rel.term_taxonomy_id = tax.term_taxonomy_id AND tax.taxonomy = 'post_tag' )) ";
+				else
+					$where .= ' AND (c.category_id NOT IN ( '.$excl_list.' ))';
+			}
+		}
+
+		$this->SE4_log("ex cats where: ".$where);
+		return $where;
+	}
+	
+	//join for excluding categories - Deprecated in 2.3
+	function SE4_exclude_categories_join($join) {
+		global $wp_query, $wpdb;
+	
+		if (!empty($wp_query->query_vars['s'])) {
+	
+			$join .= "LEFT JOIN $wpdb->post2cat AS c ON $wpdb->posts.ID = c.post_id";
+		}
+		$this->SE4_log("category join: ".$join);
+		return $join;
 	}
 	
 	//join for searching comments
@@ -220,39 +273,49 @@ Class SearchEverything {
 	
 		if (!empty($wp_query->query_vars['s'])) {
 	
-			if ('true' == $this->options['SE4_approved_comments_only']) {
-				$comment_approved = " AND comment_approved =  '1'";
-	  		} else {
-				$comment_approved = '';
+			if ($this->wp_ver23) {
+				$join .= " ,$wpdb->comments AS c ";
+			} else {
+
+				if ('true' == $this->options['SE4_approved_comments_only']) {
+					$comment_approved = " AND comment_approved =  '1'";
+		  		} else {
+					$comment_approved = '';
+				}
+
+				$join .= "LEFT JOIN $wpdb->comments ON ( comment_post_ID = ID " . $comment_approved . ") ";
+
+		    	}
 	    	}
-	
-			$join .= "LEFT JOIN $wpdb->comments ON ( comment_post_ID = ID " . $comment_approved . ") ";
-		}
+
 		$this->SE4_log("comments join: ".$join);
 		return $join;
 	}
 	
-	//search metadata
-	function SE4_search_metadata($where) {
-		global $wp_query, $wpdb;
-		if (!empty($wp_query->query_vars['s'])) {
-			$where .= " OR meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
-		}
-	
-		$this->SE4_log("metadata where: ".$where);
-	
-		return $where;
-	}
-
 	//join for searching metadata
 	function SE4_search_metadata_join($join) {
 		global $wp_query, $wpdb;
 	
 		if (!empty($wp_query->query_vars['s'])) {
-	
-			$join .= "LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
+
+			if ($this->wp_ver23)
+				$join .= " ,$wpdb->postmeta AS m ";
+			else 
+				$join .= "LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
 		}
 		$this->SE4_log("metadata join: ".$join);
+		return $join;
+	}
+
+	//join for searching tags
+	function SE4_terms_join($join) {
+		global $wp_query, $wpdb;
+	
+		if (!empty($wp_query->query_vars['s'])) {
+			$join .= " , $wpdb->terms AS ter, $wpdb->term_relationships AS rel, $wpdb->term_taxonomy AS tax ";
+	    	}
+	
+		$this->SE4_log("tags join: ".$join);
 		return $join;
 	}
 }
