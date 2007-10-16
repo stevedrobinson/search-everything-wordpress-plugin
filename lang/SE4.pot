@@ -12,59 +12,90 @@ msgstr ""
 "X-Poedit-Basepath: c:\\wamp\\www\\wordpress212\\wp-content\\plugins\\\n"
 "X-Poedit-SearchPath-0: search-everything\n"
 
-#: search-everything/search_everything.php:304
+#: search-everything/SE-Admin.php:
 msgid "The options selected below will be used in every search query on this site; in addition to the built-in post search."
 msgstr ""
 
-#: search-everything/search_everything.php:315
+#: search-everything/SE-Admin.php:
 msgid "Exclude some post or page IDs"
 msgstr ""
 
-#: search-everything/search_everything.php:316
+#: search-everything/SE-Admin.php:
 msgid "Comma separated Post IDs (example: 1, 5, 9)"
 msgstr ""
 
-#: search-everything/search_everything.php:321
-msgid "Exclude some category IDs (Wordpress 2.2 Only)"
+#: search-everything/SE-Admin.php:
+msgid "Exclude Categories <strong><small>(Wordpress 2.2 Only)</strong></small>"
 msgstr ""
 
-#: search-everything/search_everything.php:322
+#: search-everything/SE-Admin.php:
 msgid "Comma separated category IDs (example: 1, 4)"
 msgstr ""
 
-#: search-everything/search_everything.php:327
+#: search-everything/SE-Admin.php:
 msgid "Search every page (non-password protected)"
 msgstr ""
 
-#: search-everything/search_everything.php:329
+#: search-everything/SE-Admin.php:
 msgid "Search approved pages only?"
 msgstr ""
 
-#: search-everything/search_everything.php:333
+#: search-everything/SE-Admin.php:
 msgid "Search every comment"
 msgstr ""
 
-#: search-everything/search_everything.php:336
+#: search-everything/SE-Admin.php:
 msgid "Search approved comments only?"
 msgstr ""
 
-#: search-everything/search_everything.php:339
+#: search-everything/SE-Admin.php:
 msgid "Search every excerpt"
 msgstr ""
 
-#: search-everything/search_everything.php:342
+#: search-everything/SE-Admin.php:
 msgid "Search every draft"
 msgstr ""
 
-#: search-everything/search_everything.php:345
+#: search-everything/SE-Admin.php:
 msgid "Search every attachment"
 msgstr ""
 
-#: search-everything/search_everything.php:348
+#: search-everything/SE-Admin.php:
 msgid "Search every custom field (metadata)"
 msgstr ""
 
-#: search-everything/search_everything.php:354
-msgid "Update Options »"
+#: search-everything/SE-Admin.php:
+msgid "Update Options"
 msgstr ""
 
+#: search-everything/SE-Admin.php:
+msgid "SE Search Form"
+msgstr ""
+
+#: search-everything/SE-Admin.php:
+msgid "SE Search Options"
+msgstr ""
+
+#: search-everything/SE-Admin.php:
+msgid "Use this form to configure your search options."
+msgstr ""
+
+#: search-everything/SE-Admin.php:
+msgid "Search Options Form"
+msgstr ""
+
+#: search-everything/SE-Admin.php:
+msgid "Use this search form to run a live search test."
+msgstr ""
+
+#: search-everything/SE-Admin.php:
+msgid "Site Search"
+msgstr ""
+
+#: search-everything/SE-Admin.php:
+msgid "Enter search terms"
+msgstr ""
+
+#: search-everything/SE-Admin.php:
+msgid "Run Test Search"
+msgstr ""

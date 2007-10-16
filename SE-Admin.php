@@ -139,7 +139,7 @@ If ($wp_version >= '2.3') { ?>
 					<li><a href="http://green-beast.com/">Mike Cherim</a></li>
 		        	<li><a href="http://blog.saddey.net/">Saddy</a></li>
 		        	<li><a href="http://www.reaper-x.com/">Reaper</a></li>
-					<li><a href="http://http://beyn.org/">Barış Ünver</a> (localization support)</li>
+					<li><a href="http://beyn.org/">Barış Ünver</a> (localization support)</li>
 		        	<li>Uli Iserloh</li>
 		        </ul>
 			<p>If you&#8217;d like to contribute there&#8217;s a lot to do:</p>
