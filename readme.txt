@@ -4,7 +4,7 @@ Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web
 Tags: search, comment search, page search, admin, seo
 Requires at least: 2.1
 Tested up to: 2.3
-Stable tag: 4.2
+Stable tag: 4.1
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
