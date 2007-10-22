@@ -30,7 +30,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 
 == Update Log ==
 
-* 4.2 - Full 2.3 Support with Tag Searching and Category Exclusion
+* 4.2 - Full 2.3 Support with Tag Searching and Category Exclusion.  Major Performance tweaks for searching tags and comments (4.2.1).
 * 4.1 - Major Plugin Architecture change, better localization support
 * 4.0.3 - Localization pot and Turkish translation (props Baris Unver)
 * 4.0.2 - CSS Bug fix - minor

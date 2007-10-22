@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content. 
-Version: 4.2
+Version: 4.2.1
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -80,12 +80,7 @@ Class SearchEverything {
 
 		if ("true" == $this->options['SE4_exclude_categories']) {
 			add_filter('posts_where', array(&$this, 'SE4_exclude_categories'));
-			if ($this->wp_ver23) {
-				if ("true" != $this->options['SE4_use_tag_search'])
-					add_filter('posts_join', array(&$this, 'SE4_terms_join'));
-			}
-				else
-					add_filter('posts_join', array(&$this, 'SE4_exclude_categories_join'));
+			add_filter('posts_join', array(&$this, 'SE4_exclude_categories_join'));
 			$this->SE4_log("searching excluding categories");
 		}
 		
@@ -99,7 +94,7 @@ Class SearchEverything {
 		if ($this->logging) {
 			$fp = fopen("logfile.log","a+");
 			$date = date("Y-m-d H:i:s ");
-			$source = "search_everythin plugin: ";
+			$source = "search_everything plugin: ";
 			fwrite($fp, "\n\n".$date."\n".$source."\n".$msg);
 			fclose($fp);
 		}
@@ -214,7 +209,7 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
 			if ($this->wp_ver23)
-				$where .= " OR ($wpdb->posts.ID = m.post_id AND m.meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+				$where .= " OR (m.meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
 			else
 				$where .= " OR meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
 		}
@@ -228,8 +223,8 @@ Class SearchEverything {
 	function SE4_search_tags($where) {
 	global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
-			$where .= " OR ( $wpdb->posts.ID = rel.object_id AND rel.term_taxonomy_id = tax.term_taxonomy_id AND tax.term_id = ter.term_id AND tax.taxonomy = 'post_tag' AND ter.slug LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
-		}
+			$where .= " OR ( tter.slug LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+			}
 	
 		$this->SE4_log("tags where: ".$where);
 	
@@ -241,12 +236,12 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
 			if (trim($this->options['SE4_exclude_categories_list']) != '') {
-				$excl_list = implode(',', explode(',', trim($this->options['SE4_exclude_categories_list'])));
+				$excl_list = implode("','", explode(',', "'".trim($this->options['SE4_exclude_categories_list'])."'" ));
 				$where = str_replace('"', '\'', $where);
 				$where = 'AND ('.substr($where, strpos($where, 'AND')+3).' )';
 				if ($this->wp_ver23)
-					$where .= " AND ( $wpdb->posts.ID = rel.object_id AND rel.term_taxonomy_id = tax.term_taxonomy_id AND tax.taxonomy = 'category' AND (tax.term_id NOT IN ( ".$excl_list." )) OR ($wpdb->posts.ID = rel.object_id AND rel.term_taxonomy_id = tax.term_taxonomy_id AND tax.taxonomy = 'post_tag' )) ";
-				else
+					$where .= " AND ( ctax.term_id NOT IN ( ".$excl_list." ))";
+					else
 					$where .= ' AND (c.category_id NOT IN ( '.$excl_list.' ))';
 			}
 		}
@@ -261,7 +256,11 @@ Class SearchEverything {
 	
 		if (!empty($wp_query->query_vars['s'])) {
 	
-			$join .= "LEFT JOIN $wpdb->post2cat AS c ON $wpdb->posts.ID = c.post_id";
+			if ($this->wp_ver23) {
+							$join .= " LEFT JOIN $wpdb->term_relationships AS crel ON ($wpdb->posts.ID = crel.object_id) LEFT JOIN $wpdb->term_taxonomy AS ctax ON (ctax.taxonomy = 'category' AND crel.term_taxonomy_id = ctax.term_taxonomy_id) LEFT JOIN $wpdb->terms AS cter ON (ctax.term_id = cter.term_id) ";
+				  		} else {
+							$join .= "LEFT JOIN $wpdb->post2cat AS c ON $wpdb->posts.ID = c.post_id";
+						}
 		}
 		$this->SE4_log("category join: ".$join);
 		return $join;
@@ -274,8 +273,8 @@ Class SearchEverything {
 		if (!empty($wp_query->query_vars['s'])) {
 	
 			if ($this->wp_ver23) {
-				$join .= " ,$wpdb->comments AS c ";
-			} else {
+				$join .= " LEFT JOIN $wpdb->comments AS c ON ( comment_post_ID = ID " . $comment_approved . ") ";
+				} else {
 
 				if ('true' == $this->options['SE4_approved_comments_only']) {
 					$comment_approved = " AND comment_approved =  '1'";
@@ -299,7 +298,7 @@ Class SearchEverything {
 		if (!empty($wp_query->query_vars['s'])) {
 
 			if ($this->wp_ver23)
-				$join .= " ,$wpdb->postmeta AS m ";
+				$join .= " LEFT JOIN $wpdb->postmeta AS m ON ($wpdb->posts.ID = m.post_id) ";
 			else 
 				$join .= "LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
 		}
@@ -312,8 +311,8 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 	
 		if (!empty($wp_query->query_vars['s'])) {
-			$join .= " , $wpdb->terms AS ter, $wpdb->term_relationships AS rel, $wpdb->term_taxonomy AS tax ";
-	    	}
+			$join .= " LEFT JOIN $wpdb->term_relationships AS trel ON ($wpdb->posts.ID = trel.object_id) LEFT JOIN $wpdb->term_taxonomy AS ttax ON (ttax.taxonomy = 'post_tag' AND trel.term_taxonomy_id = ttax.term_taxonomy_id) LEFT JOIN $wpdb->terms AS tter ON (ttax.term_id = tter.term_id) ";
+			}
 	
 		$this->SE4_log("tags join: ".$join);
 		return $join;
