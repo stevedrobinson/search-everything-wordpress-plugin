@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.2.2';
+	var $version = '4.2.3';
 
 	function SearchEverythingAdmin() {
 	
@@ -140,7 +140,10 @@ If ($wp_version >= '2.3') { ?>
 		        	<li><a href="http://blog.saddey.net/">Saddy</a></li>
 		        	<li><a href="http://www.reaper-x.com/">Reaper</a></li>
 					<li><a href="http://beyn.org/">Barış Ünver</a> (localization support)</li>
+					<li><a href="http://www.alohastone.com">alohastone</a> (localization support)</li>
+					<li><a href="http://www.fratelliditalia.eu">Domiziano Galia</a></li>
 		        	<li>Uli Iserloh</li>
+		
 		        </ul>
 			<p>If you&#8217;d like to contribute there&#8217;s a lot to do:</p>
 		        <ul class="SE_lists">

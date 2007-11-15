@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content. 
-Version: 4.2.2
+Version: 4.2.3
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -223,7 +223,8 @@ Class SearchEverything {
 	function SE4_search_tags($where) {
 	global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
-			$where .= " OR ( tter.slug LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+			//$where .= " OR ( tter.slug LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+			$where .= " OR ( tter.slug LIKE '%" . str_replace(' ', '-',$wpdb->escape($wp_query->query_vars['s'])) . "%') ";
 			}
 	
 		$this->SE4_log("tags where: ".$where);
