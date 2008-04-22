@@ -1,0 +1,124 @@
+# Japanese Language File for Search Everything 3.01
+# (search_everything-ja_UTF.po)
+# This file is distributed under the same license as the WordPress package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Search Everything 3.01\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2008-02-29 11:50-0500\n"
+"Last-Translator: Naoko McCracken <info@nao-net.com>\n"
+"Language-Team: WordPress J-Series Project <http://wppluginsj.sourceforge.jp/i18n-ja_jp/>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Japanese\n"
+"X-Poedit-Country: JAPAN\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: search-everything/SE-Admin.php:29
+msgid "Search Everything Options  <strong>Updated</strong>."
+msgstr "Search Everything の設定を<strong>更新しました</strong>。"
+
+#: search-everything/SE-Admin.php:59
+msgid "The options selected below will be used in every search query on this site; in addition to the built-in post search."
+msgstr "以下で選択した設定は、デフォルトの記事検索機能に加え、サイト内の検索クエリすべてに適用されます。"
+
+#: search-everything/SE-Admin.php:63
+msgid "SE Search Options"
+msgstr "SE 検索設定"
+
+#: search-everything/SE-Admin.php:64
+msgid "Use this form to configure your search options."
+msgstr "以下のフォームで検索設定を行ってください。"
+
+#: search-everything/SE-Admin.php:67
+msgid "Search Options Form"
+msgstr "検索設定フォーム"
+
+#: search-everything/SE-Admin.php:69
+msgid "Exclude some post or page IDs"
+msgstr "指定した ID の投稿やページを検索対象に含めない"
+
+#: search-everything/SE-Admin.php:70
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "投稿 ID を半角コンマ区切りで記入してください（例: 1, 5, 9）。"
+
+#: search-everything/SE-Admin.php:75
+msgid "Exclude Categories"
+msgstr "指定したカテゴリーを検索対象に含めない"
+
+#: search-everything/SE-Admin.php:76
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "カテゴリー ID を半角コンマ区切りで記入してください（例: 1, 4）。"
+
+#: search-everything/SE-Admin.php:81
+msgid "Search every page (non-password protected)"
+msgstr "パスワード保護されていないページをすべて検索"
+
+#: search-everything/SE-Admin.php:83
+msgid "Search approved pages only?"
+msgstr "承認したページのみを検索しますか？"
+
+#: search-everything/SE-Admin.php:89
+msgid "Search every tag"
+msgstr "タグをすべて検索"
+
+#: search-everything/SE-Admin.php:94
+msgid "Search every comment"
+msgstr "コメントをすべて検索"
+
+#: search-everything/SE-Admin.php:97
+msgid "Search approved comments only?"
+msgstr "承認したコメントのみを検索しますか？"
+
+#: search-everything/SE-Admin.php:100
+msgid "Search every excerpt"
+msgstr "記事の要約をすべて検索"
+
+#: search-everything/SE-Admin.php:103
+msgid "Search every draft"
+msgstr "未公開の記事をすべて検索"
+
+#: search-everything/SE-Admin.php:106
+msgid "Search every attachment"
+msgstr "メディアをすべて検索"
+
+#: search-everything/SE-Admin.php:109
+msgid "Search every custom field (metadata)"
+msgstr "カスタムフィールド（メタデータ）をすべて検索"
+
+#: search-everything/SE-Admin.php:115
+msgid "Update Options"
+msgstr "設定を更新"
+
+#: search-everything/SE-Admin.php:121
+msgid "SE Search Form"
+msgstr "SE 検索フォーム"
+
+#: search-everything/SE-Admin.php:122
+msgid "Use this search form to run a live search test."
+msgstr "この検索フォームで現在適用された設定を元にした検索テストを行うことができます。"
+
+#: search-everything/SE-Admin.php:125
+msgid "Site Search"
+msgstr "サイトの検索"
+
+#: search-everything/SE-Admin.php:127
+msgid "Enter search terms"
+msgstr "検索キーワードを入力"
+
+#: search-everything/SE-Admin.php:129
+msgid "Run Test Search"
+msgstr "検索のテスト"
+
+#~ msgid "Search Everything"
+#~ msgstr "検索対象設定"
+#~ msgid "Save"
+#~ msgstr "保存"
+#~ msgid "You may have to update your options twice before it sticks."
+#~ msgstr "変更が適用されるまで、設定を2回更新する必要がある場合があります。"
+
