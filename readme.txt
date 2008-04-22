@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: dancameron
 Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web/
-Tags: search, comment search, page search, admin, seo
+Tags: search, tag search, category search, category exclusion, comment search, page search, admin, seo
 Requires at least: 2.1
-Tested up to: 2.3
-Stable tag: 4.2.2
+Tested up to: 2.5
+Stable tag: 4.5
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -14,6 +14,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 
 * Search Every Page
 * Search Every Tag
+* Search Every Category
 * Search non-password protected pages only
 * Search Every Comment
 * Search only approved comments
@@ -21,15 +22,15 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Search Every Excerpt
 * Search Every Attachment
 * Search Every Custom Field (metadata)
-* Search Every Category Name
 * Exclude Posts from search
 * Exclude Categories from search
 
-... tagging support and category exclusion for WordPress 2.3 is now supported.
+... I'm still looking for some help so please contact me if you'd like to contribute.
 
 
 == Update Log ==
 
+*4.5 - Japanese Language Support, Category Fix for Wordpress 2.5, Tag search fix (name) other minors
 * 4.2.2 - Localization PO and MO updates, German Translation
 * 4.2 - Full 2.3 Support with Tag Searching and Category Exclusion.  Major Performance tweaks for searching tags and comments (4.2.1).
 * 4.1 - Major Plugin Architecture change, better localization support
@@ -45,7 +46,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 Installation Instructions:
 
 1. Download the plugin and unzip it (didn't you already do this?).
-2. Put the 'searchev-erything' directory into your wp-content/plugins/ directory.
+2. Put the 'search-everything' directory into your wp-content/plugins/ directory.
 3. Go to the Plugins page in your WordPress Administration area and click 'Activate' next to Search Everything.
 4. Go to the Options >  Search Everything and configure your site.
 5. That's it. Have fun and if you can contribute (see notes), at the very least post your likes and dislikes about the plugin linking to http://dancameron.org/wordpress/ so your readers to find the plugin and I can see your feedback.
@@ -69,7 +70,7 @@ Open up a thread in the support forums tagged 'searcheverything' and 'dancameron
 
 == Help ==
 
-I do need help with this plugin. If you can possibly do my day job and take my girls to the park I would appreciate it so I can work on this plugin. Otherwise contribute your fixes and suggestions to me in the forums or through the contact form on my site.
+I do need help with this plugin. If you can possibly do my day job and take my girls to the park I would appreciate it; otherwise contribute your fixes and suggestions to me in the forums or through the contact form on my site.
 
 
 == Support ==
