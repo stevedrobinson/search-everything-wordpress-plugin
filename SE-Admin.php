@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.5';
+	var $version = '4.6';
 
 	function SearchEverythingAdmin() {
 
@@ -55,115 +55,134 @@ Class SearchEverythingAdmin {
 
 		?>
 
-		<div class="wrap" id="SE4_options_panel">
+		<div class="wrap">
 			<h2>Search Everything (SE) Version: <?php echo $this->version; ?></h2>
-			<p><?php _e('The options selected below will be used in every search query on this site; in addition to the built-in post search.','SearchEverything'); ?></p>
+
+		   	<table class="form-table">
+				<tr valign="top">
+					<td colspan="4" bgcolor="#DDD"><?php _e('Use this form to configure your search options.', 'SearchEverything'); ?><br />
+					<?php _e('The options selected below will be used in every search query on this site; in addition to the built-in post search.','SearchEverything'); ?></td>
+				</tr>
+				<tr>
+					<td>
+						<form method="post">
+		      				<legend><?php _e('Search Options Form', 'SearchEverything'); ?></legend>
+			        		<p><input type="checkbox" id="exclude_posts" name="exclude_posts" value="true" <?php if($options['SE4_exclude_posts'] == 'true') { echo 'checked="true"'; } ?> />
+			       			<label for="exclude_posts"><?php _e('Exclude some post or page IDs','SearchEverything'); ?></label><br />
+			       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="exclude_posts_list" class="SE_text_label"><?php _e('Comma separated Post IDs (example: 1, 5, 9)','SearchEverything'); ?></label><br />
+			        		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" class="SE_text_input" id="exclude_posts_list" name="exclude_posts_list" value="<?php echo $options['SE4_exclude_posts_list'];?>" /></p>
+
+			        		<p><input type="checkbox" id="exclude_categories" name="exclude_categories"	value="true" <?php if($options['SE4_exclude_categories'] == 'true') { echo 'checked="true"'; } ?> />
+			       			<label for="exclude_categories"><?php _e('Exclude Categories','SearchEverything'); ?></label><br />
+			       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="exclude_categories_list" class="SE_text_label"><?php _e('Comma separated category IDs (example: 1, 4)','SearchEverything'); ?></label><br />
+			         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" class="SE_text_input" id="exclude_categories_list" name="exclude_categories_list" value="<?php echo $options['SE4_exclude_categories_list'];?>" /></p>
+
+		         			<p><input type="checkbox" id="search_pages" name="search_pages" value="true" <?php if($options['SE4_use_page_search'] == 'true') { echo 'checked="true"'; } ?>  />
+		       				<label for="search_pages"><?php _e('Search every page (non-password protected)','SearchEverything'); ?></label></p>
+							<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="SE_text_input" id="appvd_pages" name="appvd_pages" value="true"  <?php if($options['SE4_approved_pages_only'] == 'true') { echo 'checked="true"'; } ?>
+		      				<label for="appvd_pages"><?php _e('Search approved pages only?','SearchEverything'); ?></label></p>
+
+							<?php
+							// Show tags only for WP 2.3+
+							If ($wp_version >= '2.3') { ?>
+								<p><input type="checkbox" id="search_tags" name="search_tags" value="true" <?php if($options['SE4_use_tag_search'] == 'true') { echo 'checked="true"'; } ?> />
+								<label for="search_tags"><?php _e('Search every tag','SearchEverything'); ?></label></p>
+							<?php } ?>
+
+							<?php
+							// Show categories only for WP 2.5+
+							If ($wp_version >= '2.5') { ?>
+								<p><input type="checkbox" id="search_categories" name="search_categories" value="true"  <?php if($options['SE4_use_category_search'] == 'true') { echo 'checked="true"'; } ?> />
+								<label for="search_categories"><?php _e('Search every category','SearchEverything'); ?></label></p>
+							<?php } ?>
+
+		         			<p><input type="checkbox" id="search_comments" name="search_comments" value="true" <?php if($options['SE4_use_comment_search'] == 'true') { echo 'checked="true"'; } ?> />
+		       				<label for="search_comments"><?php _e('Search every comment','SearchEverything'); ?></label></p>
+
+				 			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="SE_text_input" id="appvd_comments" name="appvd_comments" value="true"  <?php if($options['SE4_approved_comments_only'] == 'true') { echo 'checked="true"'; } ?>
+		       				<label for="appvd_comments"><?php _e('Search approved comments only?','SearchEverything'); ?></label></p>
+
+			         		<p><input type="checkbox" id="search_excerpt" name="search_excerpt" value="true"  <?php if($options['SE4_use_excerpt_search'] == 'true') { echo 'checked="true"'; } ?> />
+			       			<label for="search_excerpt"><?php _e('Search every excerpt','SearchEverything'); ?></label></p>
+	
+			         		<p><input type="checkbox" id="search_drafts" name="search_drafts" value="true"  <?php if($options['SE4_use_draft_search'] == 'true') { echo 'checked="true"'; } ?>
+			       			<label for="search_drafts"><?php _e('Search every draft','SearchEverything'); ?></label></p>
+	
+			         		<p><input type="checkbox" id="search_attachments" name="search_attachments" value="true"  <?php if($options['SE4_use_attachment_search'] == 'true') { echo 'checked="true"'; } ?> />
+			       			<label for="search_attachments"><?php _e('Search every attachment','SearchEverything'); ?></label></p>
+	
+			         		<p><input type="checkbox" id="search_metadata" name="search_metadata" value="true"  <?php if($options['SE4_use_metadata_search'] == 'true') { echo 'checked="true"'; } ?> />
+			       			<label for="search_metadata"><?php _e('Search every custom field (metadata)','SearchEverything'); ?></label></p>
+				    	</form>
+			    	</td>
+			    </tr>
+		    </table>
+			<div class="submit">
+				<input type="hidden" name="action" value="save" />
+				<input type="submit" value="<?php _e('Update Options', 'SearchEverything') ?>" />
+			</div>
 		</div>
-
-		<div class="wrap SE4">
-			<h2><?php _e('SE Search Options', 'SearchEverything'); ?></h2>
-			<p><?php _e('Use this form to configure your search options.', 'SearchEverything'); ?></p>
-			<form method="post">
-		    		<fieldset class="options">
-		      			<legend><?php _e('Search Options Form', 'SearchEverything'); ?></legend>
-		        		<p><input type="checkbox" id="exclude_posts" name="exclude_posts" value="true"  <?php if($options['SE4_exclude_posts'] == 'true') { echo 'checked="true"'; } ?> />
-		       			<label for="exclude_posts"><?php _e('Exclude some post or page IDs','SearchEverything'); ?></label><br />
-		       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="exclude_posts_list" class="SE_text_label"><?php _e('Comma separated Post IDs (example: 1, 5, 9)','SearchEverything'); ?></label><br />
-		        		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" class="SE_text_input" id="exclude_posts_list" name="exclude_posts_list" value="<?php echo $options['SE4_exclude_posts_list'];?>" /></p>
-
-		        		<p><input type="checkbox" id="exclude_categories" name="exclude_categories"
-					value="true"  <?php if($options['SE4_exclude_categories'] == 'true') { echo 'checked="true"'; } ?> />
-		       			<label for="exclude_categories"><?php _e('Exclude Categories','SearchEverything'); ?></label><br />
-		       			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label for="exclude_categories_list" class="SE_text_label"><?php _e('Comma separated category IDs (example: 1, 4)','SearchEverything'); ?></label><br />
-		         		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" size="50" class="SE_text_input" id="exclude_categories_list" name="exclude_categories_list" value="<?php echo $options['SE4_exclude_categories_list'];?>" /></p>
-
-		         		<p><input type="checkbox" id="search_pages" name="search_pages"
-					value="true"  <?php if($options['SE4_use_page_search'] == 'true') { echo 'checked="true"'; } ?>  />
-		       			<label for="search_pages"><?php _e('Search every page (non-password protected)','SearchEverything'); ?></label></p>
-					<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="SE_text_input" id="appvd_pages" name="appvd_pages" value="true"  <?php if($options['SE4_approved_pages_only'] == 'true') { echo 'checked="true"'; } ?>
-		      			<label for="appvd_pages"><?php _e('Search approved pages only?','SearchEverything'); ?></label></p>
-
-<?php
-// Show tags only for WP 2.3+
-If ($wp_version >= '2.3') { ?>
-					<p><input type="checkbox" id="search_tags" name="search_tags" value="true"  <?php if($options['SE4_use_tag_search'] == 'true') { echo 'checked="true"'; } ?> />
-						<label for="search_tags"><?php _e('Search every tag','SearchEverything'); ?></label></p>
-<?php } ?>
-
-<?php
-// Show categories only for WP 2.5+
-If ($wp_version >= '2.5') { ?>
-					<p><input type="checkbox" id="search_categories" name="search_categories" value="true"  <?php if($options['SE4_use_category_search'] == 'true') { echo 'checked="true"'; } ?> />
-						<label for="search_categories"><?php _e('Search every category','SearchEverything'); ?></label></p>
-<?php } ?>
-
-		         		<p><input type="checkbox" id="search_comments" name="search_comments"
-					value="true"  <?php if($options['SE4_use_comment_search'] == 'true') { echo 'checked="true"'; } ?> />
-		       			<label for="search_comments"><?php _e('Search every comment','SearchEverything'); ?></label></p>
-
-				 	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="SE_text_input" id="appvd_comments" name="appvd_comments" value="true"  <?php if($options['SE4_approved_comments_only'] == 'true') { echo 'checked="true"'; } ?>
-		       			<label for="appvd_comments"><?php _e('Search approved comments only?','SearchEverything'); ?></label></p>
-
-		         		<p><input type="checkbox" id="search_excerpt" name="search_excerpt" value="true"  <?php if($options['SE4_use_excerpt_search'] == 'true') { echo 'checked="true"'; } ?> />
-		       			<label for="search_excerpt"><?php _e('Search every excerpt','SearchEverything'); ?></label></p>
-
-		         		<p><input type="checkbox" id="search_drafts" name="search_drafts" value="true"  <?php if($options['SE4_use_draft_search'] == 'true') { echo 'checked="true"'; } ?>
-		       			<label for="search_drafts"><?php _e('Search every draft','SearchEverything'); ?></label></p>
-
-		         		<p><input type="checkbox" id="search_attachments" name="search_attachments" value="true"  <?php if($options['SE4_use_attachment_search'] == 'true') { echo 'checked="true"'; } ?> />
-		       			<label for="search_attachments"><?php _e('Search every attachment','SearchEverything'); ?></label></p>
-
-		         		<p><input type="checkbox" id="search_metadata" name="search_metadata" value="true"  <?php if($options['SE4_use_metadata_search'] == 'true') { echo 'checked="true"'; } ?> />
-		       			<label for="search_metadata"><?php _e('Search every custom field (metadata)','SearchEverything'); ?></label></p>
-
-		   		</fieldset>
-				<fieldset class="options">
-					<div class="submit">
-						<input type="hidden" name="action" value="save" />
-						<input type="submit" value="<?php _e('Update Options', 'SearchEverything') ?>" />
-					</div>
-				</fieldset>
-		    	</form>
-		</div>
-		<div class="wrap SE4">
+	    	
+		<div class="wrap">
 			<h2><?php _e('SE Search Form', 'SearchEverything'); ?></h2>
-			<p><?php _e('Use this search form to run a live search test.', 'SearchEverything'); ?></p>
-
-		      	<fieldset>
-		       		<legend><?php _e('Site Search', 'SearchEverything'); ?></legend>
-		        	<form method="get" id="searchform" action="<?php bloginfo('home'); ?>"><p class="srch submit">
-					<label for="s"><?php _e('Enter search terms', 'SearchEverything'); ?><br /></label>
-		          		<input type="text" class="srch-txt" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" />
-				  	<input type="submit" class="SE4_btn" id="searchsubmit" value="<?php _e('Run Test Search', 'SearchEverything'); ?>" /></p>
-		      		</form>
-			</fieldset>
+		   	<table class="form-table">
+				<tr valign="top">
+					<td colspan="4" bgcolor="#DDD"><?php _e('Use this search form to run a live search test.', 'SearchEverything'); ?></td>
+				</tr>
+				<tr>
+					<td>
+			       		<legend><?php _e('Site Search', 'SearchEverything'); ?></legend>
+			        	<form method="get" id="searchform" action="<?php bloginfo('home'); ?>"><p class="srch submit">
+							<label for="s"><?php _e('Enter search terms', 'SearchEverything'); ?><br /></label>
+			          		<input type="text" class="srch-txt" value="<?php echo wp_specialchars($s, 1); ?>" name="s" id="s" size="30" />
+						  	<input type="submit" class="SE4_btn" id="searchsubmit" value="<?php _e('Run Test Search', 'SearchEverything'); ?>" /></p>
+			      		</form>
+					</td>
+				</tr>
+			</table>
 		</div>
+		
 		<div class="wrap">
 			<h2>SE Project Information</h2>
-		       	<p>As of 2.5 I'm taking a hiatus from SE development; however I'm still accepting and committing feature updates and fixes from the community. <br/> You should not fret, the development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:</p>
-		        <ul class="SE_lists">
-					<li><a href="http://chrismeller.com/">Chris Meller</a></li>
-					<li>jdleung</li>
-					<li>Alakhnor</li>
-					<li><a href="http://kinrowan.net/">Cori Schlegel</a></li>
-					<li><a href="http://green-beast.com/">Mike Cherim</a></li>
-		        	<li><a href="http://blog.saddey.net/">Saddy</a></li>
-		        	<li><a href="http://www.reaper-x.com/">Reaper</a></li>
-					<li><a href="http://beyn.org/">Barış Ünver</a> (localization support)</li>
-					<li><a href="http://www.alohastone.com">alohastone</a> (localization support)</li>
-					<li><a href="http://www.fratelliditalia.eu">Domiziano Galia</a></li>
-		        	<li>Uli Iserloh</li>
-
-		        </ul>
-			<p>If you&#8217;d like to contribute there&#8217;s a lot to do:</p>
-		        <ul class="SE_lists">
-				<li>More meta data functions.</li>
-				<li>Search Bookmarks.</li>
-				<li>&#8230;anything else you want to add.</li>
-		        </ul>
-		        <br/><p>The current project home is at <a href="http://scatter3d.com/">scatter3d.com</a>. If you want to contribute <a href="mailto:dancameron+se@gmail.com">e-mail me</a> your modifications.</p>
-			<p class="sig">Respectfully,<br />
-			<a href="http://dancameron.org/">Dan Cameron</a></p>
+		   	<table class="form-table">
+				<tr valign="top">
+					<td colspan="4" bgcolor="#DDD">
+		       			As of 2.5 I'm taking a hiatus from SE development; however I'm still accepting and committing feature updates and fixes from the community.<br/>
+		       			You should not fret, the development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:
+				        <ul class="SE_lists">
+							<li><a href="http://chrismeller.com/">Chris Meller</a></li>
+							<li>jdleung</li>
+							<li>Alakhnor</li>
+							<li><a href="http://kinrowan.net/">Cori Schlegel</a></li>
+							<li><a href="http://green-beast.com/">Mike Cherim</a></li>
+				        	<li><a href="http://blog.saddey.net/">Saddy</a></li>
+				        	<li><a href="http://www.reaper-x.com/">Reaper</a></li>
+							<li><a href="http://beyn.org/">Barış Ünver</a> (localization support)</li>
+							<li><a href="http://www.alohastone.com">alohastone</a> (localization support)</li>
+							<li><a href="http://www.fratelliditalia.eu">Domiziano Galia</a></li>
+							<li><a href="http://meandmymac.net">Arnan de Gans</a> (Options panel)</li>
+				        	<li>Uli Iserloh</li>
+				        </ul>
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor="#DDD">
+						If you&#8217;d like to contribute there&#8217;s a lot to do:
+				        <ul class="SE_lists">
+							<li>More meta data functions.</li>
+							<li>Search Bookmarks.</li>
+							<li>&#8230;anything else you want to add.</li>
+				        </ul>
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor="#DDD">
+		     			The current project home is at <a href="http://scatter3d.com/">scatter3d.com</a>. If you want to contribute <a href="mailto:dancameron+se@gmail.com">e-mail me</a> your modifications.<br />
+		     			Respectfully,<br />
+						<a href="http://dancameron.org/">Dan Cameron</a>
+					</td>
+				</tr>
+			</table>
 		</div>
 
 		<?php

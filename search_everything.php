@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 4.5
+Version: 4.6
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -153,21 +153,22 @@ Class SearchEverything {
 		return $where;
 	}
 
-	//search excerpts provided by Dennis Turner
+	//search excerpts provided by Dennis Turner, fixed by GvA
 	function SE4_search_excerpt($where) {
 		global $wp_query;
 		if (!empty($wp_query->query_vars['s'])) {
-			$where = str_replace('"', '\'', $where);
-			$where = str_replace(' OR (post_content LIKE \'%' .
-			$wp_query->query_vars['s'] . '%\'', ' OR (post_content LIKE \'%' .
-			$wp_query->query_vars['s'] . '%\') OR (post_excerpt LIKE \'%' .
-			$wp_query->query_vars['s'] . '%\'', $where);
-	   	}
+				$where = str_replace('"', '\'', $where);
+				$where = str_replace(' OR (wp_posts.post_content LIKE \'%' . 
+				$wp_query->query_vars['s'] . '%\'', ' OR (wp_posts.post_content LIKE \'%' . 
+				$wp_query->query_vars['s'] . '%\') OR (wp_posts.post_excerpt LIKE \'%' . 
+				$wp_query->query_vars['s'] . '%\'', $where);
+		}
 
 		$this->SE4_log("excerpts where: ".$where);
 		return $where;
 	}
-
+	
+	
 	//search drafts
 	function SE4_search_draft_posts($where) {
 		global $wp_query;
