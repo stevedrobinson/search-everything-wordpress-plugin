@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.6';
+	var $version = '4.6.1';
 
 	function SearchEverythingAdmin() {
 
@@ -99,13 +99,13 @@ Class SearchEverythingAdmin {
 		         			<p><input type="checkbox" id="search_comments" name="search_comments" value="true" <?php if($options['SE4_use_comment_search'] == 'true') { echo 'checked="true"'; } ?> />
 		       				<label for="search_comments"><?php _e('Search every comment','SearchEverything'); ?></label></p>
 
-				 			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="SE_text_input" id="appvd_comments" name="appvd_comments" value="true"  <?php if($options['SE4_approved_comments_only'] == 'true') { echo 'checked="true"'; } ?>
+				 			<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox" class="SE_text_input" id="appvd_comments" name="appvd_comments" value="true"  <?php if($options['SE4_approved_comments_only'] == 'true') { echo 'checked="true"'; } ?> />
 		       				<label for="appvd_comments"><?php _e('Search approved comments only?','SearchEverything'); ?></label></p>
 
 			         		<p><input type="checkbox" id="search_excerpt" name="search_excerpt" value="true"  <?php if($options['SE4_use_excerpt_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_excerpt"><?php _e('Search every excerpt','SearchEverything'); ?></label></p>
 	
-			         		<p><input type="checkbox" id="search_drafts" name="search_drafts" value="true"  <?php if($options['SE4_use_draft_search'] == 'true') { echo 'checked="true"'; } ?>
+			         		<p><input type="checkbox" id="search_drafts" name="search_drafts" value="true"  <?php if($options['SE4_use_draft_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_drafts"><?php _e('Search every draft','SearchEverything'); ?></label></p>
 	
 			         		<p><input type="checkbox" id="search_attachments" name="search_attachments" value="true"  <?php if($options['SE4_use_attachment_search'] == 'true') { echo 'checked="true"'; } ?> />
