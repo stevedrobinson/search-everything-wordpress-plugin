@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.6.1';
+	var $version = '4.6.2';
 
 	function SearchEverythingAdmin() {
 
@@ -86,14 +86,14 @@ Class SearchEverythingAdmin {
 							// Show tags only for WP 2.3+
 							If ($wp_version >= '2.3') { ?>
 								<p><input type="checkbox" id="search_tags" name="search_tags" value="true" <?php if($options['SE4_use_tag_search'] == 'true') { echo 'checked="true"'; } ?> />
-								<label for="search_tags"><?php _e('Search every tag','SearchEverything'); ?></label></p>
+								<label for="search_tags"><?php _e('Search every tag name','SearchEverything'); ?></label></p>
 							<?php } ?>
 
 							<?php
 							// Show categories only for WP 2.5+
 							If ($wp_version >= '2.5') { ?>
 								<p><input type="checkbox" id="search_categories" name="search_categories" value="true"  <?php if($options['SE4_use_category_search'] == 'true') { echo 'checked="true"'; } ?> />
-								<label for="search_categories"><?php _e('Search every category','SearchEverything'); ?></label></p>
+								<label for="search_categories"><?php _e('Search every category name','SearchEverything'); ?></label></p>
 							<?php } ?>
 
 		         			<p><input type="checkbox" id="search_comments" name="search_comments" value="true" <?php if($options['SE4_use_comment_search'] == 'true') { echo 'checked="true"'; } ?> />
@@ -104,16 +104,18 @@ Class SearchEverythingAdmin {
 
 			         		<p><input type="checkbox" id="search_excerpt" name="search_excerpt" value="true"  <?php if($options['SE4_use_excerpt_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_excerpt"><?php _e('Search every excerpt','SearchEverything'); ?></label></p>
-	
+								<?php
+								// Show drafts only for WP 2.3+
+								If ($wp_version < '2.5') { ?>
 			         		<p><input type="checkbox" id="search_drafts" name="search_drafts" value="true"  <?php if($options['SE4_use_draft_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_drafts"><?php _e('Search every draft','SearchEverything'); ?></label></p>
-	
+								<?php } ?>
 			         		<p><input type="checkbox" id="search_attachments" name="search_attachments" value="true"  <?php if($options['SE4_use_attachment_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_attachments"><?php _e('Search every attachment','SearchEverything'); ?></label></p>
 	
 			         		<p><input type="checkbox" id="search_metadata" name="search_metadata" value="true"  <?php if($options['SE4_use_metadata_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_metadata"><?php _e('Search every custom field (metadata)','SearchEverything'); ?></label></p>
-				    	</form>
+				    	
 			    	</td>
 			    </tr>
 		    </table>
@@ -121,6 +123,7 @@ Class SearchEverythingAdmin {
 				<input type="hidden" name="action" value="save" />
 				<input type="submit" value="<?php _e('Update Options', 'SearchEverything') ?>" />
 			</div>
+			</form>
 		</div>
 	    	
 		<div class="wrap">
@@ -147,7 +150,7 @@ Class SearchEverythingAdmin {
 		   	<table class="form-table">
 				<tr valign="top">
 					<td colspan="4" bgcolor="#DDD">
-		       			As of 2.5 I'm taking a hiatus from SE development; however I'm still accepting and committing feature updates and fixes from the community.<br/>
+		       			As of 2.5 I'm taking a hiatus from SE development; however I'm still committing feature updates and bug fixes from the community.<br/>
 		       			You should not fret, the development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:
 				        <ul class="SE_lists">
 							<li><a href="http://chrismeller.com/">Chris Meller</a></li>
@@ -169,6 +172,7 @@ Class SearchEverythingAdmin {
 					<td bgcolor="#DDD">
 						If you&#8217;d like to contribute there&#8217;s a lot to do:
 				        <ul class="SE_lists">
+							<strong><li>Search Options for Visitor.</li></strong>
 							<li>More meta data functions.</li>
 							<li>Search Bookmarks.</li>
 							<li>&#8230;anything else you want to add.</li>
