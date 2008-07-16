@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 4.6.2
+Version: 4.7
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -13,7 +13,10 @@ This program is free software; you can redistribute it and/or modify it under th
 
 This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
 */
-define('SE_ABSPATH', ABSPATH . 'wp-content/plugins/' . dirname(plugin_basename(__FILE__)).'/');
+
+if ( !defined('WP_CONTENT_DIR') )
+	define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
+define('SE_ABSPATH', WP_CONTENT_DIR.'/plugins/' . dirname(plugin_basename(__FILE__)) . '/');
 
 $SE = new SearchEverything();
 //add filters based upon option settings
@@ -32,7 +35,7 @@ Class SearchEverything {
 		$this->options = get_option('SE4_options');
 
 		if (is_admin()) {
-			include ( SE_ABSPATH  . '/SE-Admin.php' );
+			include ( SE_ABSPATH  . 'SE-Admin.php' );
 			$SEAdmin = new SearchEverythingAdmin();
 		}
 
@@ -112,15 +115,15 @@ Class SearchEverything {
 
 	//Duplicate fix provided by Tiago.Pocinho
 	function SE4_distinct($query){
-		  global $wp_query;
-		  if (!empty($wp_query->query_vars['s'])) {
-		    if (strstr($where, 'DISTINCT')) {}
-		    else {
-		      $query = str_replace('SELECT', 'SELECT DISTINCT', $query);
-		    }
-		  }
-		  return $query;
+		global $wp_query;
+		if (!empty($wp_query->query_vars['s'])) {
+			if (strstr($where, 'DISTINCT')) {
+			} else {
+				$query = str_replace('SELECT', 'SELECT DISTINCT', $query);
+			}
 		}
+		return $query;
+	}
 
 	function SE4_exclude_posts($where) {
 		global $wp_query;

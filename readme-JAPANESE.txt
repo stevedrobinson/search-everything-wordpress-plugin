@@ -1,8 +1,8 @@
-Search Everything (SE) v4.2.2 - 検索対象にするコンテンツを追加するプラグイン
+Search Everything (SE) v4.7 - 検索対象にするコンテンツを追加するプラグイン
 GNU General Public License
-Developed by Daniel Cameron dancameron@gmail.com / http://dancameron.org/
+Developed by Daniel Cameron http://dancameron.org/
 Translation by Naoko McCracken http://detlog.org/
-対応テスト済みのWordPressバージョン: 2.1〜2.3（日本語タグ未対応）
+対応テスト済みのWordPressバージョン: 2.1〜2.6（日本語タグ未対応）
 
 このプラグインの翻訳版配布ページ： http://wppluginsj.sourceforge.jp/i18n-ja_jp/search-everything/
 このプラグインに関する追加情報（英語）： http://wordpress.org/extend/plugins/search-everything/

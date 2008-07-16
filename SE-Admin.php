@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.6.2';
+	var $version = '4.7';
 
 	function SearchEverythingAdmin() {
 
@@ -153,6 +153,7 @@ Class SearchEverythingAdmin {
 		       			As of 2.5 I'm taking a hiatus from SE development; however I'm still committing feature updates and bug fixes from the community.<br/>
 		       			You should not fret, the development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:
 				        <ul class="SE_lists">
+							<li><a href="http://striderweb.com/">Stephen Rider</a></li>
 							<li><a href="http://chrismeller.com/">Chris Meller</a></li>
 							<li>jdleung</li>
 							<li>Alakhnor</li>
