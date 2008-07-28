@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.7';
+	var $version = '4.7.1';
 
 	function SearchEverythingAdmin() {
 
