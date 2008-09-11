@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 4.7.5
+Version: 4.7.6.2
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -96,14 +96,15 @@ Class SearchEverything {
 		}
 		
 		
-	  	// Add registration of bo_revisions hook handler
-	  	// right before the following line already existant
-	  	add_filter('posts_where', array(&$this, 'SE4_no_revisions'));
-
+		// Add registration of bo_revisions hook handler
+		// right before the following line already existant
+		add_filter('posts_where', array(&$this, 'SE4_no_revisions'));
+		
+		
 		//Duplicate fix provided by Tiago.Pocinho
 		add_filter('posts_request', array(&$this, 'SE4_distinct'));
 	}
-	
+
 	// Exclude post revisions
 	function SE4_no_revisions($where) {
 	  global $wp_query;
@@ -112,7 +113,7 @@ Class SearchEverything {
 	  }
 	  return $where;
 	}
-
+	
 	// Logs search into a file
 	function SE4_log($msg) {
 
@@ -236,9 +237,9 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
 			if ($this->wp_ver23)
-				$where .= " OR (m.meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') AND post_status='publish') ";
+				$where .= " OR (m.meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
 			else
-				$where .= " OR (meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') AND post_status='publish') ";
+				$where .= " OR meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
 		}
 
 		$this->SE4_log("metadata where: ".$where);
@@ -265,7 +266,7 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 
 		if ( ! empty($wp_query->query_vars['s']) ) {
-			$where .= " OR ( tter.slug LIKE '%" . sanitize_title_with_dashes( $wp_query->query_vars['s'] ) . "%') AND post_status='publish') ";
+			$where .= " OR ( tter.slug LIKE '%" . sanitize_title_with_dashes( $wp_query->query_vars['s'] ) . "%') ";
 		}
 
 		$this->SE4_log("categories where: ".$where);
