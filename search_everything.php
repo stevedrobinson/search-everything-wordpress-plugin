@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 4.7.6.2
+Version: 4.7.7
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -223,7 +223,8 @@ Class SearchEverything {
 	  		}
 
 			if ($this->wp_ver23) {
-				$where .= " OR ( c.comment_post_ID = ".$wpdb->posts . ".ID " . $comment_approved . " AND c.comment_content LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+				$or = " OR ( c.comment_post_ID = ".$wpdb->posts . ".ID " . $comment_approved . " AND c.comment_content LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+	  			$where = preg_replace("/\bor\b/i",$or." OR",$where,1);
 	  		}
 		}
 
@@ -237,11 +238,11 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
 			if ($this->wp_ver23)
-				$where .= " OR (m.meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+				$or = " OR (m.meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
 			else
-				$where .= " OR meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
+				$or = " OR meta_value LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
 		}
-
+		$where = preg_replace("/\bor\b/i",$or." OR",$where,1);
 		$this->SE4_log("metadata where: ".$where);
 
 		return $where;
@@ -252,7 +253,8 @@ Class SearchEverything {
 	global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) {
 			//$where .= " OR ( tter.slug LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
-			$where .= " OR ( tter.name LIKE '%" . str_replace(' ', '-',$wpdb->escape($wp_query->query_vars['s'])) . "%') ";
+			$or = " OR ( tter.name LIKE '%" . str_replace(' ', '-',$wpdb->escape($wp_query->query_vars['s'])) . "%') ";
+			$where = preg_replace("/\bor\b/i",$or." OR",$where,1);
 			}
 
 		$this->SE4_log("tags where: ".$where);
@@ -266,7 +268,8 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 
 		if ( ! empty($wp_query->query_vars['s']) ) {
-			$where .= " OR ( tter.slug LIKE '%" . sanitize_title_with_dashes( $wp_query->query_vars['s'] ) . "%') ";
+			$or = " OR ( tter.slug LIKE '%" . sanitize_title_with_dashes( $wp_query->query_vars['s'] ) . "%') ";
+			$where = preg_replace("/\bor\b/i",$or." OR",$where,1);
 		}
 
 		$this->SE4_log("categories where: ".$where);

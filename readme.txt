@@ -3,8 +3,8 @@ Contributors: dancameron
 Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web/
 Tags: search, tag search, category search, category exclusion, comment search, page search, admin, seo
 Requires at least: 2.1
-Tested up to: 2.6.1
-Stable tag: 4.7.6
+Tested up to: 2.6.3
+Stable tag: 4.7.7
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -30,6 +30,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 
 == Update Log ==
 
+*4.7.7 - New conditions to fix plugin from breaking with certain option selections. props Matias Gertel
 *4.7.6.2 - Bug fix, some people returning no results. Matching release number with WP version.
 *4.7.5 - Post Revision Update for Wordpress 2.6 (necessary update for 2.6 users), removed future posts from results
 *4.7.1 - Swedish, Spanish and Dutch

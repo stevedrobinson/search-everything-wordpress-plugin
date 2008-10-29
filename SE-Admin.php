@@ -150,9 +150,9 @@ Class SearchEverythingAdmin {
 		   	<table class="form-table">
 				<tr valign="top">
 					<td colspan="4" bgcolor="#DDD">
-		       			As of 2.5 I'm taking a hiatus from SE development; however I'm still committing feature updates and bug fixes from the community.<br/>
-		       			You should not fret, the development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:
+		       			The development since Version One has primarily come from the WordPress community and as a Search Everything user myself, I&#8217;m grateful for their dedicated and continued support:
 				        <ul class="SE_lists">
+							<li><a href="http://codium.co.nz">Matias Gertel</a></li>
 							<li><a href="http://striderweb.com/">Stephen Rider</a></li>
 							<li><a href="http://chrismeller.com/">Chris Meller</a></li>
 							<li>jdleung</li>
