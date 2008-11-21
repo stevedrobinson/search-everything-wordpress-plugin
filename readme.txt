@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: dancameron
-Donate link: http://www.amazon.com/gp/registry/wishlist/3EM84J7FVHE6S/ref=wl_web/
+Donate link: http://sproutventure.com
 Tags: search, tag search, category search, category exclusion, comment search, page search, admin, seo
 Requires at least: 2.1
 Tested up to: 2.6.3
-Stable tag: 4.7.7
+Stable tag: 4.7.8
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
