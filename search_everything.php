@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: http://dancameron.org/wordpress/
 Description: Adds search functionality with little setup. Including options to search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 4.7.7
+Version: 4.7.8
 Author: Dan Cameron
 Author URI: http://dancameron.org/
 */
@@ -95,7 +95,12 @@ Class SearchEverything {
 			$this->SE4_log("searching excluding categories");
 		}
 		
-		
+		if ("true" == $this->options['SE4_exclude_authors']) {
+			add_filter('posts_where', array(&$this, 'SE4_search_authors'));
+			add_filter('posts_join', array(&$this, 'SE4_search_authors_join'));
+			$this->SE4_log("searching authors");
+		}
+				
 		// Add registration of bo_revisions hook handler
 		// right before the following line already existant
 		add_filter('posts_where', array(&$this, 'SE4_no_revisions'));
@@ -337,7 +342,33 @@ Class SearchEverything {
 		$this->SE4_log("comments join: ".$join);
 		return $join;
 	}
+	
+	//join for searching authors
+	function SE4_search_authors($where) {
+       global $wp_query, $wpdb;
+       if (!empty($wp_query->query_vars['s'])) {
+           $or = " OR (u.user_nicename LIKE '%" .
+$wpdb->escape($wp_query->query_vars['s']) . "%') ";
 
+       }
+       $where = preg_replace("/\bor\b/i",$or." OR",$where,1);
+       $this->SE4_log("user where: ".$where);
+
+       return $where;
+   }
+
+
+   function SE4_search_authors_join($join) {
+       global $wp_query, $wpdb;
+
+       if (!empty($wp_query->query_vars['s'])) {
+           $join .= " LEFT JOIN $wpdb->users AS u ON
+($wpdb->posts.post_author = u.ID) ";
+
+       }
+       $this->SE4_log("authors join: ".$join);
+       return $join;
+   }
 	//join for searching metadata
 	function SE4_search_metadata_join($join) {
 		global $wp_query, $wpdb;
@@ -347,7 +378,7 @@ Class SearchEverything {
 			if ($this->wp_ver23)
 				$join .= " LEFT JOIN $wpdb->postmeta AS m ON ($wpdb->posts.ID = m.post_id) ";
 			else
-				$join .= "LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
+				$join .= " LEFT JOIN $wpdb->postmeta ON $wpdb->posts.ID = $wpdb->postmeta.post_id ";
 		}
 		$this->SE4_log("metadata join: ".$join);
 		return $join;

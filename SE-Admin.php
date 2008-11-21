@@ -2,7 +2,7 @@
 
 Class SearchEverythingAdmin {
 
-	var $version = '4.7.6';
+	var $version = '4.7.8';
 
 	function SearchEverythingAdmin() {
 
@@ -112,7 +112,8 @@ Class SearchEverythingAdmin {
 								<?php } ?>
 			         		<p><input type="checkbox" id="search_attachments" name="search_attachments" value="true"  <?php if($options['SE4_use_attachment_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_attachments"><?php _e('Search every attachment','SearchEverything'); ?></label></p>
-	
+							<p><input type="checkbox" id="search_authors" name="search_authors" value="true"  <?php if($options['SE4_use_authors'] == 'true') { echo 'checked="true"'; } ?> />
+			       			<label for="search_authors"><?php _e('Search every author','SearchEverything'); ?></label></p>
 			         		<p><input type="checkbox" id="search_metadata" name="search_metadata" value="true"  <?php if($options['SE4_use_metadata_search'] == 'true') { echo 'checked="true"'; } ?> />
 			       			<label for="search_metadata"><?php _e('Search every custom field (metadata)','SearchEverything'); ?></label></p>
 				    	
