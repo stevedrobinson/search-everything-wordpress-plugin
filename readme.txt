@@ -1,10 +1,10 @@
 === Plugin Name ===
 Contributors: dancameron
-Donate link: http://sproutventure.com
+Donate link: http://www.amazon.com/
 Tags: search, tag search, category search, category exclusion, comment search, page search, admin, seo
 Requires at least: 2.1
-Tested up to: 2.6.3
-Stable tag: 4.7.8
+Tested up to: 2.7
+Stable tag: 5
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -30,6 +30,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 
 == Update Log ==
 
+*5 - Bug Release, Extend Author Search to comments (props to Joshua Bettigole), Tag Fix, Meta Fix
 *4.7.7 - New conditions to fix plugin from breaking with certain option selections. props Matias Gertel
 *4.7.6.2 - Bug fix, some people returning no results. Matching release number with WP version.
 *4.7.5 - Post Revision Update for Wordpress 2.6 (necessary update for 2.6 users), removed future posts from results
@@ -46,7 +47,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 * 4.0.1 - Bug fix~Extraneous 's' in options panel
 * 4.0.0 - Wordpress 2.3 Support, Password protected pages option, Overhaul of Admin area
 
-[SVN Browser](http://searcheverything.scatter3d.com:3000/browser "Project Home and SVN Browser")
+[SVN Browser](https://redmine.sproutventure.com/projects/show/search-everything "Project Home and SVN Browser")
 
 == Installation ==
 
@@ -68,7 +69,7 @@ Read the installation guide.
 
 = It *still* doesn't work =
 
-Open up a thread in the support forums tagged 'searcheverything' and 'dancameron'.
+[Support Forums and Project Center](https://redmine.sproutventure.com/projects/show/search-everything "Support Forums and Project Center")
 
 
 == Screenshots ==
@@ -82,5 +83,5 @@ I do need help with this plugin. If you can possibly do my day job and take my g
 
 == Support ==
 
-Create a new topic in the forums with 'searcheverything' and 'dancameron' as the tag for your support related questions.
+[Support Forums and Project Center](https://redmine.sproutventure.com/projects/show/search-everything "Support Forums and Project Center")
 

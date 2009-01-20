@@ -36,7 +36,7 @@ Translation by Naoko McCracken http://detlog.org/
 	  	  | search_everything.php
 	  	  | SE-Admin.php
 		  - lang
-		     | SE4-ja.mo
+		     | SE5-ja.mo
 
 2. プラグイン管理画面にログインし、「Search Everything」を有効化します。
 
