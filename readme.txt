@@ -1,10 +1,10 @@
 === Plugin Name ===
-Contributors: dancameron
-Donate link: http://www.amazon.com/
+Contributors: dancameron, sproutventure
+Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
 Tags: search, tag search, category search, category exclusion, comment search, page search, admin, seo
 Requires at least: 2.1
-Tested up to: 2.7
-Stable tag: 5
+Tested up to: 2.8
+Stable tag: 6
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -25,18 +25,16 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Exclude Posts from search
 * Exclude Categories from search
 
-... I'm still looking for some help so please contact me if you'd like to contribute.
-
-
 == Update Log ==
 
+*6 - New Options Panel!!, Multi-Word fix! #44, Exclude Bug Fix, Admin search fix.
 *5 - Bug Release, Extend Author Search to comments (props to Joshua Bettigole), Tag Fix, Meta Fix
 *4.7.7 - New conditions to fix plugin from breaking with certain option selections. props Matias Gertel
 *4.7.6.2 - Bug fix, some people returning no results. Matching release number with WP version.
 *4.7.5 - Post Revision Update for Wordpress 2.6 (necessary update for 2.6 users), removed future posts from results
 *4.7.1 - Swedish, Spanish and Dutch
 *4.7 - Wordpress 2.6 updates and more
-*4.6.2 - REQUIRED UPDATE from 4.6 release. Admin panel bug fixes (proper wp_version checks, disabled draft support for 2.5 and fixed the options from not updating); Russian and Italian language suuport.
+*4.6.2 - REQUIRED UPDATE from 4.6 release. Admin panel bug fixes (proper wp_version checks, disabled draft support for 2.5 and fixed the options from not updating); Russian and Italian language support.
 *4.6 - Admin refresh and Excerpt Fix
 *4.5 - Japanese Language Support, Category Fix for Wordpress 2.5, Tag search fix (name) other minors
 * 4.2.2 - Localization PO and MO updates, German Translation
@@ -47,7 +45,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 * 4.0.1 - Bug fix~Extraneous 's' in options panel
 * 4.0.0 - Wordpress 2.3 Support, Password protected pages option, Overhaul of Admin area
 
-[SVN Browser](https://redmine.sproutventure.com/projects/show/search-everything "Project Home and SVN Browser")
+[SVN Browser](https://redmine.sproutventure.com/repositories/show/search-everything "Project Home and SVN Browser")
 
 == Installation ==
 
@@ -56,9 +54,8 @@ Installation Instructions:
 1. Download the plugin and unzip it (didn't you already do this?).
 2. Put the 'search-everything' directory into your wp-content/plugins/ directory.
 3. Go to the Plugins page in your WordPress Administration area and click 'Activate' next to Search Everything.
-4. Go to the Options >  Search Everything and configure your site.
-5. That's it. Have fun and if you can contribute (see notes), at the very least post your likes and dislikes about the plugin linking to http://dancameron.org/wordpress/ so your readers to find the plugin and I can see your feedback.
-	
+4. Go to the Options >  Search Everything and configure your settings.
+5. That's it. Have fun and if you can contribute (see notes).
 	
 	
 == Frequently Asked Questions ==
