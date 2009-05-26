@@ -2,14 +2,14 @@
 
 Class se_admin {
 
-	var $version = '6.0.1';
+	var $version = '6.1';
 
 	function se_admin() {
 
 		// Load language file
 		$locale = get_locale();
 		if ( !empty($locale) )
-			load_textdomain('SearchEverything', SE_ABSPATH .'lang/SE4-'.$locale.'.mo');
+			load_textdomain('SearchEverything', SE_ABSPATH .'lang/se-'.$locale.'.mo');
 
 
 		add_action('admin_head', array(&$this, 'se_options_style'));
@@ -27,20 +27,21 @@ Class se_admin {
 		global $wpdb, $table_prefix, $wp_version;
 			
 			$new_options = array(
-				'se_exclude_categories'		=> $_POST["exclude_categories"],
+				'se_exclude_categories'			=> $_POST["exclude_categories"],
 				'se_exclude_categories_list'	=> $_POST["exclude_categories_list"],
 				'se_exclude_posts'				=> $_POST["exclude_posts"],
-				'se_exclude_posts_list'		=> $_POST["exclude_posts_list"],
+				'se_exclude_posts_list'			=> $_POST["exclude_posts_list"],
 				'se_use_page_search'			=> $_POST["search_pages"],
-				'se_use_comment_search'		=> $_POST["search_comments"],
-				'se_use_tag_search'			=> $_POST["search_tags"],
+				'se_use_comment_search'			=> $_POST["search_comments"],
+				'se_use_tag_search'				=> $_POST["search_tags"],
 				'se_use_category_search'		=> $_POST["search_categories"],
-				'se_approved_comments_only'	=> $_POST["appvd_comments"],
+				'se_approved_comments_only'		=> $_POST["appvd_comments"],
 				'se_approved_pages_only'		=> $_POST["appvd_pages"],
-				'se_use_excerpt_search'		=> $_POST["search_excerpt"],
+				'se_use_excerpt_search'			=> $_POST["search_excerpt"],
 				'se_use_draft_search'			=> $_POST["search_drafts"],
 				'se_use_attachment_search'		=> $_POST["search_attachments"],
-				'se_use_authors'				=> $_POST['search_authors'],
+				'se_use_authors'				=> $_POST["search_authors"],
+				'se_use_cmt_authors'			=> $_POST["search_cmt_authors"],
 				'se_use_metadata_search'		=> $_POST["search_metadata"]
 
 			);
@@ -120,8 +121,8 @@ Class se_admin {
 					<?php
 					// Show categories only for WP 2.5+
 					if ($wp_version >= '2.5') : ?>
-					<tr class="mainrow"> 
-				        <td class="titledesc"><?php _e('Search every category name','SearchEverything'); ?>:</td>
+					<tr class="mainrow">
+				        <td class="titledesc"><?php _e('Search every category name and description','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_categories" name="search_categories">
 				                <option<?php if ($options['se_use_category_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
@@ -137,6 +138,16 @@ Class se_admin {
 				            <select name="search_comments" id="search_comments">
 				                <option<?php if ($options['se_use_comment_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
 								<option<?php if ($options['se_use_comment_search'] == 'Yes') { echo ' selected="selected"'; } ?>>Yes</option>
+				            </select>
+							<br/><small></small>
+				        </td>
+				    </tr>
+					<tr class="mainrow"> 
+				        <td class="titledesc">&nbsp;&nbsp;&nbsp;<?php _e('Search comment authors','SearchEverything'); ?>:</td>
+				        <td class="forminp">
+				            <select id="search_cmt_authors" name="search_cmt_authors">
+				                <option<?php if ($options['se_use_cmt_authors'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_cmt_authors'] == 'Yes') { echo ' selected="selected"'; } ?>>Yes</option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -178,7 +189,7 @@ Class se_admin {
 					<tr class="mainrow"> 
 				        <td class="titledesc"><?php _e('Search every attachment','SearchEverything'); ?>:</td>
 				        <td class="forminp">
-				            <select id="search_authors" name="search_authors">
+				            <select id="search_attachments" name="search_attachments">
 				                <option<?php if ($options['se_use_attachment_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
 								<option<?php if ($options['se_use_attachment_search'] == 'Yes') { echo ' selected="selected"'; } ?>>Yes</option>
 				            </select>
@@ -205,6 +216,7 @@ Class se_admin {
 							<br/><small></small>
 				        </td>
 				    </tr>
+				
 				</table>
 				<table style="margin-bottom: 20px;"></table>
 					
@@ -241,7 +253,7 @@ Class se_admin {
 	</form>
 
 	<div class="info">
-		<div style="float: left; padding-top:4px;"><?php _e('Developed by Dan Cameron of') ?> <a href="http://sproutventure.com" title="custom WordPress development"><?php _e('Sprout Venture') ?></a>. <?php _e('We Provide custom WordPress Plugins and Themes and a whole lot more.', 'SearchEverything') ?>
+		<div style="float: left; padding-top:4px;"><?php _e('Developed by Dan Cameron of') ?> <a href="http://sproutventure.com?search-everything" title="Custom WordPress Development"><?php _e('Sprout Venture') ?></a>. <?php _e('We Provide custom WordPress Plugins and Themes and a whole lot more.', 'SearchEverything') ?>
 		</div>
 		<div style="float: right; margin:0; padding:0; " class="submit">
 			<form method="post">
@@ -253,7 +265,7 @@ Class se_admin {
 
 <div style="clear: both;"></div>
 
-<small><?php _e('Find a bug?') ?> <a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><?php _e('Post it as a new issue','SearchEverything')?></a>.</small>
+	<small><?php _e('Find a bug?') ?> <a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><?php _e('Post it as a new issue','SearchEverything')?></a>.</small>
 </div>			
 
 				<table style="margin-bottom: 20px;"></table>
@@ -284,7 +296,7 @@ Class se_admin {
 				<table class="widefat">
 					<thead>
 						<tr class="title">
-							<th scope="col" class="manage-column"><?php _e('Thank You!') ?></th>
+							<th scope="col" class="manage-column"><?php _e('News') ?></th>
 							<th scope="col" class="manage-column"><?php _e('Development Support') ?></th>
 							<th scope="col" class="manage-column"><?php _e('Localization Support') ?></th>
 						</tr>
@@ -292,12 +304,12 @@ Class se_admin {
 				
 					<tr class="mainrow"> 
 					    <td class="thanks">
-						<p><?php _e('The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support.') ?></p>
+						<p><strong><?php _e('LOCALIZATION SUPPORT:') ?></strong><br/><?php _e('Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, ') ?><a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><strong><?php _e('here','SearchEverything')?></strong></a>.</p>
+						<p><strong><?php _e('Thank You!') ?></strong><br/><?php _e('The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support.') ?></p>
 						</td>
 				        <td>
 							<ul class="SE_lists">
-								<li><a href="#">Gary Traffanstedt</a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#43</a>)</li>
-								<li><a href="#">Eric Le Bail</a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#44 and #60</a>)</li>
+								<li><a href="#"><strong>EricLe Bail</strong></a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#272, #49, #44 and #60</a>)</li>
 								<li><a href="#">Gary Traffanstedt</a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#43</a>)</li>
 								<li><a href="http://codium.co.nz"  target="blank">Matias Gertel</a></li>
 								<li><a href="http://striderweb.com/" target="blank">Stephen Rider</a></li>
@@ -309,7 +321,6 @@ Class se_admin {
 						<td>
 							<ul class="SE_lists">
 								<li><a href="#">hit1205 (CN and TW)</a></li>
-								<li><a href="#">Silver Ghost (RU)</a></li>
 								<li><a href="http://beyn.org/" target="blank">Barış Ünver (FR)</a></li>
 								<li><a href="http://www.alohastone.com" target="blank">alohastone (DE)</a></li>
 								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (ES)</a></li>

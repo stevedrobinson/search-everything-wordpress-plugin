@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
 Description: Adds search functionality without modifying template pages: Activate, Configure and Search. Options Include: search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 6.0.1
+Version: 6.1
 Author: Dan Cameron of Sprout Venture
 Author URI: http://sproutventure.com/
 */
@@ -252,7 +252,7 @@ trim($this->options['se_exclude_posts_list'])));
 		{
 
 			$where = str_replace('"', '\'', $where);
-			if ('true' == $this->options['se_approved_pages_only']) 
+			if ('Yes' == $this->options['se_approved_pages_only']) 
 			{
 				$where = str_replace('post_type = \'post\' AND ', 'post_password = \'\' AND ', $where);
 				} else { // < v 2.1
@@ -327,20 +327,25 @@ trim($this->options['se_exclude_posts_list'])));
 	global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s'])) 
 		{
-			if ('true' == $this->options['se_approved_comments_only']) 
+			if ('Yes' == $this->options['se_approved_comments_only']) 
 			{
 				$comment_approved = " AND c.comment_approved =  '1'";
 	  			} else {
 				$comment_approved = '';
 	  		}
 
-				if($this->options['se_use_authors'] == 'true')
+				if($this->options['se_use_authors'] == 'Yes')
 				{
-					$comment_author = " OR c.comment_author LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
+					$comment_author = " OR cmt.comment_author LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%' ";
+				}
+				
+				else
+				{
+					$comment_author = '';
 				}
 
 			if ($this->wp_ver23) {
-				$where .= " OR ( c.comment_post_ID = ".$wpdb->posts . ".ID " . $comment_approved . " AND c.comment_content LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
+				$where .= " OR (( cmt.comment_content LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%'".$comment_author.")".$comment_approved.")";
 				
 				
 			}
@@ -439,24 +444,42 @@ trim($this->options['se_exclude_posts_list'])));
 		$exact = $wp_query->query_vars['exact'];
 		$search = '';
 
-		if ( !empty($search_terms) ) 
+		if ( !empty($search_terms) )
 		{
-			// Building search query
+			// Building search query for categories slug.
 			$n = ($exact) ? '' : '%';
 			$searchand = '';
-			foreach($search_terms as $term) 
+			$searchSlug = '';
+			foreach($search_terms as $term)
 			{
 				$term = addslashes_gpc($term);
-				$search .= "{$searchand}(tter.slug LIKE '{$n}".sanitize_title_with_dashes($term)."{$n}')";
+				$searchSlug .= "{$searchand}(tter.slug LIKE '{$n}".sanitize_title_with_dashes($term)."{$n}')";
 				$searchand = ' AND ';
 			}
 			$term = $wpdb->escape($s);
 			if (!$sentence && count($search_terms) > 1 && $search_terms[0] != $s )
 			{
-				$search = "($search) OR (tter.slug LIKE '{$n}".sanitize_title_with_dashes($s)."{$n}')";
+				$searchSlug = "($searchSlug) OR (tter.slug LIKE '{$n}".sanitize_title_with_dashes($s)."{$n}')";
 			}
-			if ( !empty($search) )
-			$search = " OR ({$search}) ";
+			if ( !empty($searchSlug) )
+				$search = " OR ({$searchSlug}) ";
+
+			// Building search query for categories description.
+			$searchand = '';
+			$searchDesc = '';
+			foreach($search_terms as $term)
+			{
+				$term = addslashes_gpc($term);
+				$searchDesc .= "{$searchand}(ttax.description LIKE '{$n}{$term}{$n}')";
+				$searchand = ' AND ';
+			}
+			$term = $wpdb->escape($s);
+			if (!$sentence && count($search_terms) > 1 && $search_terms[0] != $s )
+			{
+				$searchDesc = "($searchDesc) OR (ttax.description LIKE '{$n}{$s}{$n}')";
+			}
+			if ( !empty($searchDesc) )
+				$search = $search." OR ({$searchDesc}) ";
 		}
 		$this->se_log("categories where: ".$where);
 		return $search;
@@ -511,11 +534,11 @@ trim($this->options['se_exclude_posts_list'])));
 		{
 			if ($this->wp_ver23) 
 			{
-				$join .= " LEFT JOIN $wpdb->comments AS c ON ( comment_post_ID = ID " . $comment_approved . ") ";
+				$join .= " LEFT JOIN $wpdb->comments AS cmt ON ( cmt.comment_post_ID = ID ) ";
 			
 			} else {
 				
-					if ('true' == $this->options['se_approved_comments_only']) 
+					if ('Yes' == $this->options['se_approved_comments_only']) 
 					{
 						$comment_approved = " AND comment_approved =  '1'";
 		  					} else {
