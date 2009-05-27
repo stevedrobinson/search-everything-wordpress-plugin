@@ -329,7 +329,7 @@ trim($this->options['se_exclude_posts_list'])));
 		{
 			if ('Yes' == $this->options['se_approved_comments_only']) 
 			{
-				$comment_approved = " AND c.comment_approved =  '1'";
+				$comment_approved = " AND cmt.comment_approved =  '1'";
 	  			} else {
 				$comment_approved = '';
 	  		}

@@ -65,7 +65,7 @@ Class se_admin {
 		?>
 
 	<div class="wrap">
-		<h2><?php _e('Search Everything Version:') ?> <?php echo $this->version; ?></h2>
+		<h2><?php _e('Search Everything Version:', 'SearchEverything'); ?> <?php echo $this->version; ?></h2>
 			<form method="post">
 		
 				<div style="float: right; margin-bottom:10px; padding:0; " id="top-update" class="submit">
@@ -78,7 +78,7 @@ Class se_admin {
 				<table class="widefat fixed">
 					<thead>
 						<tr class="title">
-							<th scope="col" class="manage-column"><?php _e('Basic Configuration') ?></th>
+							<th scope="col" class="manage-column"><?php _e('Basic Configuration', 'SearchEverything'); ?></th>
 							<th scope="col" class="manage-column"></th>
 						</tr>
 					</thead>
@@ -223,7 +223,7 @@ Class se_admin {
 				<table class="widefat">
 					<thead>
 						<tr class="title">
-							<th scope="col" class="manage-column"><?php _e('Advanced Configuration - Exclusion') ?></th>
+							<th scope="col" class="manage-column"><?php _e('Advanced Configuration - Exclusion', 'SearchEverything'); ?></th>
 							<th scope="col" class="manage-column"></th>
 						</tr>
 					</thead>
@@ -253,7 +253,7 @@ Class se_admin {
 	</form>
 
 	<div class="info">
-		<div style="float: left; padding-top:4px;"><?php _e('Developed by Dan Cameron of') ?> <a href="http://sproutventure.com?search-everything" title="Custom WordPress Development"><?php _e('Sprout Venture') ?></a>. <?php _e('We Provide custom WordPress Plugins and Themes and a whole lot more.', 'SearchEverything') ?>
+		<div style="float: left; padding-top:4px;"><?php _e('Developed by Dan Cameron of', 'SearchEverything'); ?> <a href="http://sproutventure.com?search-everything" title="Custom WordPress Development"><?php _e('Sprout Venture', 'SearchEverything'); ?></a>. <?php _e('We Provide custom WordPress Plugins and Themes and a whole lot more.', 'SearchEverything') ?>
 		</div>
 		<div style="float: right; margin:0; padding:0; " class="submit">
 			<form method="post">
@@ -296,20 +296,20 @@ Class se_admin {
 				<table class="widefat">
 					<thead>
 						<tr class="title">
-							<th scope="col" class="manage-column"><?php _e('News') ?></th>
-							<th scope="col" class="manage-column"><?php _e('Development Support') ?></th>
-							<th scope="col" class="manage-column"><?php _e('Localization Support') ?></th>
+							<th scope="col" class="manage-column"><?php _e('News', 'SearchEverything'); ?></th>
+							<th scope="col" class="manage-column"><?php _e('Development Support', 'SearchEverything'); ?>></th>
+							<th scope="col" class="manage-column"><?php _e('Localization Support', 'SearchEverything'); ?>></th>
 						</tr>
 					</thead>
 				
 					<tr class="mainrow"> 
 					    <td class="thanks">
-						<p><strong><?php _e('LOCALIZATION SUPPORT:') ?></strong><br/><?php _e('Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, ') ?><a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><strong><?php _e('here','SearchEverything')?></strong></a>.</p>
-						<p><strong><?php _e('Thank You!') ?></strong><br/><?php _e('The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support.') ?></p>
+						<p><strong><?php _e('LOCALIZATION SUPPORT:', 'SearchEverything'); ?>></strong><br/><?php _e('Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, ') ?><a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><strong><?php _e('here','SearchEverything')?></strong></a>.</p>
+						<p><strong><?php _e('Thank You!', 'SearchEverything'); ?></strong><br/><?php _e('The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support.', 'SearchEverything'); ?></p>
 						</td>
 				        <td>
 							<ul class="SE_lists">
-								<li><a href="#"><strong>EricLe Bail</strong></a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#272, #49, #44 and #60</a>)</li>
+								<li><a href="#"><strong>EricLe Bail</strong></a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#285, #272, #49, #44 and #60</a>)</li>
 								<li><a href="#">Gary Traffanstedt</a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#43</a>)</li>
 								<li><a href="http://codium.co.nz"  target="blank">Matias Gertel</a></li>
 								<li><a href="http://striderweb.com/" target="blank">Stephen Rider</a></li>
