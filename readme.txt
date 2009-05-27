@@ -4,7 +4,7 @@ Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
 Tags: search, tag search, category search, category exclusion, comment search, page search, admin, seo
 Requires at least: 2.1
 Tested up to: 2.8
-Stable tag: 6.1
+Stable tag: 6.1.1
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -25,19 +25,24 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Exclude Posts from search
 * Exclude Categories from search
 
+* 6.1.1 - Fixed bug when search comments is selected and localization update.
+* 6.1 - New search comment author selection, Misc. bug fixes from v.6 release and updated Localization support.
+* 6 - New Options Panel!!, Multi-Word fix! #44, Exclude Bug Fix, Admin search fix.
+
 == Update Log ==
 
-*6.1 - New search comment author selection, Misc. bug fixes from v.6 release and updated Localization support.
-*6 - New Options Panel!!, Multi-Word fix! #44, Exclude Bug Fix, Admin search fix.
-*5 - Bug Release, Extend Author Search to comments (props to Joshua Bettigole), Tag Fix, Meta Fix
-*4.7.7 - New conditions to fix plugin from breaking with certain option selections. props Matias Gertel
-*4.7.6.2 - Bug fix, some people returning no results. Matching release number with WP version.
-*4.7.5 - Post Revision Update for Wordpress 2.6 (necessary update for 2.6 users), removed future posts from results
-*4.7.1 - Swedish, Spanish and Dutch
-*4.7 - Wordpress 2.6 updates and more
-*4.6.2 - REQUIRED UPDATE from 4.6 release. Admin panel bug fixes (proper wp_version checks, disabled draft support for 2.5 and fixed the options from not updating); Russian and Italian language support.
-*4.6 - Admin refresh and Excerpt Fix
-*4.5 - Japanese Language Support, Category Fix for Wordpress 2.5, Tag search fix (name) other minors
+* 6.1.1 - Fixed bug when search comments is selected and localization update.
+* 6.1 - New search comment author selection, Misc. bug fixes from v.6 release and updated Localization support.
+* 6 - New Options Panel!!, Multi-Word fix! #44, Exclude Bug Fix, Admin search fix.
+* 5 - Bug Release, Extend Author Search to comments (props to Joshua Bettigole), Tag Fix, Meta Fix
+* 4.7.7 - New conditions to fix plugin from breaking with certain option selections. props Matias Gertel
+* 4.7.6.2 - Bug fix, some people returning no results. Matching release number with WP version.
+* 4.7.5 - Post Revision Update for Wordpress 2.6 (necessary update for 2.6 users), removed future posts from results
+* 4.7.1 - Swedish, Spanish and Dutch
+* 4.7 - Wordpress 2.6 updates and more
+* 4.6.2 - REQUIRED UPDATE from 4.6 release. Admin panel bug fixes (proper wp_version checks, disabled draft support for 2.5 and fixed the options from not updating); Russian and Italian language support.
+* 4.6 - Admin refresh and Excerpt Fix
+* 4.5 - Japanese Language Support, Category Fix for Wordpress 2.5, Tag search fix (name) other minors
 * 4.2.2 - Localization PO and MO updates, German Translation
 * 4.2 - Full 2.3 Support with Tag Searching and Category Exclusion.  Major Performance tweaks for searching tags and comments (4.2.1).
 * 4.1 - Major Plugin Architecture change, better localization support
