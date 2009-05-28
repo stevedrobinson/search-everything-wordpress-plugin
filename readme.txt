@@ -4,7 +4,7 @@ Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
 Tags: search, tag search, category search, category exclusion, comment search, page search, admin, seo
 Requires at least: 2.1
 Tested up to: 2.8
-Stable tag: 6.1.1
+Stable tag: 6.1.3
 
 Increases Wordpress' default search functionality through an options panel. Options include searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -20,17 +20,21 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Search only approved comments
 * Search Every Draft
 * Search Every Excerpt
-* Search Every Attachment
+* Search Every Attachment (post type)
 * Search Every Custom Field (metadata)
 * Exclude Posts from search
 * Exclude Categories from search
 
+* 6.1.3 - Exclusion Bug Fix.
+* 6.1.2 - Localization bug fixes.
 * 6.1.1 - Fixed bug when search comments is selected and localization update.
 * 6.1 - New search comment author selection, Misc. bug fixes from v.6 release and updated Localization support.
 * 6 - New Options Panel!!, Multi-Word fix! #44, Exclude Bug Fix, Admin search fix.
 
 == Update Log ==
 
+* 6.1.3 - Exclusion Bug Fix.
+* 6.1.2 - Localization bug fixes.
 * 6.1.1 - Fixed bug when search comments is selected and localization update.
 * 6.1 - New search comment author selection, Misc. bug fixes from v.6 release and updated Localization support.
 * 6 - New Options Panel!!, Multi-Word fix! #44, Exclude Bug Fix, Admin search fix.

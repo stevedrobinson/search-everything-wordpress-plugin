@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/tag/search-everything\n"
-"POT-Creation-Date: 2009-05-27 15:18+0000\n"
+"POT-Creation-Date: 2009-05-28 00:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,6 +21,10 @@ msgid ""
 "Your default search settings have been <strong>updated</strong> by Search "
 "Everything. </p><p> What are you waiting for? Go check out the new search "
 "results!"
+msgstr ""
+
+#: views/options.php:58
+msgid "Your settings have been reset"
 msgstr ""
 
 #: views/options.php:68
@@ -41,6 +45,13 @@ msgstr ""
 
 #: views/options.php:87
 msgid "(non-password protected)"
+msgstr ""
+
+#: views/options.php:91 views/options.php:102 views/options.php:115
+#: views/options.php:129 views/options.php:140 views/options.php:150
+#: views/options.php:160 views/options.php:170 views/options.php:183
+#: views/options.php:194 views/options.php:204 views/options.php:214
+msgid "Yes"
 msgstr ""
 
 #: views/options.php:98
@@ -123,6 +134,10 @@ msgstr ""
 msgid "We Provide custom WordPress Plugins and Themes and a whole lot more."
 msgstr ""
 
+#: views/options.php:260
+msgid "Reset Button"
+msgstr ""
+
 #: views/options.php:268
 msgid "Find a bug?"
 msgstr ""
@@ -178,6 +193,14 @@ msgid ""
 "The development of Search Everything since Version one has primarily come "
 "from the WordPress community, I&#8217;m grateful for their dedicated and "
 "continued support."
+msgstr ""
+
+#: views/options.php:318
+msgid "and many more..."
+msgstr ""
+
+#: views/options.php:318
+msgid "how about you?"
 msgstr ""
 
 #. Plugin Name of an extension

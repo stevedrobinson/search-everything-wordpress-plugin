@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.1.1';
+	var $version = '6.1.3';
 
 	function se_admin() {
 
@@ -48,14 +48,14 @@ Class se_admin {
 			
 		if($_POST['action'] == "save") 
 		{
-			echo "<div class=\"updated fade\" id=\"limitcatsupdatenotice\"><p>" . _e('Your default search settings have been <strong>updated</strong> by Search Everything. </p><p> What are you waiting for? Go check out the new search results!', 'SearchEverything') . "</p></div>";
+			echo "<div class=\"updated fade\" id=\"limitcatsupdatenotice\"><p>" . __('Your default search settings have been <strong>updated</strong> by Search Everything. </p><p> What are you waiting for? Go check out the new search results!', 'SearchEverything') . "</p></div>";
 			update_option("se_options", $new_options);
 
 		}
 		
 		if($_POST['action'] == "reset") 
 		{ 
-			echo "<div id=\"message\" class=\"updated fade\"><p><strong>" . _e('Your settings have been reset', 'SearchEverything') . "</strong></p></div>";
+			echo "<div class=\"updated fade\" id=\"limitcatsupdatenotice\"><p>" . __('Your default search settings have been <strong>updated</strong> by Search Everything. </p><p> What are you waiting for? Go check out the new search results!', 'SearchEverything') . "</p></div>";
 			delete_option("se_options", $new_options);
 		}
 		
@@ -187,7 +187,7 @@ Class se_admin {
 				    </tr>
 					<?php endif; ?>
 					<tr class="mainrow"> 
-				        <td class="titledesc"><?php _e('Search every attachment','SearchEverything'); ?>:</td>
+				        <td class="titledesc"><?php _e('Search every attachment','SearchEverything'); ?>:<br/><small><?php _e('(post type = attachment)','SearchEverything'); ?></small></td>
 				        <td class="forminp">
 				            <select id="search_attachments" name="search_attachments">
 				                <option<?php if ($options['se_use_attachment_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
@@ -320,6 +320,7 @@ Class se_admin {
 					    </td>
 						<td>
 							<ul class="SE_lists">
+								<li><a href="#">Simon Hansen (NN)</a></li>
 								<li><a href="#">hit1205 (CN and TW)</a></li>
 								<li><a href="http://beyn.org/" target="blank">Barış Ünver (FR)</a></li>
 								<li><a href="http://www.alohastone.com" target="blank">alohastone (DE)</a></li>
