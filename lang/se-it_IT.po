@@ -1,12 +1,13 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Search Everything in italiano\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: 2008-06-22 11:53+0100\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/search-everything\n"
+"POT-Creation-Date: 2009-05-28 00:37+0000\n"
+"PO-Revision-Date: 2009-05-29 07:55+0100\n"
 "Last-Translator: Gianni Diurno (aka gidibao) <gidibao@gmail.com>\n"
 "Language-Team: Gianni Diurno | http://gidibao.net/ <gidibao@gmail.com>\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
 "X-Poedit-Basepath: C:\\Dokumente und Einstellungen\\AlohaStone\\Eigene Dateien\\Eigene Websites\\ver 2.3\\wordpress\\wp-content\\plugins\\\n"
@@ -15,99 +16,231 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "X-Poedit-SearchPath-0: search-everything\n"
 
-#: search-everything/SE-Admin.php:29
-msgid "Search Everything Options  <strong>Updated</strong>."
-msgstr "Le opzioni di Search Everything sono state <strong>aggiornate</strong>."
+#: views/options.php:51
+msgid "Your default search settings have been <strong>updated</strong> by Search Everything. </p><p> What are you waiting for? Go check out the new search results!"
+msgstr "Le tue impostazioni predefinite per la ricerca sono state <strong>aggiornate</strong> da Search Everything. </p><p> Cosa stai aspettando? Vai a vedere i nuovi risultati!"
 
-#: search-everything/SE-Admin.php:59
-msgid "The options selected below will be used in every search query on this site; in addition to the built-in post search."
-msgstr "Le opzioni selezionate verranno utilizzate per ogni interrogazione di ricerca (in aggiunta a quella di base) agli articoli di questo sito."
+#: views/options.php:58
+msgid "Your settings have been reset"
+msgstr "Le tue impostazioni sono stateripristinate"
 
-#: search-everything/SE-Admin.php:63
-msgid "SE Search Options"
-msgstr "Opzioni di ricerca SE"
+#: views/options.php:68
+msgid "Search Everything Version:"
+msgstr "Versione di Search Everything:"
 
-#: search-everything/SE-Admin.php:64
-msgid "Use this form to configure your search options."
-msgstr "Utilizza questo modulo per configurare le tue opzioni di ricerca."
-
-#: search-everything/SE-Admin.php:67
-msgid "Search Options Form"
-msgstr "Modulo delle opzioni di ricerca"
-
-#: search-everything/SE-Admin.php:69
-msgid "Exclude some post or page IDs"
-msgstr "Escludi l'ID di alcune pagine o articoli"
-
-#: search-everything/SE-Admin.php:70
-msgid "Comma separated Post IDs (example: 1, 5, 9)"
-msgstr "Separa l'ID dei post con una virgola (ad esempio: 1, 5, 9)"
-
-#: search-everything/SE-Admin.php:75
-msgid "Exclude Categories"
-msgstr "Escludi le categorie"
-
-#: search-everything/SE-Admin.php:76
-msgid "Comma separated category IDs (example: 1, 4)"
-msgstr "Separa l'ID delle categorie con una virgola (ad esempio: 1, 5, 9)"
-
-#: search-everything/SE-Admin.php:81
-msgid "Search every page (non-password protected)"
-msgstr "Ricerca estesa ad ogni pagina (non protetta da password)"
-
-#: search-everything/SE-Admin.php:83
-msgid "Search approved pages only?"
-msgstr "Vuoi che la ricerca sia ristretta solamente alle pagine? "
-
-#: search-everything/SE-Admin.php:89
-msgid "Search every tag"
-msgstr "Ricerca estesa ad ogni tag"
-
-#: search-everything/SE-Admin.php:94
-msgid "Search every comment"
-msgstr "Ricerca estesa ad ogni commento"
-
-#: search-everything/SE-Admin.php:97
-msgid "Search approved comments only?"
-msgstr "Vuoi che la ricerca sia ristretta solamente ai commenti?"
-
-#: search-everything/SE-Admin.php:100
-msgid "Search every excerpt"
-msgstr "Ricerca estesa ad ogni estratto"
-
-#: search-everything/SE-Admin.php:103
-msgid "Search every draft"
-msgstr "Ricerca estesa ad ogni bozza"
-
-#: search-everything/SE-Admin.php:106
-msgid "Search every attachment"
-msgstr "Ricerca estesa ad ogni allegato"
-
-#: search-everything/SE-Admin.php:109
-msgid "Search every custom field (metadata)"
-msgstr "Ricerca per ogni campo personalizzato (metadata)"
-
-#: search-everything/SE-Admin.php:115
+#: views/options.php:73
+#: views/options.php:251
 msgid "Update Options"
 msgstr "Aggiona le opzioni"
 
-#: search-everything/SE-Admin.php:121
-msgid "SE Search Form"
-msgstr "Modulo di ricerca SE"
+#: views/options.php:81
+msgid "Basic Configuration"
+msgstr "Configurazione di base"
 
-#: search-everything/SE-Admin.php:122
+#: views/options.php:87
+msgid "Search every page"
+msgstr "Ricerca estesa ad ogni pagina"
+
+#: views/options.php:87
+msgid "(non-password protected)"
+msgstr "(non protetto da password)"
+
+#: views/options.php:91
+#: views/options.php:102
+#: views/options.php:115
+#: views/options.php:129
+#: views/options.php:140
+#: views/options.php:150
+#: views/options.php:160
+#: views/options.php:170
+#: views/options.php:183
+#: views/options.php:194
+#: views/options.php:204
+#: views/options.php:214
+msgid "Yes"
+msgstr "Sì"
+
+#: views/options.php:98
+msgid "Search approved pages only"
+msgstr "Ricerca ristretta solamente alle pagine"
+
+#: views/options.php:111
+msgid "Search every tag name"
+msgstr "Ricerca estesa ad ogni nome tag"
+
+#: views/options.php:125
+msgid "Search every category name and description"
+msgstr "Ricerca estesa ad ogni categoria e descrizione"
+
+#: views/options.php:136
+msgid "Search every comment"
+msgstr "Ricerca estesa ad ogni commento"
+
+#: views/options.php:146
+msgid "Search comment authors"
+msgstr "Ricerca estesa agli autori dei commenti"
+
+#: views/options.php:156
+msgid "Search approved comments only"
+msgstr "Ricerca ristretta solamente ai commenti"
+
+#: views/options.php:166
+msgid "Search every excerpt"
+msgstr "Ricerca estesa ad ogni estratto"
+
+#: views/options.php:179
+msgid "Search every draft"
+msgstr "Ricerca estesa ad ogni bozza"
+
+#: views/options.php:190
+msgid "Search every attachment"
+msgstr "Ricerca estesa ad ogni allegato"
+
+#: views/options.php:200
+msgid "Search every custom field"
+msgstr "Ricerca estesa per ogni campo personalizzato"
+
+#: views/options.php:200
+msgid "(metadata)"
+msgstr "(metadati)"
+
+#: views/options.php:210
+msgid "Search every author"
+msgstr "Ricerca estesa ad ogni autore"
+
+#: views/options.php:226
+msgid "Advanced Configuration - Exclusion"
+msgstr "Configurazione avanzata - Esclusione"
+
+#: views/options.php:232
+msgid "Exclude some post or page IDs"
+msgstr "Escludi l'ID di alcune pagine o articoli"
+
+#: views/options.php:235
+msgid "Comma separated Post IDs (example: 1, 5, 9)"
+msgstr "Separa l'ID dei post con una virgola (ad esempio: 1, 5, 9)"
+
+#: views/options.php:239
+msgid "Exclude Categories"
+msgstr "Escludi le categorie"
+
+#: views/options.php:242
+msgid "Comma separated category IDs (example: 1, 4)"
+msgstr "Separa l'ID delle categorie con una virgola (ad esempio: 1, 5, 9)"
+
+#: views/options.php:256
+msgid "Developed by Dan Cameron of"
+msgstr "Sviluppato da Dan Cameron di"
+
+#: views/options.php:256
+msgid "Sprout Venture"
+msgstr "Sprout Venture"
+
+#: views/options.php:256
+msgid "We Provide custom WordPress Plugins and Themes and a whole lot more."
+msgstr "Realizziamo plugin personalizzati per WordPress, temi e molto altro ancora."
+
+#: views/options.php:260
+msgid "Reset Button"
+msgstr "Pulsante ripristino"
+
+#: views/options.php:268
+msgid "Find a bug?"
+msgstr "Segnala un errore"
+
+#: views/options.php:268
+msgid "Post it as a new issue"
+msgstr "qui"
+
+#: views/options.php:275
+msgid "Test Search Form"
+msgstr "Test modulo di ricerca"
+
+#: views/options.php:282
 msgid "Use this search form to run a live search test."
 msgstr "Usa questo modulo di ricerca per avviare un test live di ricerca."
 
-#: search-everything/SE-Admin.php:125
-msgid "Site Search"
-msgstr "Ricerca nel sito"
-
-#: search-everything/SE-Admin.php:127
-msgid "Enter search terms"
-msgstr "Inserisci i termini di ricerca"
-
-#: search-everything/SE-Admin.php:129
+#: views/options.php:288
 msgid "Run Test Search"
 msgstr "Avvia il test di ricerca"
+
+#: views/options.php:299
+msgid "News"
+msgstr "Novità"
+
+#: views/options.php:300
+msgid "Development Support"
+msgstr "Supporto per lo sviluppo"
+
+#: views/options.php:301
+msgid "Localization Support"
+msgstr "Supporto per la localizzazione"
+
+#: views/options.php:307
+msgid "LOCALIZATION SUPPORT:"
+msgstr "SUPPORTO LOCALIZZAZIONE:"
+
+#: views/options.php:307
+msgid "Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, "
+msgstr "La versione 6 é da considerarsi quale major update ed alcune aree necessitano di un nuovo lavoro di localizzazione. Aiutatemi inviandomi le vostre traduzioni aggiornate,"
+
+#: views/options.php:307
+msgid "here"
+msgstr "qui"
+
+#: views/options.php:308
+msgid "Thank You!"
+msgstr "Grazie!"
+
+#: views/options.php:308
+msgid "The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support."
+msgstr "Sino dalla prima versione, Search Everything ha avuto un grande supporto da parte della comunità di WordPress: sono grato per tutto il Vostro tempo dedicato ed il continuo supporto."
+
+#: views/options.php:318
+msgid "and many more..."
+msgstr "e molto altro ancora..."
+
+#: views/options.php:318
+msgid "how about you?"
+msgstr "segnalazioni"
+
+#. Plugin Name of an extension
+msgid "Search Everything"
+msgstr "Search Everything"
+
+#. Plugin URI of an extension
+msgid "https://redmine.sproutventure.com/projects/show/search-everything"
+msgstr "https://redmine.sproutventure.com/projects/show/search-everything"
+
+#. Description of an extension
+msgid "Adds search functionality without modifying template pages: Activate, Configure and Search. Options Include: search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content."
+msgstr "Aggiunge la funzionalità della ricerca senza modificare il template delle pagine: Attivare, Configurare e Ricercare. Opzioni incluse: ricerca pagine, riassunti, allegati, bozze, commenti, tag e campi personalizzati (metadati). Offre inoltre la possibilità di escludere dei specifici articoli e pagine. Non verranno effettuate delle ricerche per quei contenuti protetti da password."
+
+#. Author of an extension
+msgid "Dan Cameron of Sprout Venture"
+msgstr "Dan Cameron di Sprout Venture"
+
+#. Author URI of an extension
+msgid "http://sproutventure.com/"
+msgstr "http://sproutventure.com/"
+
+#~ msgid "Search Everything Options  <strong>Updated</strong>."
+#~ msgstr ""
+#~ "Le opzioni di Search Everything sono state <strong>aggiornate</strong>."
+#~ msgid ""
+#~ "The options selected below will be used in every search query on this "
+#~ "site; in addition to the built-in post search."
+#~ msgstr ""
+#~ "Le opzioni selezionate verranno utilizzate per ogni interrogazione di "
+#~ "ricerca (in aggiunta a quella di base) agli articoli di questo sito."
+#~ msgid "SE Search Options"
+#~ msgstr "Opzioni di ricerca SE"
+#~ msgid "Use this form to configure your search options."
+#~ msgstr "Utilizza questo modulo per configurare le tue opzioni di ricerca."
+#~ msgid "Search Options Form"
+#~ msgstr "Modulo delle opzioni di ricerca"
+#~ msgid "Site Search"
+#~ msgstr "Ricerca nel sito"
+#~ msgid "Enter search terms"
+#~ msgstr "Inserisci i termini di ricerca"
 

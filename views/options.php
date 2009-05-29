@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.1.3';
+	var $version = '6.1.4';
 
 	function se_admin() {
 
@@ -320,13 +320,13 @@ Class se_admin {
 					    </td>
 						<td>
 							<ul class="SE_lists">
-								<li><a href="#">Simon Hansen (NN)</a></li>
+								<li><a href="#">Simon Hansen (NN) - v.6</a></li>
+								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (IT) - v.6</a></li>
 								<li><a href="#">hit1205 (CN and TW)</a></li>
 								<li><a href="http://beyn.org/" target="blank">Barış Ünver (FR)</a></li>
 								<li><a href="http://www.alohastone.com" target="blank">alohastone (DE)</a></li>
 								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (ES)</a></li>
 								<li><a href="#">János Csárdi-Braunstein (HU)</a></li>
-								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (IT)</a></li>
 								<li><a href="http://wppluginsj.sourceforge.jp/i18n-ja_jp/" target="blank">Naoko McCracken (JA)</a></li>
 								<li><a href="http://idimensie.nl" target="blank">Joeke-Remkus de Vries (NL)</a></li>
 								<li><a href="#">Silver Ghost (RU)</a></li>
