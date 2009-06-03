@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
 Description: Adds search functionality without modifying template pages: Activate, Configure and Search. Options Include: search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 6.1.4
+Version: 6.1.5
 Author: Dan Cameron of Sprout Venture
 Author URI: http://sproutventure.com/
 */
@@ -507,13 +507,16 @@ Class SearchEverything {
 	function se_build_exclude_posts()
 	{
 		$excludeQuery = '';
-		$excludedPostList = trim($this->options['se_exclude_posts_list']);
-		if ($excludedPostList != '')
+		if (!empty($wp_query->query_vars['s']))
 		{
-			$excl_list = implode(',', explode(',',$excludedPostList));
-			$excludeQuery = ' AND (wp_posts.ID NOT IN ( '.$excl_list.' ))';
+			$excludedPostList = trim($this->options['se_exclude_posts_list']);
+			if ($excludedPostList != '')
+			{
+				$excl_list = implode(',', explode(',',$excludedPostList));
+				$excludeQuery = ' AND (wp_posts.ID NOT IN ( '.$excl_list.' ))';
+			}
+			$this->se_log("ex posts where: ".$excludeQuery);
 		}
-		$this->se_log("ex posts where: ".$excludeQuery);
 		return $excludeQuery;
 	}
 
@@ -521,20 +524,23 @@ Class SearchEverything {
 	function se_build_exclude_categories()
 	{
 		$excludeQuery = '';
-		$excludedCatList = trim($this->options['se_exclude_categories_list']);
-		if ($excludedCatList != '')
+		if (!empty($wp_query->query_vars['s']))
 		{
-			$excl_list = implode(',', explode(',',$excludedCatList));
-			if ($this->wp_ver23)
+			$excludedCatList = trim($this->options['se_exclude_categories_list']);
+			if ($excludedCatList != '')
 			{
-				$excludeQuery = " AND ( ctax.term_id NOT IN ( ".$excl_list." ))";
+				$excl_list = implode(',', explode(',',$excludedCatList));
+				if ($this->wp_ver23)
+				{
+					$excludeQuery = " AND ( ctax.term_id NOT IN ( ".$excl_list." ))";
+				}
+				else
+				{
+					$excludeQuery = ' AND (c.category_id NOT IN ( '.$excl_list.' ))';
+				}
 			}
-			else
-			{
-				$excludeQuery = ' AND (c.category_id NOT IN ( '.$excl_list.' ))';
-			}
+			$this->se_log("ex category where: ".$excludeQuery);
 		}
-		$this->se_log("ex category where: ".$excludeQuery);
 		return $excludeQuery;
 	}
 
