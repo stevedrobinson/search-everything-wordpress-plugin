@@ -3,7 +3,7 @@
 Plugin Name: Search Everything
 Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
 Description: Adds search functionality without modifying template pages: Activate, Configure and Search. Options Include: search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
-Version: 6.1.5
+Version: 6.1.7
 Author: Dan Cameron of Sprout Venture
 Author URI: http://sproutventure.com/
 */
@@ -15,8 +15,16 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 */
 
 if ( !defined('WP_CONTENT_DIR') )
-	define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
-define('SE_ABSPATH', WP_CONTENT_DIR.'/plugins/' . dirname(plugin_basename(__FILE__)) . '/');
+define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
+
+if (!defined('DIRECTORY_SEPARATOR'))
+{
+    if (strpos(php_uname('s'), 'Win') !== false )
+        define('DIRECTORY_SEPARATOR', '\\');
+    else 
+        define('DIRECTORY_SEPARATOR', '/');
+}
+define('SE_ABSPATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 
 $SE = new SearchEverything();
 //add filters based upon option settings
@@ -506,6 +514,7 @@ Class SearchEverything {
 	// create the Posts exclusion query
 	function se_build_exclude_posts()
 	{
+		global $wp_query;
 		$excludeQuery = '';
 		if (!empty($wp_query->query_vars['s']))
 		{
@@ -513,7 +522,7 @@ Class SearchEverything {
 			if ($excludedPostList != '')
 			{
 				$excl_list = implode(',', explode(',',$excludedPostList));
-				$excludeQuery = ' AND (wp_posts.ID NOT IN ( '.$excl_list.' ))';
+				$excludeQuery = ' AND (ID NOT IN ( '.$excl_list.' ))';
 			}
 			$this->se_log("ex posts where: ".$excludeQuery);
 		}
@@ -523,6 +532,7 @@ Class SearchEverything {
 	// create the Categories exclusion query
 	function se_build_exclude_categories()
 	{
+		global $wp_query, $wpdb;
 		$excludeQuery = '';
 		if (!empty($wp_query->query_vars['s']))
 		{

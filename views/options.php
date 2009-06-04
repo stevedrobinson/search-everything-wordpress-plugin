@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.1.5';
+	var $version = '6.1.7';
 
 	function se_admin() {
 
