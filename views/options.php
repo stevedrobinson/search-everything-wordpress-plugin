@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.1.7';
+	var $version = '6.2';
 
 	function se_admin() {
 
@@ -42,7 +42,10 @@ Class se_admin {
 				'se_use_attachment_search'		=> $_POST["search_attachments"],
 				'se_use_authors'				=> $_POST["search_authors"],
 				'se_use_cmt_authors'			=> $_POST["search_cmt_authors"],
-				'se_use_metadata_search'		=> $_POST["search_metadata"]
+				'se_use_metadata_search'		=> $_POST["search_metadata"],
+				'se_use_highlight'				=> $_POST["search_highlight"],
+				'se_highlight_color'			=> $_POST["highlight_color"],
+				'se_highlight_style'			=> $_POST["highlight_style"]
 
 			);
 			
@@ -216,6 +219,23 @@ Class se_admin {
 							<br/><small></small>
 				        </td>
 				    </tr>
+					<tr class="mainrow"> 
+				        <td class="titledesc"><?php _e('Highlight Search Terms','SearchEverything'); ?>:</td>
+				        <td class="forminp">
+				            <select id="search_highlight" name="search_highlight">
+				                <option<?php if ($options['se_use_highlight'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_highlight'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				            </select>
+							<br/><small></small>
+				        </td>
+				    </tr>
+					<tr class="mainrow"> 
+					    <td class="titledesc">&nbsp;&nbsp;&nbsp;<?php _e('Highlight Background Color','SearchEverything'); ?>:</td>
+					    <td class="forminp">
+					        <input type="text" id="highlight_color" name="highlight_color" value="<?php echo $options['se_highlight_color'];?>" />
+						    <br/><small><?php _e('Examples:<br/>\'#FFF984\' or \'red\'','SearchEverything'); ?></small>
+					    </td>
+					</tr>
 				
 				</table>
 				<table style="margin-bottom: 20px;"></table>
@@ -242,7 +262,14 @@ Class se_admin {
 						    <br/><small><?php _e('Comma separated category IDs (example: 1, 4)','SearchEverything'); ?></small>
 					    </td>
 					</tr>
-					
+					<tr class="mainrow"> 
+					    <td class="titledesc"><?php _e('Full Highlight Style','SearchEverything'); ?>:</td>
+					    <td class="forminp">
+					        <small><?php _e('Important: \'Highlight Background Color\' must be blank to use this advanced styling.', 'SearchEverything') ?></small><br/>
+							<input type="text" id="highlight_style" name="highlight_style" value="<?php echo $options['se_highlight_style'];?>" />
+						    <br/><small><?php _e('Example:<br/>background-color: #FFF984; font-weight: bold; color: #000; padding: 0 1px;','SearchEverything'); ?></small>
+					    </td>
+					</tr>
 				</table>
 
 
