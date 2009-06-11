@@ -697,13 +697,13 @@ Class SearchEverything {
 				if ($highlight_color != '')
 				$postcontent = preg_replace(
 					'"('.$term.')"i'
-					, '<span class="search-everything-highlight-color" style="background-color:'.$highlight_color.'">$1</span>'
+					, '<div class="search-everything-highlight-color" style="background-color:'.$highlight_color.'">$1</div>'
 					, $postcontent
 					);
 				else
 				$postcontent = preg_replace(
 					'"('.$term.')"i'
-					, '<span class="search-everything-highlight" style="'.$highlight_style.'">$1</span>'
+					, '<div class="search-everything-highlight" style="'.$highlight_style.'">$1</div>'
 					, $postcontent
 					);
 			}
