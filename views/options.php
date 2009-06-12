@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.2';
+	var $version = '6.2.2';
 
 	function se_admin() {
 
@@ -87,7 +87,7 @@ Class se_admin {
 					</thead>
 		
 					<tr class="mainrow"> 
-				        <td class="titledesc"><?php _e('Search every page','SearchEverything'); ?>:<br/><small><?php _e('(non-password protected)','SearchEverything'); ?></small></td>
+				        <td class="titledesc"><?php _e('Search every page','SearchEverything'); ?>:<br/><small></small></td>
 				        <td class="forminp">
 				            <select id="search_pages" name="search_pages">
 				                <option<?php if ($options['se_use_page_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
@@ -96,7 +96,9 @@ Class se_admin {
 							
 				        </td>
 				    </tr>
-				
+					<?php
+					// Show categories only for WP 2.5+
+					if ($wp_version <= '2.5') : ?>
 					<tr class="mainrow"> 
 				        <td class="titledesc">&nbsp;&nbsp;&nbsp;<?php _e('Search approved pages only','SearchEverything'); ?>:</td>
 				        <td class="forminp">
@@ -107,6 +109,7 @@ Class se_admin {
 							<br/><small></small>
 				        </td>
 				    </tr>
+					<?php endif; ?>
 					<?php
 					// Show tags only for WP 2.3+
 					if ($wp_version >= '2.3') : ?>
@@ -347,10 +350,11 @@ Class se_admin {
 					    </td>
 						<td>
 							<ul class="SE_lists">
+								<li><a href="#">Maris Svirksts (Lt) - v.6</a></li>
 								<li><a href="#">Simon Hansen (NN) - v.6</a></li>
 								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (IT) - v.6</a></li>
+								<li><a href="http://beyn.org/" target="blank">jean Pierre Gavoille (FR) - v.6</a></li>
 								<li><a href="#">hit1205 (CN and TW)</a></li>
-								<li><a href="http://beyn.org/" target="blank">Barış Ünver (FR)</a></li>
 								<li><a href="http://www.alohastone.com" target="blank">alohastone (DE)</a></li>
 								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (ES)</a></li>
 								<li><a href="#">János Csárdi-Braunstein (HU)</a></li>

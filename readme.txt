@@ -4,7 +4,7 @@ Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
 Tags: search, search highlight, tag search, category search, category exclusion, comment search, page search, admin, seo, post filter
 Requires at least: 2.3
 Tested up to: 2.8
-Stable tag: 6.2
+Stable tag: 6.2.2
 
 Increases Wordpress' default search functionality through an options panel. Options include search highlight, searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -26,6 +26,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Exclude Posts from search
 * Exclude Categories from search
 
+* 6.2.2   - Post Exclusion fix. More translations.
 * 6.2   - Search Highlighting options. Fix when searching with '.
 * 6.1.7 - Major Posts Exclude and Category Exclude Bug fix.
 * 6.1.6 - Sym link fix.
@@ -39,6 +40,8 @@ Search Everything increases the ability of the default Wordpress Search, options
 
 == Update Log ==
 
+* 6.2.2   - Post Exclusion fix. More translations.
+* 6.2.1   - Changed highlight from span to div.
 * 6.2   - Search Highlighting options. Fix when searching with '.
 * 6.1.7 - Major Posts Exclude and Category Exclude Bug fix.
 * 6.1.6 - Sym link fix.

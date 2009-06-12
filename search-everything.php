@@ -3,7 +3,7 @@
  Plugin Name: Search Everything
  Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
  Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
- Version: 6.2
+ Version: 6.2.2
  Author: Dan Cameron of Sprout Venture
  Author URI: http://sproutventure.com/
  */
@@ -131,7 +131,7 @@ Class SearchEverything {
 	// creates the list of search keywords from the 's' parameters.
 	function se_get_search_terms()
 	{
-		global $wp_query;
+		global $wp_query, $wpdb;
 		$s = $wp_query->query_vars['s'];
 		$sentence = $wp_query->query_vars['sentence'];
 		$search_terms = array();
@@ -204,7 +204,7 @@ Class SearchEverything {
 	// Exclude post revisions
 	function se_no_revisions($where)
 	{
-		global $wp_query;
+		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s']))
 		{
 			$where = 'AND (' . substr($where, strpos($where, 'AND')+3) . ') AND post_type != \'revision\'';
@@ -234,7 +234,7 @@ Class SearchEverything {
 	//Duplicate fix provided by Tiago.Pocinho
 	function se_distinct($query)
 	{
-		global $wp_query;
+		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s']))
 		{
 			if (strstr($where, 'DISTINCT'))
@@ -250,7 +250,7 @@ Class SearchEverything {
 	//search pages (except password protected pages provided by loops)
 	function se_search_pages($where)
 	{
-		global $wp_query;
+		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s']))
 		{
 
@@ -300,7 +300,7 @@ Class SearchEverything {
 	//search drafts
 	function se_search_draft_posts($where)
 	{
-		global $wp_query;
+		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s']))
 		{
 			$where = str_replace('"', '\'', $where);
@@ -313,7 +313,7 @@ Class SearchEverything {
 	//search attachments
 	function se_search_attachments($where)
 	{
-		global $wp_query;
+		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s']))
 		{
 			$where = str_replace('"', '\'', $where);
@@ -521,7 +521,7 @@ Class SearchEverything {
 	// create the Posts exclusion query
 	function se_build_exclude_posts()
 	{
-		global $wp_query;
+		global $wp_query, $wpdb;
 		$excludeQuery = '';
 		if (!empty($wp_query->query_vars['s']))
 		{
@@ -697,13 +697,13 @@ Class SearchEverything {
 				if ($highlight_color != '')
 				$postcontent = preg_replace(
 					'"('.$term.')"i'
-					, '<div class="search-everything-highlight-color" style="background-color:'.$highlight_color.'">$1</div>'
+					, '<span class="search-everything-highlight-color" style="background-color:'.$highlight_color.'">$1</span>'
 					, $postcontent
 					);
 				else
 				$postcontent = preg_replace(
 					'"('.$term.')"i'
-					, '<div class="search-everything-highlight" style="'.$highlight_style.'">$1</div>'
+					, '<span class="search-everything-highlight" style="'.$highlight_style.'">$1</span>'
 					, $postcontent
 					);
 			}
