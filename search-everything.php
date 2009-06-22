@@ -3,7 +3,7 @@
  Plugin Name: Search Everything
  Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
  Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
- Version: 6.2.2
+ Version: 6.2.5
  Author: Dan Cameron of Sprout Venture
  Author URI: http://sproutventure.com/
  */
@@ -35,11 +35,13 @@ Class SearchEverything {
 	var $options;
 	var $wp_ver23;
 	var $wp_ver25;
+	var $wp_ver28;
 
 	function SearchEverything(){
 		global $wp_version;
 		$this->wp_ver23 = ($wp_version >= '2.3');
 		$this->wp_ver25 = ($wp_version >= '2.5');
+		$this->wp_ver28 = ($wp_version >= '2.8');
 		$this->options = get_option('se_options');
 
 		if (is_admin()) {
@@ -207,6 +209,10 @@ Class SearchEverything {
 		global $wp_query, $wpdb;
 		if (!empty($wp_query->query_vars['s']))
 		{
+			if(!$this->wp_ver28)
+			{
+				$where = 'AND (' . substr($where, strpos($where, 'AND')+3) . ") AND $wpdb->posts.post_type != 'revision'";
+			}
 			$where = 'AND (' . substr($where, strpos($where, 'AND')+3) . ') AND post_type != \'revision\'';
 		}
 		return $where;
@@ -257,7 +263,7 @@ Class SearchEverything {
 			$where = str_replace('"', '\'', $where);
 			if ('Yes' == $this->options['se_approved_pages_only'])
 			{
-				$where = str_replace('post_type = \'post\' AND ', 'post_password = \'\' AND ', $where);
+				$where = str_replace("post_type = 'post'", " AND 'post_password = '' AND ", $where);
 			} else { // < v 2.1
 				$where = str_replace('post_type = \'post\' AND ', '', $where);
 			}
@@ -304,7 +310,15 @@ Class SearchEverything {
 		if (!empty($wp_query->query_vars['s']))
 		{
 			$where = str_replace('"', '\'', $where);
-			$where = str_replace(' AND (post_status = \'publish\'', ' AND (post_status = \'publish\' or post_status = \'draft\'', $where);
+			if(!$this->wp_ver28)
+			{
+				$where = str_replace(" AND (post_status = 'publish'", " AND ((post_status = 'publish' OR post_status = 'draft')", $where);
+			} 
+			else
+			{
+				$where = str_replace(" AND ($wpdb->posts.post_status = 'publish'", " AND ($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'draft'", $where);
+			}
+			$where = str_replace(" AND (post_status = 'publish'", " AND (post_status = 'publish' OR post_status = 'draft'", $where);
 		}
 		$this->se_log("drafts where: ".$where);
 		return $where;
@@ -317,8 +331,16 @@ Class SearchEverything {
 		if (!empty($wp_query->query_vars['s']))
 		{
 			$where = str_replace('"', '\'', $where);
-			$where = str_replace(' AND (post_status = \'publish\'', ' AND (post_status = \'publish\' or post_status = \'attachment\'', $where);
-			$where = str_replace('AND post_status != \'attachment\'','',$where);
+			if(!$this->wp_ver28)
+			{
+				$where = str_replace(" AND (post_status = 'publish'", " AND (post_status = 'publish' OR post_status = 'attachment'", $where);
+				$where = str_replace("AND post_status != 'attachment'","",$where);
+			}
+			else
+			{
+				$where = str_replace(" AND ($wpdb->posts.post_status = 'publish'", " AND ($wpdb->posts.post_status = 'publish' OR $wpdb->posts.post_status = 'attachment'", $where);
+				$where = str_replace("AND $wpdb->posts.post_status != 'attachment'","",$where);
+			}
 		}
 		$this->se_log("attachments where: ".$where);
 		return $where;

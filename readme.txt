@@ -2,9 +2,9 @@
 Contributors: dancameron, sproutventure, ericlebail
 Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
 Tags: search, search highlight, tag search, category search, category exclusion, comment search, page search, admin, seo, post filter
-Requires at least: 2.3
-Tested up to: 2.8
-Stable tag: 6.2.2
+Requires at least: 2.1
+Tested up to: 2.8.1
+Stable tag: 6.2.5
 
 Increases Wordpress' default search functionality through an options panel. Options include search highlight, searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -26,20 +26,33 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Exclude Posts from search
 * Exclude Categories from search
 
+Translations:
+
+* Belarusian
+* China / Chinese
+* Dutch
+* French
+* German
+* Hungarian
+* Italian
+* Japanese
+* Latvian
+* Norwegian Nynorsk
+* Russian
+* Spanish
+* Swedish
+* Turkish
+* Taiwan / Chinese
+
+
+Updates:
+
+* 6.2.5 - Bug fixed specifically for WordPress 2.8. More Translations.
 * 6.2.2   - Post Exclusion fix. More translations.
-* 6.2   - Search Highlighting options. Fix when searching with '.
-* 6.1.7 - Major Posts Exclude and Category Exclude Bug fix.
-* 6.1.6 - Sym link fix.
-* 6.1.5 - Major Exclude Bug fix.
-* 6.1.4 - New Translations (IT)
-* 6.1.3 - Exclusion Bug Fix.
-* 6.1.2 - Localization bug fixes.
-* 6.1.1 - Fixed bug when search comments is selected and localization update.
-* 6.1 - New search comment author selection, Misc. bug fixes from v.6 release and updated Localization support.
-* 6 - New Options Panel!!, Multi-Word fix! #44, Exclude Bug Fix, Admin search fix.
 
 == Update Log ==
 
+* 6.2.5 - Bug fixed specifically for WordPress 2.8. More Translations.
 * 6.2.2   - Post Exclusion fix. More translations.
 * 6.2.1   - Changed highlight from span to div.
 * 6.2   - Search Highlighting options. Fix when searching with '.

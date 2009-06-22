@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.2.2';
+	var $version = '6.2.5';
 
 	function se_admin() {
 
@@ -85,7 +85,9 @@ Class se_admin {
 							<th scope="col" class="manage-column"></th>
 						</tr>
 					</thead>
-		
+					<?php
+					// Show options for 2.5 and below
+					if ($wp_version <= '2.5') : ?>
 					<tr class="mainrow"> 
 				        <td class="titledesc"><?php _e('Search every page','SearchEverything'); ?>:<br/><small></small></td>
 				        <td class="forminp">
@@ -96,9 +98,7 @@ Class se_admin {
 							
 				        </td>
 				    </tr>
-					<?php
-					// Show categories only for WP 2.5+
-					if ($wp_version <= '2.5') : ?>
+					
 					<tr class="mainrow"> 
 				        <td class="titledesc">&nbsp;&nbsp;&nbsp;<?php _e('Search approved pages only','SearchEverything'); ?>:</td>
 				        <td class="forminp">
@@ -350,9 +350,10 @@ Class se_admin {
 					    </td>
 						<td>
 							<ul class="SE_lists">
-								<li><a href="#">Maris Svirksts (Lt) - v.6</a></li>
-								<li><a href="#">Simon Hansen (NN) - v.6</a></li>
+								<li><a href="(http://www.fatcow.com">Fat Cow (BY) - v.6</a></li>
 								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (IT) - v.6</a></li>
+								<li><a href="#">Maris Svirksts (LV) - v.6</a></li>
+								<li><a href="#">Simon Hansen (NN) - v.6</a></li>
 								<li><a href="http://beyn.org/" target="blank">jean Pierre Gavoille (FR) - v.6</a></li>
 								<li><a href="#">hit1205 (CN and TW)</a></li>
 								<li><a href="http://www.alohastone.com" target="blank">alohastone (DE)</a></li>
