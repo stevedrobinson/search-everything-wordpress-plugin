@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.2.5';
+	var $version = '6.3';
 
 	function se_admin() {
 
@@ -92,8 +92,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every page','SearchEverything'); ?>:<br/><small></small></td>
 				        <td class="forminp">
 				            <select id="search_pages" name="search_pages">
-				                <option<?php if ($options['se_use_page_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_page_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_page_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_page_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							
 				        </td>
@@ -103,8 +103,8 @@ Class se_admin {
 				        <td class="titledesc">&nbsp;&nbsp;&nbsp;<?php _e('Search approved pages only','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="appvd_pages" name="appvd_pages">
-				                <option<?php if ($options['se_approved_pages_only'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_approved_pages_only'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_approved_pages_only'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_approved_pages_only'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -117,8 +117,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every tag name','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_tags" name="search_tags" >
-				                <option<?php if ($options['se_use_tag_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_tag_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_tag_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_tag_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -131,8 +131,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every category name and description','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_categories" name="search_categories">
-				                <option<?php if ($options['se_use_category_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_category_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_category_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_category_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -142,8 +142,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every comment','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select name="search_comments" id="search_comments">
-				                <option<?php if ($options['se_use_comment_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_comment_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_comment_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_comment_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -152,8 +152,8 @@ Class se_admin {
 				        <td class="titledesc">&nbsp;&nbsp;&nbsp;<?php _e('Search comment authors','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_cmt_authors" name="search_cmt_authors">
-				                <option<?php if ($options['se_use_cmt_authors'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_cmt_authors'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_cmt_authors'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_cmt_authors'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -162,8 +162,8 @@ Class se_admin {
 				        <td class="titledesc">&nbsp;&nbsp;&nbsp;<?php _e('Search approved comments only','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="appvd_comments" name="appvd_comments">
-				                <option<?php if ($options['se_approved_comments_only'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_approved_comments_only'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_approved_comments_only'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_approved_comments_only'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -172,8 +172,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every excerpt','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_excerpt" name="search_excerpt">
-				                <option<?php if ($options['se_use_excerpt_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_excerpt_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_excerpt_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_excerpt_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -185,8 +185,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every draft','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_drafts" name="search_drafts">
-				                <option<?php if ($options['se_use_draft_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_draft_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_draft_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_draft_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -196,8 +196,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every attachment','SearchEverything'); ?>:<br/><small><?php _e('(post type = attachment)','SearchEverything'); ?></small></td>
 				        <td class="forminp">
 				            <select id="search_attachments" name="search_attachments">
-				                <option<?php if ($options['se_use_attachment_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_attachment_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_attachment_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_attachment_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -206,8 +206,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every custom field','SearchEverything'); ?>:<br/><small><?php _e('(metadata)','SearchEverything'); ?></small></td>
 				        <td class="forminp">
 				            <select id="search_metadata" name="search_metadata">
-				                <option<?php if ($options['se_use_metadata_search'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_metadata_search'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_metadata_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_metadata_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							
 				        </td>
@@ -216,8 +216,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Search every author','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_authors" name="search_authors">
-				                <option<?php if ($options['se_use_authors'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_authors'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_authors'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_authors'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -226,8 +226,8 @@ Class se_admin {
 				        <td class="titledesc"><?php _e('Highlight Search Terms','SearchEverything'); ?>:</td>
 				        <td class="forminp">
 				            <select id="search_highlight" name="search_highlight">
-				                <option<?php if ($options['se_use_highlight'] == 'No') { echo ' selected="selected"'; } ?>>&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_highlight'] == 'Yes') { echo ' selected="selected"'; } ?>><?php _e('Yes', 'SearchEverything'); ?></option>
+				                <option<?php if ($options['se_use_highlight'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_highlight'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
 				            </select>
 							<br/><small></small>
 				        </td>
@@ -350,7 +350,11 @@ Class se_admin {
 					    </td>
 						<td>
 							<ul class="SE_lists">
-								<li><a href="(http://www.fatcow.com">Fat Cow (BY) - v.6</a></li>
+								<li><a href="http://www.r-sn.com/wp" target="blank">Anonymous (AR) - v.6</a></li>
+								<li><a href="http://www.doctorley.pl" target="blank">Karol Manikowski (PL) - v.6</a></li>
+								<li><a href="http://www.paulwicking.com" target="blank">Paul Wicking (NO)- v.6</a></li>
+								<li><a href="#">Bilei Radu (RO)- v.6</a></li>
+								<li><a href="http://www.fatcow.com" target="blank">Fat Cow (BY) - v.6</a></li>
 								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (IT) - v.6</a></li>
 								<li><a href="#">Maris Svirksts (LV) - v.6</a></li>
 								<li><a href="#">Simon Hansen (NN) - v.6</a></li>
@@ -359,7 +363,6 @@ Class se_admin {
 								<li><a href="http://www.alohastone.com" target="blank">alohastone (DE)</a></li>
 								<li><a href="http://gidibao.net/" target="blank">Gianni Diurno (ES)</a></li>
 								<li><a href="#">János Csárdi-Braunstein (HU)</a></li>
-								<li><a href="http://wppluginsj.sourceforge.jp/i18n-ja_jp/" target="blank">Naoko McCracken (JA)</a></li>
 								<li><a href="http://idimensie.nl" target="blank">Joeke-Remkus de Vries (NL)</a></li>
 								<li><a href="#">Silver Ghost (RU)</a></li>
 								<li><a href="http://mishkin.se" target="blank">Mikael Jorhult (RU)</a></li>

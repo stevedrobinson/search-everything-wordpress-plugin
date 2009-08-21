@@ -3,7 +3,7 @@
  Plugin Name: Search Everything
  Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
  Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
- Version: 6.2.5
+ Version: 6.3
  Author: Dan Cameron of Sprout Venture
  Author URI: http://sproutventure.com/
  */
@@ -31,7 +31,7 @@ $SE = new SearchEverything();
 
 Class SearchEverything {
 
-	var $login = false;
+	var $logging = false;
 	var $options;
 	var $wp_ver23;
 	var $wp_ver25;
@@ -49,18 +49,19 @@ Class SearchEverything {
 			$SEAdmin = new se_admin();
 		}
 		//add filters based upon option settings
-		if ("Yes" == $this->options['se_use_tag_search'])
+		if ("Yes" == $this->options['se_use_tag_search'] || "Yes" == $this->options['se_use_category_search'])
 		{
 			add_filter('posts_join', array(&$this, 'se_terms_join'));
-			$this->se_log("searching tags");
+			if ("Yes" $this->options['se_use_tag_search']) 
+				{
+					$this->se_log("searching tags");
+				} 
+			elseif ("Yes" $this->options['se_use_category_search']) 
+				{
+					$this->se_log("searching categories");
+				}
 		}
-
-		if ("Yes" == $this->options['se_use_category_search'])
-		{
-			add_filter('posts_join', array(&$this, 'se_terms_join'));
-			$this->se_log("searching categories");
-		}
-
+		
 		if ("Yes" == $this->options['se_use_page_search'])
 		{
 			add_filter('posts_where', array(&$this, 'se_search_pages'));
@@ -76,6 +77,11 @@ Class SearchEverything {
 		{
 			add_filter('posts_join', array(&$this, 'se_comments_join'));
 			$this->se_log("searching comments");
+			// Highlight content
+			if("Yes" == $this->options['se_use_highlight'])
+			{
+				add_filter('comment_text', array(&$this,'se_postfilter'));
+			}
 		}
 
 		if ("Yes" == $this->options['se_use_draft_search'])
@@ -123,9 +129,9 @@ Class SearchEverything {
 		// Highlight content
 		if("Yes" == $this->options['se_use_highlight'])
 		{
-			add_filter('the_content', array(&$this,'se_postfilter'));
-			add_filter('the_title', array(&$this,'se_postfilter'));
-			add_filter('the_excerpt', array(&$this,'se_postfilter'));
+            add_filter('the_content', array(&$this,'se_postfilter'), 11);
+            add_filter('the_title', array(&$this,'se_postfilter'), 11);
+            add_filter('the_excerpt', array(&$this,'se_postfilter'), 11);
 		}
 	}
 
@@ -716,15 +722,19 @@ Class SearchEverything {
 			$search_terms = $this->se_get_search_terms();
 			foreach ( $search_terms as $term )
 			{
+				if (preg_match('/\>/', $term))
+        			continue; //don't try to highlight this one
+					$term = preg_quote($term);
+					
 				if ($highlight_color != '')
 				$postcontent = preg_replace(
-					'"('.$term.')"i'
+					'"(?!<.*)(?<!\w)(\pL*'.$term.'\pL*)(?!\w|[^<>]*>)"i'
 					, '<span class="search-everything-highlight-color" style="background-color:'.$highlight_color.'">$1</span>'
 					, $postcontent
 					);
 				else
 				$postcontent = preg_replace(
-					'"('.$term.')"i'
+					'"(?!<.*)(?<!\w)(\pL*'.$term.'\pL*)(?!\w|[^<>]*>)"i'
 					, '<span class="search-everything-highlight" style="'.$highlight_style.'">$1</span>'
 					, $postcontent
 					);
