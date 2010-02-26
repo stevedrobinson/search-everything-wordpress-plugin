@@ -1,12 +1,21 @@
 === Plugin Name ===
-Contributors: dancameron, sproutventure, ericlebail
+Contributors: dancameron, sproutventure
 Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
 Tags: search, search highlight, tag search, category search, category exclusion, comment search, page search, admin, seo, post filter
 Requires at least: 2.1
 Tested up to: 2.9.3
-Stable tag: 6.4.1
+Stable tag: 6.5
 
-Increases Wordpress' default search functionality through an options panel. Options include search highlight, searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
+Increases Wordpress' default search functionality in three easy steps.
+
+== Better WordPress search in three steps ==
+
+# Activate
+# Configure options
+# Search ( maybe that's only two steps )
+
+Options include search highlight, searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
+
 
 == Description ==
 
@@ -15,6 +24,7 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Search Highlighting
 * Search Every Page
 * Search Every Tag
+* Search Custom Taxonomies ( new )
 * Search Every Category
 * Search non-password protected pages only
 * Search Every Comment
@@ -26,38 +36,17 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Exclude Posts from search
 * Exclude Categories from search
 
-Translations:
-
-* Arabic
-* Belarusian
-* China / Chinese
-* Dutch
-* French
-* German
-* Hungarian
-* Italian
-* Japanese
-* Korean
-* Latvian
-* Norwegian (Bokmål)
-* Norwegian (Nynorsk)
-* Romanian
-* Russian
-* Spanish
-* Swedish
-* Turkish
-* Taiwan / Chinese
-
 
 Updates:
+
+* 6.5 - Highlighting fix. Better Tag search and Taxonomy search
 * 6.4 - Fixing comment search conflict with author searches.
 * 6.3.1 - Major bug fix. Necessary upgrade for 6.3.
-* 6.3 - 2.8 issue for terms and categories. Highlight fixes. Language Updates: Romanian, Japan, Arabic
-* 6.2.5 - Bug fixed specifically for WordPress 2.8. More Translations.
-* 6.2.2   - Post Exclusion fix. More translations.
+
 
 == Update Log ==
 
+* 6.5 - highlight regex update, props eric. Added taxonomy support, props leewillis.
 * 6.4.1 - Logging bug fix.
 * 6.4 - Fixing comment search conflict with author searches ( temporarily disabling author search ). More languages
 * 6.3 - 2.8 issue for terms and categories (Search every category name and description issue). Highlight fixes. Language Updates: Romanian, Japan, Arabic, Norwegian (Nynorsk)
@@ -113,6 +102,27 @@ Read the installation guide.
 
 [Support Forums and Project Center](https://redmine.sproutventure.com/projects/show/search-everything "Support Forums and Project Center")
 
+= What Translations are included? =
+
+* Arabic
+* Belarusian
+* China / Chinese
+* Dutch
+* French
+* German
+* Hungarian
+* Italian
+* Japanese
+* Korean
+* Latvian
+* Norwegian (Bokmål)
+* Norwegian (Nynorsk)
+* Romanian
+* Russian
+* Spanish
+* Swedish
+* Turkish
+* Taiwan / Chinese
 
 == Screenshots ==
 

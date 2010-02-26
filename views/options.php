@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.4.1';
+	var $version = '6.5';
 
 	function se_admin() {
 
@@ -34,6 +34,7 @@ Class se_admin {
 				'se_use_page_search'			=> $_POST["search_pages"],
 				'se_use_comment_search'			=> $_POST["search_comments"],
 				'se_use_tag_search'				=> $_POST["search_tags"],
+				'se_use_tax_search'				=> $_POST["search_taxonomies"],
 				'se_use_category_search'		=> $_POST["search_categories"],
 				'se_approved_comments_only'		=> $_POST["appvd_comments"],
 				'se_approved_pages_only'		=> $_POST["appvd_pages"],
@@ -123,6 +124,20 @@ Class se_admin {
 							<br/><small></small>
 				        </td>
 				    </tr>
+					<?php endif; ?>
+					<?php
+					// Show taxonomies only for WP 2.3+
+					if ($wp_version >= '2.3') : ?>
+					<tr class="mainrow"> 
+						<td class="titledesc"><?php _e('Search custom taxonomies','SearchEverything'); ?>:</td>
+						<td class="forminp">
+							<select id="search_tags" name="search_taxonomies" >
+								<option<?php if ($options['se_use_tax_search'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
+								<option<?php if ($options['se_use_tax_search'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
+							</select>
+							<br/><small></small>
+						</td>
+					</tr>
 					<?php endif; ?>
 					<?php
 					// Show categories only for WP 2.5+
@@ -341,7 +356,7 @@ Class se_admin {
 						</td>
 				        <td>
 							<ul class="SE_lists">
-								<li><a href="#"><strong>EricLe Bail</strong></a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#285, #272, #49, #44 and #60</a>)</li>
+								<li><a href="#"><strong>EricLe Bail</strong></a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#690, #285, #272, #49, #44 and #60</a>)</li>
 								<li><a href="#">Gary Traffanstedt</a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#43</a>)</li>
 								<li><a href="http://codium.co.nz"  target="blank">Matias Gertel</a></li>
 								<li><a href="http://striderweb.com/" target="blank">Stephen Rider</a></li>
