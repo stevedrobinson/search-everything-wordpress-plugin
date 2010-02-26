@@ -3,7 +3,7 @@
  Plugin Name: Search Everything
  Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
  Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
- Version: 6.3.1
+ Version: 6.4
  Author: Dan Cameron of Sprout Venture
  Author URI: http://sproutventure.com/
  */
@@ -31,7 +31,7 @@ $SE = new SearchEverything();
 
 Class SearchEverything {
 
-	var $logging = false;
+	var $logging = true;
 	var $options;
 	var $wp_ver23;
 	var $wp_ver25;
@@ -113,7 +113,7 @@ Class SearchEverything {
 			$this->se_log("searching excluding categories");
 		}
 
-		if ("Yes" == $this->options['se_use_authors'])
+		if ("Yes" == $this->options['se_use_authors'] && !$this->wp_ver28)// Need some help getting this back into the mix
 		{
 			add_filter('posts_where', array(&$this, 'se_search_authors'));
 			add_filter('posts_join', array(&$this, 'se_search_authors_join'));
@@ -125,6 +125,8 @@ Class SearchEverything {
 		add_filter('posts_where', array(&$this, 'se_no_revisions'));
 
 		add_filter('posts_request', array(&$this, 'se_distinct'));
+		
+		add_filter('posts_where', array(&$this, 'se_no_future'));
 		
 		// Highlight content
 		if("Yes" == $this->options['se_use_highlight'])
@@ -224,6 +226,21 @@ Class SearchEverything {
 		return $where;
 	}
 
+	// Exclude future posts fix provided by Mx
+	function se_no_future($where)
+	{
+		global $wp_query, $wpdb;
+		if (!empty($wp_query->query_vars['s']))
+		{
+			if(!$this->wp_ver28)
+			{
+				$where = 'AND (' . substr($where, strpos($where, 'AND')+3) . ") AND $wpdb->posts.post_status != 'future'";
+			}
+				$where = 'AND (' . substr($where, strpos($where, 'AND')+3) . ') AND post_status != \'future\'';
+		}
+		return $where;
+	}
+	
 	// Logs search into a file
 	function se_log($msg)
 	{
@@ -351,7 +368,7 @@ Class SearchEverything {
 		$this->se_log("attachments where: ".$where);
 		return $where;
 	}
-
+	
 	// create the comments data query
 	function se_build_search_comments()
 	{
@@ -382,7 +399,7 @@ Class SearchEverything {
 				}
 			}
 			$search = $searchContent;
-			// Building search query on comments autor
+			// Building search query on comments author
 			if($this->options['se_use_cmt_authors'] == 'Yes')
 			{
 				$searchand = '';
@@ -414,9 +431,53 @@ Class SearchEverything {
 			$search = " OR ({$search}) ";
 		}
 		$this->se_log("comments where: ".$where);
+		$this->se_log("comments sql: ".$search);
 		return $search;
 	}
-
+	
+	// Build the author search
+	function se_search_authors($where)
+	{
+		global $wp_query, $wpdb;
+		$s = $wp_query->query_vars['s'];
+		$search_terms = $this->se_get_search_terms();
+		$exact = $wp_query->query_vars['exact'];
+		$search = '';
+		
+		if ( !empty($search_terms) ) {
+			// Building search query
+			$n = ($exact) ? '' : '%';
+			$searchand = '';
+			foreach($search_terms as $term) {
+				$term = addslashes_gpc($term);
+				if ($this->wp_ver23)
+				{
+					$search .= "{$searchand}(u.display_name LIKE '{$n}{$term}{$n}')";
+				} else {
+					$search .= "{$searchand}(u.display_name LIKE '{$n}{$term}{$n}')";
+				}
+				$searchand = ' AND ';
+			}
+			$sentence_term = $wpdb->escape($s);
+			if (!$sentence && count($search_terms) > 1 && $search_terms[0] != $sentence_term )
+			{
+				if ($this->wp_ver23)
+				{
+					$search = "($search) OR (u.display_name LIKE '{$n}{$sentence_term}{$n}')";
+				} else {
+					$search = "($search) OR (u.display_name LIKE '{$n}{$sentence_term}{$n}')";
+				}
+			}
+				
+			if ( !empty($search) )
+			$search = " OR ({$search}) ";
+				
+		}
+		
+		$this->se_log("user where: ".$search);
+		return $search;
+	}
+	
 	// create the search meta data query
 	function se_build_search_metadata()
 	{
@@ -455,7 +516,7 @@ Class SearchEverything {
 			$search = " OR ({$search}) ";
 				
 		}
-		$this->se_log("meta where: ".$where);
+		$this->se_log("meta where: ".$search);
 		return $search;
 	}
 
@@ -493,7 +554,7 @@ Class SearchEverything {
 			if ( !empty($search) )
 			$search = " OR ({$search}) ";
 		}
-		$this->se_log("tag where: ".$where);
+		$this->se_log("tag where: ".$search);
 		return $search;
 	}
 
@@ -542,7 +603,7 @@ Class SearchEverything {
 			if ( !empty($searchDesc) )
 			$search = $search." OR ({$searchDesc}) ";
 		}
-		$this->se_log("categories where: ".$where);
+		$this->se_log("categories where: ".$search);
 		return $search;
 	}
 
@@ -617,7 +678,7 @@ Class SearchEverything {
 		{
 			if ($this->wp_ver23)
 			{
-				$join .= " LEFT JOIN $wpdb->comments AS cmt ON ( cmt.comment_post_ID = ID ) ";
+				$join .= " LEFT JOIN $wpdb->comments AS cmt ON ( cmt.comment_post_ID = $wpdb->posts.ID ) ";
 					
 			} else {
 
@@ -636,19 +697,6 @@ Class SearchEverything {
 	}
 
 	//join for searching authors
-	function se_search_authors($where)
-	{
-		global $wp_query, $wpdb;
-
-		if (!empty($wp_query->query_vars['s']))
-		{
-			$or = " OR (u.user_nicename LIKE '%" . $wpdb->escape($wp_query->query_vars['s']) . "%') ";
-		}
-		$where = preg_replace("/\bor\b/i",$or." OR",$where,1);
-		$this->se_log("user where: ".$where);
-		return $where;
-	}
-
 
 	function se_search_authors_join($join)
 	{
@@ -656,7 +704,7 @@ Class SearchEverything {
 
 		if (!empty($wp_query->query_vars['s']))
 		{
-			$join .= " LEFT JOIN $wpdb->users AS u ON ($wpdb->posts.post_author = u.ID) ";
+			$join .= " LEFT JOIN $wpdb->users AS u ON ($wpdb->posts.ID = u.ID) ";
 		}
 		$this->se_log("authors join: ".$join);
 		return $join;

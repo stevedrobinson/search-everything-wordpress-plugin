@@ -2,7 +2,7 @@
 
 Class se_admin {
 
-	var $version = '6.3.1';
+	var $version = '6.4';
 
 	function se_admin() {
 
@@ -215,11 +215,13 @@ Class se_admin {
 					<tr class="mainrow"> 
 				        <td class="titledesc"><?php _e('Search every author','SearchEverything'); ?>:</td>
 				        <td class="forminp">
+							<?php if ($wp_version <= '2.8'): ?>
 				            <select id="search_authors" name="search_authors">
 				                <option<?php if ($options['se_use_authors'] == 'No') { echo ' selected="selected"'; } ?> value="No">&nbsp;&nbsp;</option>
-								<option<?php if ($options['se_use_authors'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>
+								<option<?php if ($options['se_use_authors'] == 'Yes') { echo ' selected="selected"'; } ?> value="Yes"><?php _e('Yes', 'SearchEverything'); ?></option>	
 				            </select>
-							<br/><small></small>
+							<?php endif; ?>
+							<small><?php if ($wp_version >= '2.8') { _e('This is disabled for WP 2.8+. I\'d appreciate the help if you have a fix.', 'SearchEverything');} ?></small>
 				        </td>
 				    </tr>
 					<tr class="mainrow"> 
@@ -350,6 +352,7 @@ Class se_admin {
 					    </td>
 						<td>
 							<ul class="SE_lists">
+								<li><a href="#" target="blank">minjae kim (KR) - v.6</a></li>
 								<li><a href="http://www.r-sn.com/wp" target="blank">Anonymous (AR) - v.6</a></li>
 								<li><a href="http://www.doctorley.pl" target="blank">Karol Manikowski (PL) - v.6</a></li>
 								<li><a href="http://www.paulwicking.com" target="blank">Paul Wicking (NO)- v.6</a></li>
