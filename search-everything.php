@@ -3,7 +3,7 @@
  Plugin Name: Search Everything
  Plugin URI: https://redmine.sproutventure.com/projects/show/search-everything
  Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
- Version: 6.4
+ Version: 6.4.1
  Author: Dan Cameron of Sprout Venture
  Author URI: http://sproutventure.com/
  */
@@ -31,7 +31,7 @@ $SE = new SearchEverything();
 
 Class SearchEverything {
 
-	var $logging = true;
+	var $logging = false;
 	var $options;
 	var $wp_ver23;
 	var $wp_ver25;

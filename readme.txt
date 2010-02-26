@@ -4,7 +4,7 @@ Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
 Tags: search, search highlight, tag search, category search, category exclusion, comment search, page search, admin, seo, post filter
 Requires at least: 2.1
 Tested up to: 2.9.3
-Stable tag: 6.4
+Stable tag: 6.4.1
 
 Increases Wordpress' default search functionality through an options panel. Options include search highlight, searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
@@ -58,6 +58,7 @@ Updates:
 
 == Update Log ==
 
+* 6.4.1 - Logging bug fix.
 * 6.4 - Fixing comment search conflict with author searches ( temporarily disabling author search ). More languages
 * 6.3 - 2.8 issue for terms and categories (Search every category name and description issue). Highlight fixes. Language Updates: Romanian, Japan, Arabic, Norwegian (Nynorsk)
 * 6.2.5 - Bug fixed specifically for WordPress 2.8. More Translations.
