@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: dancameron, sproutventure
-Donate link: http://www.amazon.com/wishlist/3EM84J7FVHE6S
+Donate link: http://bit.ly/plugin-donations
 Tags: search, search highlight, tag search, category search, category exclusion, comment search, page search, admin, seo, post filter
 Requires at least: 2.1
 Tested up to: 2.9.3
