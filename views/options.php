@@ -312,7 +312,7 @@ Class se_admin {
 
 <div style="clear: both;"></div>
 
-	<small><?php _e('Find a bug?', 'SearchEverything') ?> <a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><?php _e('Post it as a new issue','SearchEverything')?></a>.</small>
+	<small><?php _e('Find a bug?', 'SearchEverything') ?> <a href="https://core.sproutventure.com/projects/search-everything/issues" target="blank"><?php _e('Post it as a new issue','SearchEverything')?></a>.</small>
 </div>			
 
 				<table style="margin-bottom: 20px;"></table>
@@ -351,18 +351,18 @@ Class se_admin {
 				
 					<tr class="mainrow"> 
 					    <td class="thanks">
-						<p><strong><?php _e('LOCALIZATION SUPPORT:', 'SearchEverything'); ?></strong><br/><?php _e('Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, ', 'SearchEverything') ?><a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><strong><?php _e('here','SearchEverything')?></strong></a>.</p>
+						<p><strong><?php _e('LOCALIZATION SUPPORT:', 'SearchEverything'); ?></strong><br/><?php _e('Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, ', 'SearchEverything') ?><a href="https://core.sproutventure.com/projects/search-everything/issues" target="blank"><strong><?php _e('here','SearchEverything')?></strong></a>.</p>
 						<p><strong><?php _e('Thank You!', 'SearchEverything'); ?></strong><br/><?php _e('The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support.', 'SearchEverything'); ?></p>
 						</td>
 				        <td>
 							<ul class="SE_lists">
-								<li><a href="#"><strong>EricLe Bail</strong></a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#690, #285, #272, #49, #44 and #60</a>)</li>
-								<li><a href="#">Gary Traffanstedt</a> (<a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank">#43</a>)</li>
+								<li><a href="#"><strong>EricLe Bail</strong></a> (<a href="https://core.sproutventure.com/projects/search-everything/issues" target="blank">#690, #285, #272, #49, #44 and #60</a>)</li>
+								<li><a href="#">Gary Traffanstedt</a> (<a href="https://core.sproutventure.com/projects/search-everything/issues" target="blank">#43</a>)</li>
 								<li><a href="http://codium.co.nz"  target="blank">Matias Gertel</a></li>
 								<li><a href="http://striderweb.com/" target="blank">Stephen Rider</a></li>
 								<li><a href="http://chrismeller.com/" target="blank">Chris Meller</a></li>
 								<li><a href="http://kinrowan.net/" target="blank">Cori Schlegel</a></li>
-								<li><?php _e('and many more...', 'SearchEverything'); ?><a href="https://redmine.sproutventure.com/projects/search-everything/issues" target="blank"><?php _e('how about you?', 'SearchEverything'); ?></a></li>
+								<li><?php _e('and many more...', 'SearchEverything'); ?><a href="https://core.sproutventure.com/projects/search-everything/issues" target="blank"><?php _e('how about you?', 'SearchEverything'); ?></a></li>
 							</ul>
 					    </td>
 						<td>

@@ -80,7 +80,7 @@ Updates:
 * 4.0.1 - Bug fix~Extraneous 's' in options panel
 * 4.0.0 - Wordpress 2.3 Support, Password protected pages option, Overhaul of Admin area
 
-[SVN Browser](https://redmine.sproutventure.com/repositories/show/search-everything "Project Home and SVN Browser")
+[SVN Browser](https://core.sproutventure.com/repositories/show/search-everything "Project Home and SVN Browser")
 
 == Installation ==
 
@@ -101,7 +101,7 @@ Read the installation guide.
 
 = It *still* doesn't work =
 
-[Support Forums and Project Center](https://redmine.sproutventure.com/projects/show/search-everything "Support Forums and Project Center")
+[Support Forums and Project Center](https://core.sproutventure.com/projects/show/search-everything "Support Forums and Project Center")
 
 = What Translations are included? =
 
@@ -136,5 +136,5 @@ I do need help with this plugin. If you can possibly do my day job and take my g
 
 == Support ==
 
-[Support Forums and Project Center](https://redmine.sproutventure.com/projects/show/search-everything "Support Forums and Project Center")
+[Support Forums and Project Center](https://core.sproutventure.com/projects/show/search-everything "Support Forums and Project Center")
 

@@ -237,7 +237,7 @@ msgid "Search Everything"
 msgstr ""
 
 #. Plugin URI of an extension
-msgid "https://redmine.sproutventure.com/projects/show/search-everything"
+msgid "https://core.sproutventure.com/projects/show/search-everything"
 msgstr ""
 
 #. Description of an extension
