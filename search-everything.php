@@ -124,7 +124,7 @@ Class SearchEverything {
 			$this->se_log("searching authors");
 		}
 
-		add_filter('posts_where', array(&$this, 'se_search_where'));
+		add_filter('posts_search', array(&$this, 'se_search_where'));
 
 		add_filter('posts_where', array(&$this, 'se_no_revisions'));
 
@@ -194,12 +194,7 @@ Class SearchEverything {
 		}
 		if ($searchQuery != '')
 		{
-			$index1 = strpos($where, '((');
-			$index2 = strrpos($where, ')) ');
-			$firstPart = substr($where, 0, $index1);
-			$secondPart = substr($where, $index1, $index2-1);
-			$lastPart = substr($where, $index2-1+3);
-			$where = $firstPart."(".$secondPart.$searchQuery.")".$lastPart;
+			$where = str_replace( ")))", ")$searchQuery))", $where );
 
 		}
 		if ($this->options['se_exclude_posts_list'] != '')
