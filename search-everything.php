@@ -1,12 +1,12 @@
 <?php
 /*
- Plugin Name: Search Everything
- Plugin URI: https://core.sproutventure.com/projects/show/search-everything
- Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
- Version: 6.6.1
- Author: Dan Cameron of Sprout Venture
- Author URI: http://sproutventure.com/
- */
+Plugin Name: Search Everything
+Plugin URI: https://core.sproutventure.com/projects/show/search-everything
+Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
+Version: 6.6.1
+Author: Dan Cameron of Sprout Venture
+Author URI: http://sproutventure.com/
+*/
 
 /*
  This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, version 2.
