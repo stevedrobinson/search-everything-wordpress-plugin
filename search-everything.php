@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Search Everything
-Plugin URI: https://core.sproutventure.com/projects/show/search-everything
+Plugin URI: https://github.com/sproutventure/search-everything-wordpress-plugin/
 Description: Adds search functionality without modifying any template pages: Activate, Configure and Search. Options Include: search highlight, search pages, excerpts, attachments, drafts, comments, tags and custom fields (metadata). Also offers the ability to exclude specific pages and posts. Does not search password-protected content.
 Version: 6.7
 Author: Dan Cameron of Sprout Venture
