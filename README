@@ -1,24 +1,17 @@
-=== Plugin Name ===
-Contributors: dancameron, sproutventure
-Donate link: http://bit.ly/plugin-donations
-Tags: search, search highlight, tag search, category search, category exclusion, comment search, page search, admin, seo, post filter
-Requires at least: 2.1
-Tested up to: 3.3
-Stable tag: 6.6.1
+Description
+===========
 
-Increases Wordpress' default search functionality in three easy steps.
+Better WordPress search in three steps
+--------------------------------------
 
-== Description ==
-
-= Better WordPress search in three steps =
-
-# Activate
-# Configure options
-# Search ( maybe that's only two steps )
+1. Activate
+2. Configure options
+3. Search ( maybe that's only two steps )
 
 Options include search highlight, searching pages, excerpts, attachments, drafts, comments and custom fields (metadata).
 
-= What it does: =
+What it does:
+-------------
 
 Search Everything increases the ability of the default Wordpress Search, options included:
 
@@ -37,7 +30,9 @@ Search Everything increases the ability of the default Wordpress Search, options
 * Exclude Posts from search
 * Exclude Categories from search
 
-== Installation ==
+
+Installation
+============
 
 Installation Instructions:
 
@@ -48,21 +43,19 @@ Installation Instructions:
 5. That's it. Have fun and if you can contribute (see notes).
 	
 	
-== Frequently Asked Questions ==
+Frequently Asked Questions
+--------------------------
 
-= It doesn't work =
+> It doesn't work
 
 Read the installation guide.
 
-= Where is feature x? =
+> It *still* doesn't work
 
-[Github Issues](https://github.com/sproutventure/search-everything-wordpress-plugin/issues "Github Issues") Label it as a "feature-request"
+Create an issue here on github.
 
-= It *still* doesn't work (and you're certain there's a bug) =
-
-[Github Issues](https://github.com/sproutventure/search-everything-wordpress-plugin/issues "Github Issues")
-
-= What Translations are included? =
+What Translations are included?
+===============================
 
 * Arabic
 * Belarusian
@@ -83,15 +76,3 @@ Read the installation guide.
 * Swedish
 * Turkish
 * Taiwan / Chinese
-
-== Screenshots ==
-
-1. Screenshot of the options panel
-
-== Help ==
-
-Fork this plugin on github and send me requests to commit your changes upstream.
-
-== Support ==
-
-Use the WordPress forums.

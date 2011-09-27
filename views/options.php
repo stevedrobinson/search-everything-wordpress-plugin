@@ -351,7 +351,7 @@ Class se_admin {
 				
 					<tr class="mainrow"> 
 					    <td class="thanks">
-						<p><strong><?php _e('LOCALIZATION SUPPORT:', 'SearchEverything'); ?></strong><br/><?php _e('Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, ', 'SearchEverything') ?><a href="https://core.sproutventure.com/projects/search-everything/issues" target="blank"><strong><?php _e('here','SearchEverything')?></strong></a>.</p>
+						<p><strong><?php _e('LOCALIZATION SUPPORT:', 'SearchEverything'); ?></strong><br/><?php _e('Version 6 was a major update and a few areas need new localization support. If you can help send me your translations by posting them as a new issue, ', 'SearchEverything') ?><a href="https://github.com/sproutventure/search-everything-wordpress-plugin/issues?sort=created&direction=desc&state=open&page=1" target="blank"><strong><?php _e('here','SearchEverything')?></strong></a>.</p>
 						<p><strong><?php _e('Thank You!', 'SearchEverything'); ?></strong><br/><?php _e('The development of Search Everything since Version one has primarily come from the WordPress community, I&#8217;m grateful for their dedicated and continued support.', 'SearchEverything'); ?></p>
 						</td>
 				        <td>
