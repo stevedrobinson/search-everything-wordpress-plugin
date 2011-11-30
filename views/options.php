@@ -18,7 +18,7 @@ Class se_admin {
         }
 
 	function se_add_options_panel() {
-		add_options_page('Search', 'Search Everything', 7, 'extend_search', array(&$this, 'se_option_page'));
+		add_options_page('Search', 'Search Everything', 'manage_options', 'extend_search', array(&$this, 'se_option_page'));
 	}
 
 	//build admin interface
